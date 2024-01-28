@@ -8,7 +8,7 @@ const SplashScreen = () => {
         <View style={styles.container}>
             <StatusBar  barStyle='light-content' backgroundColor={colors.BACK_SB}/>
             <Image source={images.STDPIC} style={{width:setHeight(40),height:setHeight(40)}}></Image>
-            <Text style={{fontSize:30,fontWeight:700,color:'white',}}>POLITISCAN</Text>
+            <Text style={{fontSize:30,color:'white',}}>POLITISCAN</Text>
         </View>
     );
 }

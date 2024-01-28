@@ -1,9 +1,7 @@
-import { DarkTheme } from '@react-navigation/native';
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet,FlatList} from 'react-native';
 import { StatusBar } from 'react-native';
 import { colors,General } from '../constants';
-import { FlatList } from 'react-native-gesture-handler';
 import { WelcomeCard } from '../components';
 const WelcomeScreen = () => {
     return (
@@ -19,7 +17,6 @@ const WelcomeScreen = () => {
                     renderItem={({item})=><WelcomeCard {...item}/>}
                 />
 
-                
             </View>
         </View>
         
