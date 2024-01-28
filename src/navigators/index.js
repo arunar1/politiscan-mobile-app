@@ -9,7 +9,7 @@ const Navigators=()=>{
         <NavigationContainer>
             <stack.Navigator screenOptions={{headerShown:false}}>
                 <stack.Screen name="welcome" component={WelcomeScreen}/>
-                <stack.Screen name="splash" component={SplashScreen} />
+                {/* <stack.Screen name="splash" component={SplashScreen} /> */}
             </stack.Navigator>
         </NavigationContainer>
     )

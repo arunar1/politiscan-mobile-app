@@ -31,12 +31,16 @@ const styles = StyleSheet.create({
         width:setWidth(60),
     },
     titleText:{
-        fontSize:22,
+        fontSize:25,
+        color:'orange',
+        alignItems:'center',
+        fontWeight:'900'
 
     },
     contentText:{
+        padding:20,
         fontSize:22,
-        textAlign:'center',
+        // textAlign:'center',
         marginHorizontal:20,
 
     }
