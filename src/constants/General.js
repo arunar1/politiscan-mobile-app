@@ -7,7 +7,7 @@ const WELCOME_CONTENT=[
     {
         image:"ROLE",
         title:"What is your role in politics",
-        content:"Be a part of society"
+        content:"Be a part of society be a part of politics"
     },
     {
         image:"FEEDBACK",

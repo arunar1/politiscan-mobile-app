@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     contentText:{
         padding:20,
         fontSize:22,
-        // textAlign:'center',
+        textAlign:'center',
         marginHorizontal:20,
 
     }
