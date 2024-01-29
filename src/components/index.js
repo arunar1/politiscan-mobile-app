@@ -1,3 +1,3 @@
 import WelcomeCard from "./WelcomeCard";
-
-export {WelcomeCard}
+import Seperator from "./Seperator";
+export {WelcomeCard,Seperator}
