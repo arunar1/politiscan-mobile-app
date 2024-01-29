@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useRef } from 'react';
 import {View,Text, StyleSheet,FlatList, TouchableOpacity} from 'react-native';
 import { StatusBar } from 'react-native';
 import { colors,General } from '../constants';
@@ -17,6 +17,16 @@ const Pagination=()=>{
 }
 
 const WelcomeScreen = () => {
+
+    const [welcomeIndex,setWelcomeIndex]=useState(0);
+
+    const welcomeList=useRef()
+
+    const onViewRef=useRef(({changed})=>{
+        setWelcomeIndex(changed[0].index)
+    })
+
+    // const viewConfigRef=useRef({viewAreCoveragePercentThreshold:50})
     return (
         <View style={styles.container}>
             <StatusBar barStyle='dark-content' translucent backgroundColor={colors.BACK_SB}/>
@@ -25,12 +35,15 @@ const WelcomeScreen = () => {
 
             <View style={styles.welcomeListContainer}>
                 <FlatList
+                    ref={welcomeList}
                     data={General.WELCOME_CONTENT}
                     keyExtractor={item =>item.title}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     overScrollMode='never'
+                    // viewabilityConfig={viewConfigRef.current}
+                    // onViewableItemsChanged={onViewRef.current}
                     renderItem={({item})=><WelcomeCard {...item}/>}
                 />
 
@@ -45,6 +58,10 @@ const WelcomeScreen = () => {
                     <Text style={styles.buttonText}>NEXT</Text>
                 </TouchableOpacity>
             </View>
+            <Seperator height={setHeight(5)} activeOpacity={.7}/>
+            <TouchableOpacity style={styles.getStart}>
+                <Text style={styles.buttonText}>Get started</Text>
+            </TouchableOpacity>
         </View>
         
     );
@@ -89,6 +106,12 @@ const styles = StyleSheet.create({
         backgroundColor:'#d8e2da',
         borderRadius:10,
 
+
+    },
+    getStart:{
+        padding:10,
+        backgroundColor:'#2992ba',
+        borderRadius:10,
 
     }
 })
