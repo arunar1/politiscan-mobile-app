@@ -31,7 +31,7 @@ const WelcomeScreen = ({navigation}) => {
         <View style={styles.container}>
             <StatusBar barStyle='dark-content' translucent backgroundColor={colors.BACK_SB}/>
             <Seperator height={StatusBar.currentHeight} />
-            <Seperator height={setHeight(8)} />
+            <Seperator height={setHeight(10)} />
 
             <View style={styles.welcomeListContainer}>
                 <FlatList
@@ -49,7 +49,7 @@ const WelcomeScreen = ({navigation}) => {
 
             </View>
             <Pagination/>
-            <Seperator height={setHeight(10)}/>
+            <Seperator height={setHeight(9)}/>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity>
                     <Text style={styles.buttonText}>SKIP</Text>

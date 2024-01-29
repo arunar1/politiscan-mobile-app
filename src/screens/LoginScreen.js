@@ -1,27 +1,35 @@
-// Import necessary components from React and React Native
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { RadioButton } from 'react-native-paper';
 
-// Functional component for the login screen
 const LoginScreen = () => {
-  // State to hold email and password values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  // Function to handle login button press
   const handleLogin = () => {
-    // Implement your login logic here
     console.log('Login pressed');
     console.log('Email:', email);
     console.log('Password:', password);
-    // Add your authentication logic here (e.g., API calls, authentication services)
+    console.log('Remember Me:', rememberMe);
+  };
+
+  const handleSignUp = () => {
+    //  sign-up navigation logic 
+    console.log('Sign up pressed');
+  };
+
+  const handleForgotPassword = () => {
+    //  forgot password navigation logic 
+    console.log('Forgot Password pressed');
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
 
-      {/* Email input field */}
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -31,25 +39,48 @@ const LoginScreen = () => {
         onChangeText={(text) => setEmail(text)}
       />
 
-      {/* Password input field */}
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
+      <View style={styles.passwordContainer}>
+        <TextInput
+          style={styles.passwordInput}
+          placeholder="Password"
+          secureTextEntry={!showPassword}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <TouchableOpacity
+          style={styles.eyeIcon}
+          onPress={() => setShowPassword(!showPassword)}>
+          <Icon name={showPassword ? 'eye-slash' : 'eye'} size={20} color="gray" />
+        </TouchableOpacity>
+      </View>
 
-      {/* Login button */}
+      <View style={styles.checkboxContainer}>
+        <View style={styles.checkbox}>
+          <RadioButton.Android
+            value="rememberMe"
+            status={rememberMe ? 'checked' : 'unchecked'}
+            onPress={() => setRememberMe(!rememberMe)}
+            color="blue"
+          />
+          <Text style={styles.checkboxText}>Remember Me</Text>
+        </View>
+      </View>
+
+      <TouchableOpacity onPress={handleForgotPassword}>
+        <Text style={styles.forgotPassword}>Forgot Password?</Text>
+      </TouchableOpacity>
+
       <Button title="Login" onPress={handleLogin} />
 
-      {/* Additional UI components can be added here, like a "Forgot Password?" link */}
-
+      <View style={styles.additionalOptions}>
+        <TouchableOpacity onPress={handleSignUp}>
+          <Text style={styles.linkText}>No account? Sign up</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-// Styles for the components
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -68,6 +99,50 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 16,
     paddingLeft: 8,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 16,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  passwordInput: {
+    flex: 1,
+    height: 40,
+    paddingLeft: 8,
+  },
+  eyeIcon: {
+    padding: 10,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 16,
+    width: '100%',
+  },
+  checkbox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  checkboxText: {
+    marginLeft: 8,
+    color: 'blue',
+  },
+  forgotPassword: {
+    color: 'blue',
+    marginBottom: 16,
+  },
+  additionalOptions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16,
+  },
+  linkText: {
+    color: 'blue',
   },
 });
 
