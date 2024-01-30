@@ -5,17 +5,23 @@ import { colors,General } from '../constants';
 import { Seperator, WelcomeCard } from '../components';
 import { setHeight, setWidth } from '../utils';
 
+const pageStyle = (isActive) => 
+(isActive ? styles.page : { ...styles.page, backgroundColor: "#b6e6eb" });
 
-const Pagination=()=>{
-    return(
-        <View style={styles.pageContainer}>
-        <View style={styles.page}></View>
-        <View style={styles.page}></View>
-        <View style={styles.page}></View>
+
+
+const Pagination = ({ index }) => (
+    <View style={styles.pageContainer}>
+      {[...Array(General.WELCOME_CONTENT.length).keys()].map((_, i) =>
+        i === index ? (
+          <View style={pageStyle(true)} key={i} />
+        ) : (
+          <View style={pageStyle(false)} key={i} />
+        )
+      )}
     </View>
-    )
-}
-
+  );
+  
 const WelcomeScreen = ({navigation}) => {
 
     const [welcomeIndex,setWelcomeIndex]=useState(0);
@@ -24,9 +30,16 @@ const WelcomeScreen = ({navigation}) => {
 
     const onViewRef=useRef(({changed})=>{
         setWelcomeIndex(changed[0].index)
+        // console.log(changed)
     })
-
-    // const viewConfigRef=useRef({viewAreCoveragePercentThreshold:50})
+    const viewConfigRef=useRef({viewAreaCoveragePercentThreshold:50})
+    
+    const pageScroll=()=>{
+        welcomeList.current.scrollToIndex({
+            index : welcomeIndex<2 ?welcomeIndex+1 :welcomeIndex
+        })
+    }
+    
     return (
         <View style={styles.container}>
             <StatusBar barStyle='dark-content' translucent backgroundColor={colors.BACK_SB}/>
@@ -42,28 +55,34 @@ const WelcomeScreen = ({navigation}) => {
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     overScrollMode='never'
-                    // viewabilityConfig={viewConfigRef.current}
-                    // onViewableItemsChanged={onViewRef.current}
+                    viewabilityConfig={viewConfigRef.current}
+                    onViewableItemsChanged={onViewRef.current}
                     renderItem={({item})=><WelcomeCard {...item}/>}
                 />
 
             </View>
-            <Pagination/>
+            <Pagination index={welcomeIndex}/>
             <Seperator height={setHeight(9)}/>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity>
+            {welcomeIndex==2 ? "" : (
+                <View style={styles.buttonContainer} >
+                <TouchableOpacity onPress ={()=>{
+                welcomeList.current.scrollToEnd()
+            }}>
                     <Text style={styles.buttonText}>SKIP</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.next} activeOpacity={.5}>
+                <TouchableOpacity style={styles.next} activeOpacity={.5} onPress={()=>{
+                    pageScroll()
+                }}>
                     <Text style={styles.buttonText}>NEXT</Text>
                 </TouchableOpacity>
             </View>
+            )}
             <Seperator height={setHeight(5)} activeOpacity={.7}/>
-            <TouchableOpacity style={styles.getStart} onPress={()=>{
+            {welcomeIndex==2 ? (<TouchableOpacity style={styles.getStart} onPress={()=>{
                 navigation.navigate('login')
             }}>
                 <Text style={styles.buttonText}>Get started</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>):""}
         </View>
         
     );

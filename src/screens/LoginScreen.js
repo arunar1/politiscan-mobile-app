@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RadioButton } from 'react-native-paper';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -18,6 +18,7 @@ const LoginScreen = () => {
 
   const handleSignUp = () => {
     //  sign-up navigation logic 
+    navigation.navigate('signup')
     console.log('Sign up pressed');
   };
 
