@@ -1,12 +1,21 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { useEffect ,useState} from 'react';
 const ProjectListScreen = ({ navigation }) => {
+// const [projects, setProjects] = useState([]);
+
   const projects = [
     { projectId: 1, projectName: 'Project A' },
     { projectId: 2, projectName: 'Project B' },
     { projectId: 3, projectName: 'Project C' },
   ];
+
+//   useEffect(() => {
+//     fetch('https://your-backend-api/projects')
+//       .then((response) => response.json())
+//       .then((data) => setProjects(data))
+//       .catch((error) => console.error('Error fetching projects:', error));
+//   }, []); 
 
   return (
     <View style={styles.container}>
