@@ -5,13 +5,10 @@ import axios from 'axios';
 const ProjectDetailsScreen = ({ route,navigation }) => {
     const { projectId, projectName } = route.params;
 
-  console.log(projectId)
-  console.log(projectName)
   const [feedback, setFeedback] = useState('');
 
   const submitFeedback = async () => {
     try {
-      // Replace 'https://your-backend-api/submit-feedback' with your actual backend endpoint
       const response = await axios.post('https://your-backend-api/submit-feedback', {
         projectId: project.projectId,
         feedback,
@@ -29,14 +26,14 @@ const ProjectDetailsScreen = ({ route,navigation }) => {
     projectName: 'Sample Project',
     totalBudget: '$500,000',
     projectType: 'Development',
-    projectDetails: 'This is a sample project for demonstration purposes.',
+    projectDetails: 'This is a sample project for demonstration .',
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.projectId}>Project ID: {mockProject.projectId}</Text>
-        <Text style={styles.projectName}>{mockProject.projectName}</Text>
+        <Text style={styles.projectId}>Project ID: {projectId}</Text>
+        <Text style={styles.projectName}>{projectName}</Text>
       </View>
 
       <View style={styles.detailsContainer}>
@@ -50,9 +47,9 @@ const ProjectDetailsScreen = ({ route,navigation }) => {
           <Text style={styles.detailValue}>{mockProject.projectType}</Text>
         </View>
 
-        <View style={styles.detailItem}>
-          <Text style={styles.detailLabel}>Project Details:</Text>
-          <Text style={styles.detailValue}>{mockProject.projectDetails}</Text>
+        <View style={styles.detailItempro}>
+          <Text style={styles.detailLabel}>Project Details</Text>
+          <Text>{mockProject.projectDetails}</Text>
         </View>
       </View>
 
@@ -103,12 +100,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 12,
   },
+  detailItempro:{
+    justifyContent: 'space-between',
+    marginBottom: 12,
+    
+  },
   detailLabel: {
     fontSize: 16,
     fontWeight: 'bold',
+    padding:20,
   },
   detailValue: {
     fontSize: 16,
+    padding:20,
   },
   feedbackContainer: {
     marginTop: 20,
