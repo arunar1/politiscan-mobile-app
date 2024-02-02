@@ -7,7 +7,8 @@ const DemoScreen = () => {
   const [sentimentResult, setSentimentResult] = useState(null);
 
   const handleSubmit = async () => {
-    try {
+    if(inputText.split(' ').length>=3){
+      try {
         const response = await axios.post("http://192.168.0.116:4000/api/sentiment", {
           data: inputText,
         });
@@ -20,6 +21,12 @@ const DemoScreen = () => {
         console.error("Error fetching sentiment:", error);
         Alert.alert("Error", "Failed to fetch sentiment.");
       }
+    }
+    else{
+      Alert.alert("Please", "Need atleast 3 or more words");
+
+    }
+    
   };
 
   return (
