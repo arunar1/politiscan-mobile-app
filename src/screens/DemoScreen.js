@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, Alert ,StyleSheet} from "react-native";
 import axios from "axios";
+import { setHeight,setWidth } from '../utils';
+
 
 const DemoScreen = () => {
   const [inputText, setInputText] = useState("");
@@ -33,10 +35,12 @@ const DemoScreen = () => {
     <View style={{ padding: 20, flex: 1, justifyContent: "center" }}>
         <Text style={{paddingBottom:30,fontSize:18,}}>Please share your comments on project :</Text>
       <TextInput
-        placeholder="Enter your data"
+        placeholder="  Enter your data"
+        multiline
+        numberOfLines={4}
         onChangeText={(text) => setInputText(text)}
         value={inputText}
-        style={{ height: 40, borderColor: "gray", borderWidth: 1, marginBottom: 20 }}
+        style={{ height: 70,width:setWidth(90), borderColor: "gray", borderWidth: 1, marginBottom: 20 }}
       />
       <Button title="Submit"  style={styles.b} color={'purple'}  onPress={handleSubmit} />
 

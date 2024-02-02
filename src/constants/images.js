@@ -5,4 +5,5 @@ export default{
     ROLE:require('../assets/images/newspaper.png'),
     FEEDBACK:require('../assets/images/spl.png'),
     PIC_FRONT:require('../assets/images/splash.png'),
+    PROFILE_PIC:require('../assets/images/profilepic.png')
 }
