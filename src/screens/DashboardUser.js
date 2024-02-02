@@ -4,7 +4,7 @@ import {images} from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
 
-const DashboardUser = () => {
+const DashboardUser = ({navigation}) => {
   return (
     
     <View style={styles.container}>
@@ -40,7 +40,9 @@ const DashboardUser = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={() => console.log('Projects Button Pressed')}>
-          <Text style={styles.buttonText}>Show Projects</Text>
+          <Text style={styles.buttonText} onPress={()=>{
+            navigation.navigate('projectlist')
+          }}>Show Projects</Text>
         </TouchableOpacity>
       </View>
     </View>

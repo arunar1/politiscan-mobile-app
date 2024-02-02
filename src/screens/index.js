@@ -4,6 +4,6 @@
  import SignupScreen from "./SignupScreen";
  import DemoScreen from "./DemoScreen";
  import DashboardUser from "./DashboardUser";
+import ProjectListScreen from "./ProjectListScreen";
 
-
- export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser};
+ export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen};
