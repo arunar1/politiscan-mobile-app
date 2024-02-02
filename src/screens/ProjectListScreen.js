@@ -25,7 +25,7 @@ const ProjectListScreen = ({ navigation }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.projectItem}
-            onPress={() => navigation.navigate('ProjectDetails', { project: item })}
+            onPress={() => navigation.navigate('projectdetails', { projectId: 1, projectName: 'Sample Project' })}
           >
             <Text style={styles.projectTitle}>{item.projectName}</Text>
           </TouchableOpacity>
