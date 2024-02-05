@@ -19,6 +19,7 @@ const ProjectDetailsScreen = ({ route,navigation }) => {
       console.error('Error submitting feedback:', error);
       Alert.alert('Error', 'Failed to submit feedback. Please try again.');
     }
+    navigation.navigate('demo',{feedback:feedback})
   };
 
   const mockProject = {
@@ -63,7 +64,7 @@ const ProjectDetailsScreen = ({ route,navigation }) => {
           onChangeText={(text) => setFeedback(text)}
         />
         <TouchableOpacity style={styles.submitButton} onPress={submitFeedback}>
-          <Text style={styles.submitButtonText}>Submit Feedback</Text>
+          <Text style={styles.submitButtonText} >Submit Feedback</Text>
         </TouchableOpacity>
       </View>
     </View>

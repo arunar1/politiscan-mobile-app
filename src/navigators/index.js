@@ -15,7 +15,7 @@ const Navigators=()=>{
                 <stack.Screen name="dash" component={DashboardUser} />
                 <stack.Screen name='projectlist' component={ProjectListScreen} />
                 <stack.Screen name='projectdetails' component={ProjectDetailsScreen} />
-                {/* <stack.Screen name="demo" component={DemoScreen} /> */}
+                <stack.Screen name="demo" component={DemoScreen} />
 
             </stack.Navigator>
         </NavigationContainer>

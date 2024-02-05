@@ -4,14 +4,17 @@ import axios from "axios";
 import { setHeight,setWidth } from '../utils';
 
 
-const DemoScreen = () => {
-  const [inputText, setInputText] = useState("");
+const DemoScreen = ({route,navigation}) => {
   const [sentimentResult, setSentimentResult] = useState(null);
+
+  const {feedback}=route.params;
+
+  const [inputText, setInputText] = useState("");
 
   const handleSubmit = async () => {
     if(inputText.split(' ').length>=3){
       try {
-        const response = await axios.post("http://192.168.0.116:4000/api/sentiment", {
+        const response = await axios.post("http://172.16.16.147:4000/api/sentiment", {
           data: inputText,
         });
 
