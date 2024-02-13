@@ -6,5 +6,6 @@
  import DashboardUser from "./DashboardUser";
 import ProjectListScreen from "./ProjectListScreen";
 import ProjectDetailsScreen from "./ProjectDetailsScreen";
+import AdminDashboard from "./AdminDashboard";
 
- export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen};
+ export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard};
