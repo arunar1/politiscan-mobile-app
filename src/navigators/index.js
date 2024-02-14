@@ -12,7 +12,7 @@ const Navigators=()=>{
                 <stack.Screen name="welcome" component={WelcomeScreen}/>
                 <stack.Screen name="login" component={LoginScreen}/>
                 <stack.Screen name="signup" component={SignupScreen}/>
-                {/* <stack.Screen name="dash" component={DashboardUser} /> */}
+                <stack.Screen name="dash" component={DashboardUser} />
                 <stack.Screen name="admindash" component={AdminDashboard} />
                 <stack.Screen name='projectlist' component={ProjectListScreen} />
                 <stack.Screen name='projectdetails' component={ProjectDetailsScreen} />

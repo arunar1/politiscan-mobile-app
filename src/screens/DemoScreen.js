@@ -14,14 +14,15 @@ const DemoScreen = ({route,navigation}) => {
   const handleSubmit = async () => {
     if(inputText.split(' ').length>=3){
       try {
-        const response = await axios.post("http://172.16.16.147:4000/api/sentiment", {
-          data: inputText,
+        const response = await axios.post("http://192.168.0.112:3000/api/sentiment", {
+          text: inputText,
         });
-
+        console.log(inputText)
         console.log(response.data)
-    
-        const sentiment = response.data.calculatedsentiment;
-        setSentimentResult(sentiment);
+        
+            const sentiment = response.data.sentiment;
+
+         setSentimentResult(sentiment);
       } catch (error) {
         console.error("Error fetching sentiment:", error);
         Alert.alert("Error", "Failed to fetch sentiment.");
@@ -49,7 +50,7 @@ const DemoScreen = ({route,navigation}) => {
 
       {sentimentResult !== null && (
         <View style={{ marginTop: 20 }}>
-          <Text style={styles.text}>Sentiment Result: <Text style={styles.textresult}>{sentimentResult === 1 ? "Positive" : (sentimentResult === -1 ? "Negative":"Neutral")}</Text></Text>
+          <Text style={styles.text}>Sentiment Result:{sentimentResult} </Text>
         </View>
       )}
     </View>
