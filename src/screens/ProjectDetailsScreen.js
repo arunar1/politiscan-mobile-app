@@ -8,18 +8,18 @@ const ProjectDetailsScreen = ({ route,navigation }) => {
   const [feedback, setFeedback] = useState('');
 
   const submitFeedback = async () => {
-    try {
-      const response = await axios.post('https://your-backend-api/submit-feedback', {
-        projectId: project.projectId,
-        feedback,
-      });
+    // try {
+    //   const response = await axios.post('https://your-backend-api/submit-feedback', {
+    //     projectId: project.projectId,
+    //     feedback,
+    //   });
 
-      Alert.alert('Feedback Submitted', 'Thank you for your feedback!');
-    } catch (error) {
-      console.error('Error submitting feedback:', error);
-      Alert.alert('Error', 'Failed to submit feedback. Please try again.');
-    }
-    navigation.navigate('demo',{feedback:feedback})
+    //   Alert.alert('Feedback Submitted', 'Thank you for your feedback!');
+    // } catch (error) {
+    //   console.error('Error submitting feedback:', error);
+    //   Alert.alert('Error', 'Failed to submit feedback. Please try again.');
+    // }
+    navigation.navigate('demo',{inputText:feedback})
   };
 
   const mockProject = {
