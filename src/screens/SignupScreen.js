@@ -32,33 +32,66 @@ const SignupScreen = () => {
     aadharImage: false
   });
 
-  const handleSignup = () => {
+  const uploadDocumentToFirebase = async (documentUri) => {
+    const filename = Date.now() + '_' + documentUri.split('/').pop();
+    const reference = storage().ref(filename);
+  
+    await reference.putFile(documentUri);
+  
+    const downloadURL = await reference.getDownloadURL();
+    return downloadURL;
+  };
+
+
+  const handleSignup = async () => {
     if (validateFields()) {
       console.log('Signup pressed');
       console.log('Form Data:', formData);
+
+      // Upload documents to Firebase Storage
+      try {
+        const profileImageUpload = await uploadDocumentToFirebase(formData.profileImage);
+        const aadharImageUpload = await uploadDocumentToFirebase(formData.aadharImage);
+
+        console.log('Profile Image URL:', profileImageUpload);
+        console.log('Aadhar Image URL:', aadharImageUpload);
+
+        // Here you can proceed with sending the signup data along with document URLs to your backend
+      } catch (error) {
+        console.error('Error uploading documents:', error);
+        Alert.alert('Error', 'Failed to upload documents. Please try again.');
+      }
     } else {
       Alert.alert('Error', 'Please fill out all required fields.');
     }
   };
 
+
   const pickDocument = async (type) => {
     try {
-      const result = await DocumentPicker.getDocumentAsync();
-
-      if (result.type === 'success' && result.uri) {
-        setFormData(prevState => ({
-          ...prevState,
-          [type === 'profile' ? 'profileImage' : 'aadharImage']: result.uri
-        }));
-        // Clear error for the selected image type
-        setErrors(prevErrors => ({ ...prevErrors, [type === 'profile' ? 'profileImage' : 'aadharImage']: false }));
-      }
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.images, DocumentPicker.types.pdf], // Specify allowed document types
+      });
+  
+      setFormData(prevState => ({
+        ...prevState,
+        [type === 'profile' ? 'profileImage' : 'aadharImage']: res.uri
+      }));
+  
+      // Clear error for the selected document type
+      setErrors(prevErrors => ({ ...prevErrors, [type === 'profile' ? 'profileImage' : 'aadharImage']: false }));
     } catch (err) {
-      console.error('Error picking document', err);
+      if (DocumentPicker.isCancel(err)) {
+        console.log('Document picker cancelled');
+      } else {
+        console.error('Error picking document', err);
+      }
     }
   };
+  
 
-  const validateFields = () => {
+
+   const validateFields = () => {
     const { name, age, gender, constituency, mobileNumber, email, password, adminId, profileImage, aadharImage } = formData;
     const formErrors = {
       name: !name.trim(),

@@ -9,7 +9,7 @@ const DemoScreen = ({ route, navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
         try {
-          const response = await axios.post("http://192.168.0.102:4000/api/sentiment", {
+          const response = await axios.post("http://192.168.154.133:4000/api/sentiment", {
             text: inputText,
           });
           const sentiment = response.data.sentiment;
@@ -26,9 +26,10 @@ const DemoScreen = ({ route, navigation }) => {
 
   return (
     <View style={{ padding: 20, flex: 1, justifyContent: "center" }}>
+      <Text style={styles.text}>Feedback : {inputText}</Text>
       {sentimentResult !== null && (
         <View style={{ marginTop: 20 }}>
-          <Text style={styles.text}>Sentiment Result: {sentimentResult}</Text>
+          <Text style={styles.text}>Sentiment Result: <Text style={styles.sentimentResult}>{sentimentResult}</Text></Text>
         </View>
       )}
     </View>
@@ -41,6 +42,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 50,
   },
+  sentimentResult:{
+    color:"red"
+  }
 });
 
 export default DemoScreen;

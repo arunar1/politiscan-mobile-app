@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet,ScrollView } from 'react-native';
 import {images} from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
@@ -7,7 +7,7 @@ import { Seperator } from '../components';
 const DashboardUser = ({navigation}) => {
   return (
     
-    <View style={styles.container}>
+      <View style={styles.container}>
       <Seperator height={setWidth(2)} />
       <View style={styles.header}>
         <Image
@@ -42,10 +42,12 @@ const DashboardUser = ({navigation}) => {
         <TouchableOpacity style={styles.button} onPress={() => console.log('Projects Button Pressed')}>
           <Text style={styles.buttonText} onPress={()=>{
             navigation.navigate('projectlist')
-          }}>Show Projects</Text>
+          }}>Show_Projects</Text>
         </TouchableOpacity>
       </View>
     </View>
+    
+    
   );
 };
 
@@ -92,16 +94,18 @@ const styles = StyleSheet.create({
     
   },
   button: {
-    width:150,
+    width:setWidth(40),
     backgroundColor: '#3498db',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+    
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    justifyContent:'center'
   },
   seperator:{
     backgroundColor:'red',
