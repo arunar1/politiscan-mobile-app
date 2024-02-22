@@ -7,5 +7,8 @@
 import ProjectListScreen from "./ProjectListScreen";
 import ProjectDetailsScreen from "./ProjectDetailsScreen";
 import AdminDashboard from "./AdminDashboard";
+import viewResultScreen from "./ViewResultScreen";
+import AddProjectScreen from "./AddProjectScreen";
 
- export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard};
+ export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
+viewResultScreen,AddProjectScreen};

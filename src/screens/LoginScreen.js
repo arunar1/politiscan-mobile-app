@@ -14,7 +14,7 @@ const LoginScreen = ({navigation}) => {
     console.log('Email:', email);
     console.log('Password:', password);
     console.log('Remember Me:', rememberMe);
-    navigation.navigate('dash')
+    navigation.navigate('admindash')
   };
 
   const handleSignUp = () => {

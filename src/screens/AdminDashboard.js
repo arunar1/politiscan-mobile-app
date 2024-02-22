@@ -47,7 +47,7 @@ const AdminDashboard = ({ navigation }) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate('ProjectList');
+            navigation.navigate('projectlist');
           }}>
           <Text style={styles.buttonText}>Show Projects</Text>
         </TouchableOpacity>
@@ -55,7 +55,7 @@ const AdminDashboard = ({ navigation }) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate('');
+            navigation.navigate('rating');
           }}>
           <Text style={styles.buttonText}>Rated Project</Text>
         </TouchableOpacity>

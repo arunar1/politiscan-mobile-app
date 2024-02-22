@@ -1,7 +1,8 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { AdminDashboard, DashboardUser, DemoScreen, LoginScreen, ProjectDetailsScreen, ProjectListScreen, SignupScreen, SplashScreen,WelcomeScreen } from "../screens";
+import { AddProjectScreen,viewResultScreen,AdminDashboard, DashboardUser, DemoScreen, LoginScreen, ProjectDetailsScreen, ProjectListScreen, SignupScreen, SplashScreen,WelcomeScreen } from "../screens";
+
 const stack=createStackNavigator()
 
 const Navigators=()=>{
@@ -17,6 +18,9 @@ const Navigators=()=>{
                 <stack.Screen name='projectlist' component={ProjectListScreen} />
                 <stack.Screen name='projectdetails' component={ProjectDetailsScreen} />
                 <stack.Screen name="demo" component={DemoScreen} />
+                <stack.Screen name="add-details" component={AddProjectScreen} />
+                <stack.Screen name="rating" component={viewResultScreen} />
+                
 
             </stack.Navigator>
         </NavigationContainer>
