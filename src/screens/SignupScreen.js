@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
 
 import * as DocumentPicker from 'expo-document-picker';
 
@@ -19,6 +20,8 @@ const SignupScreen = () => {
     userType: 'user' // 'user' or 'admin'
   });
 
+  
+
   const [errors, setErrors] = useState({
     name: false,
     age: false,
@@ -28,8 +31,8 @@ const SignupScreen = () => {
     email: false,
     password: false,
     adminId: false,
-    profileImage: false,
-    aadharImage: false
+    profileImage: true,
+    aadharImage: true
   });
 
   const uploadDocumentToFirebase = async (documentUri) => {
@@ -45,6 +48,16 @@ const SignupScreen = () => {
 
   const handleSignup = async () => {
     if (validateFields()) {
+
+      try {
+        const response=axios.post("http://192.168.147.133:4000/registration",{
+          info:formData,
+        })
+        
+      } catch (error) {
+        
+      }
+
       console.log('Signup pressed');
       console.log('Form Data:', formData);
 

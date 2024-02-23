@@ -9,7 +9,7 @@ const DemoScreen = ({ route, navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
         try {
-          const response = await axios.post("http://192.168.154.133:4000/api/sentiment", {
+          const response = await axios.post("http://192.168.147.133:4000/api/sentiment", {
             text: inputText,
           });
           const sentiment = response.data.sentiment;
