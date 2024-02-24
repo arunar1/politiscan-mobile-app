@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert, Platform, PermissionsAndroid } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
-
-import * as DocumentPicker from 'expo-document-picker';
+import { firebase } from '../firebase/firebase.js'; // Import Firebase from your firebase.js file
+import * as ImagePicker from 'expo-image-picker';
 
 const SignupScreen = () => {
   const [formData, setFormData] = useState({
@@ -20,8 +20,6 @@ const SignupScreen = () => {
     userType: 'user' // 'user' or 'admin'
   });
 
-  
-
   const [errors, setErrors] = useState({
     name: false,
     age: false,
@@ -31,13 +29,39 @@ const SignupScreen = () => {
     email: false,
     password: false,
     adminId: false,
-    profileImage: true,
-    aadharImage: true
+    profileImage: false,
+    aadharImage:false
   });
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      requestStoragePermission();
+    }
+  }, []);
+
+  const requestStoragePermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        {
+          title: 'Storage Permission',
+          message: 'App needs access to your storage to upload images/documents.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        }
+      );
+      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Storage permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
 
   const uploadDocumentToFirebase = async (documentUri) => {
     const filename = Date.now() + '_' + documentUri.split('/').pop();
-    const reference = storage().ref(filename);
+    const reference = firebase.storage().ref(filename);
   
     await reference.putFile(documentUri);
   
@@ -45,17 +69,15 @@ const SignupScreen = () => {
     return downloadURL;
   };
 
-
   const handleSignup = async () => {
     if (validateFields()) {
-
       try {
-        const response=axios.post("http://192.168.147.133:4000/registration",{
-          info:formData,
-        })
-        
+        const response = await axios.post("http://192.168.147.133:4000/registration", {
+          info: formData,
+        });
+        console.log('Response:', response.data);
       } catch (error) {
-        
+        console.error('Error:', error);
       }
 
       console.log('Signup pressed');
@@ -79,32 +101,26 @@ const SignupScreen = () => {
     }
   };
 
+  const pickImage = async (type) => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
+    });
 
-  const pickDocument = async (type) => {
-    try {
-      const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.images, DocumentPicker.types.pdf], // Specify allowed document types
-      });
-  
+    console.log(result.assets[0].uri);
+
+    if (!result.cancelled) {
       setFormData(prevState => ({
         ...prevState,
-        [type === 'profile' ? 'profileImage' : 'aadharImage']: res.uri
+        [type === 'profile' ? 'profileImage' : 'aadharImage']: result.assets[0].uri
       }));
-  
-      // Clear error for the selected document type
+
       setErrors(prevErrors => ({ ...prevErrors, [type === 'profile' ? 'profileImage' : 'aadharImage']: false }));
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        console.log('Document picker cancelled');
-      } else {
-        console.error('Error picking document', err);
-      }
     }
   };
-  
 
-
-   const validateFields = () => {
+  const validateFields = () => {
     const { name, age, gender, constituency, mobileNumber, email, password, adminId, profileImage, aadharImage } = formData;
     const formErrors = {
       name: !name.trim(),
@@ -173,33 +189,30 @@ const SignupScreen = () => {
       />
 
       <View style={styles.border}>
-      <Picker
-        selectedValue={formData.gender}
-        style={[styles.border,styles.input, errors.gender && styles.errorInput]}
-        onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, gender: itemValue }))}
-      >
-        <Picker.Item label="Select Gender" value="" />
-        <Picker.Item label="Male" value="Male" />
-        <Picker.Item label="Female" value="Female" />
-        <Picker.Item label="Other" value="Other" />
-      </Picker>
+        <Picker
+          selectedValue={formData.gender}
+          style={[styles.border,styles.input, errors.gender && styles.errorInput]}
+          onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, gender: itemValue }))}
+        >
+          <Picker.Item label="Select Gender" value="" />
+          <Picker.Item label="Male" value="Male" />
+          <Picker.Item label="Female" value="Female" />
+          <Picker.Item label="Other" value="Other" />
+        </Picker>
       </View>
-
 
       <View style={[styles.border]}>
-      <Picker 
-        selectedValue={formData.constituency}
-        style={[styles.border,styles.input, errors.constituency && styles.errorInput]}
-        onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, constituency: itemValue }))}
-      >
-        <Picker.Item label="Select Constituency" value="" />
-        <Picker.Item label="Constituency 1" value="Constituency 1" />
-        <Picker.Item label="Constituency 2" value="Constituency 2" />
-        <Picker.Item label="Constituency 3" value="Constituency 3" />
-      </Picker>
-
+        <Picker 
+          selectedValue={formData.constituency}
+          style={[styles.border,styles.input, errors.constituency && styles.errorInput]}
+          onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, constituency: itemValue }))}
+        >
+          <Picker.Item label="Select Constituency" value="" />
+          <Picker.Item label="Constituency 1" value="Constituency 1" />
+          <Picker.Item label="Constituency 2" value="Constituency 2" />
+          <Picker.Item label="Constituency 3" value="Constituency 3" />
+        </Picker>
       </View>
-    
 
       <TextInput
         style={[styles.input, errors.mobileNumber && styles.errorInput]}
@@ -226,20 +239,12 @@ const SignupScreen = () => {
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
       />
 
-      {/* {formData.profileImage && (
-        <Image source={{ uri: formData.profileImage }} style={styles.imagePreview} resizeMode="contain" />
-      )} */}
-
-      <TouchableOpacity style={styles.uploadButton} onPress={() => pickDocument('profile')}>
+      <TouchableOpacity style={styles.uploadButton} onPress={() => pickImage('profile')}>
         <Text style={styles.uploadButtonText}>Upload Profile Image</Text>
       </TouchableOpacity>
       {errors.profileImage && <Text style={styles.errorText}>Profile image is required</Text>}
 
-      {/* {formData.aadharImage && (
-        <Image source={{ uri: formData.aadharImage }} style={styles.imagePreview} resizeMode="contain" />
-      )} */}
-
-      <TouchableOpacity style={styles.uploadButton} onPress={() => pickDocument('aadhar')}>
+      <TouchableOpacity style={styles.uploadButton} onPress={() => pickImage('aadhar')}>
         <Text style={styles.uploadButtonText}>Upload Aadhar Image</Text>
       </TouchableOpacity>
       {errors.aadharImage && <Text style={styles.errorText}>Aadhar image is required</Text>}
@@ -290,10 +295,14 @@ const styles = StyleSheet.create({
   errorInput: {
     borderColor: 'red',
   },
-  imagePreview: {
+  border:{
+    color:'grey',
+    height: 40,
     width: '100%',
-    height: 200,
+    borderColor: 'gray',
+    borderWidth: 1,
     marginBottom: 16,
+    paddingLeft: 0,
   },
   uploadButton: {
     backgroundColor: 'blue',
@@ -313,20 +322,7 @@ const styles = StyleSheet.create({
   },
   activecolor:{
     color:'white'
-  },
-  border:{
-    color:'grey',
-    height: 40,
-    width: '100%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 16,
-    paddingLeft: 0,
-
-
-
   }
-  
 });
 
 export default SignupScreen;
