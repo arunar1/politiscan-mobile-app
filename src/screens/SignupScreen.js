@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert, Platform, PermissionsAndroid } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
-import { firebase } from '../firebase/firebase.js'; // Import Firebase from your firebase.js file
 import * as ImagePicker from 'expo-image-picker';
+import { firebase } from '../firebase/config';
+import 'firebase/storage'; 
+import * as FileSystem from 'expo-file-system';
+
+
+
 
 const SignupScreen = () => {
+
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -17,7 +23,7 @@ const SignupScreen = () => {
     adminId: '',
     profileImage: null,
     aadharImage: null,
-    userType: 'user' // 'user' or 'admin'
+    userType: 'user'
   });
 
   const [errors, setErrors] = useState({
@@ -60,30 +66,41 @@ const SignupScreen = () => {
   };
 
   const uploadDocumentToFirebase = async (documentUri) => {
-    const filename = Date.now() + '_' + documentUri.split('/').pop();
-    const reference = firebase.storage().ref(filename);
+    try {
+      const response = await fetch(documentUri);
+      const blob = await response.blob();
   
-    await reference.putFile(documentUri);
+      const filename = Date.now() + '_' + documentUri.split('/').pop();
+      const reference = firebase.storage().ref().child(filename);
+      console.log(reference)
+      const uploadTask = reference.put(blob);
   
-    const downloadURL = await reference.getDownloadURL();
-    return downloadURL;
+      await uploadTask;
+  
+      const downloadURL = await reference.getDownloadURL();
+      console.log(downloadURL)
+      return downloadURL;
+    } catch (error) {
+      console.error('Error uploading document:', error);
+      throw error; 
+    }
   };
 
   const handleSignup = async () => {
     if (validateFields()) {
-      try {
-        const response = await axios.post("http://192.168.147.133:4000/registration", {
-          info: formData,
-        });
-        console.log('Response:', response.data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
+      // try {
+      //   const response = await axios.post("http://192.168.147.133:4000/registration", {
+      //     info: formData,
+      //   });
+      //   console.log('Response:', response.data);
+      // } catch (error) {
+      //   console.error('Error:', error);
+      // }
 
       console.log('Signup pressed');
-      console.log('Form Data:', formData);
+      console.log('Form Data:', formData.aadharImage);
 
-      // Upload documents to Firebase Storage
+      
       try {
         const profileImageUpload = await uploadDocumentToFirebase(formData.profileImage);
         const aadharImageUpload = await uploadDocumentToFirebase(formData.aadharImage);
@@ -91,7 +108,6 @@ const SignupScreen = () => {
         console.log('Profile Image URL:', profileImageUpload);
         console.log('Aadhar Image URL:', aadharImageUpload);
 
-        // Here you can proceed with sending the signup data along with document URLs to your backend
       } catch (error) {
         console.error('Error uploading documents:', error);
         Alert.alert('Error', 'Failed to upload documents. Please try again.');
