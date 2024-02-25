@@ -12,6 +12,9 @@ import * as FileSystem from 'expo-file-system';
 
 const SignupScreen = () => {
 
+  const [profile,setProfile]=useState();
+  const [aadhar,setAadhar]=useState();
+
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -88,14 +91,7 @@ const SignupScreen = () => {
 
   const handleSignup = async () => {
     if (validateFields()) {
-      // try {
-      //   const response = await axios.post("http://192.168.147.133:4000/registration", {
-      //     info: formData,
-      //   });
-      //   console.log('Response:', response.data);
-      // } catch (error) {
-      //   console.error('Error:', error);
-      // }
+      
 
       console.log('Signup pressed');
       console.log('Form Data:', formData.aadharImage);
@@ -104,17 +100,40 @@ const SignupScreen = () => {
       try {
         const profileImageUpload = await uploadDocumentToFirebase(formData.profileImage);
         const aadharImageUpload = await uploadDocumentToFirebase(formData.aadharImage);
-
+        
+        setFormData(prevState => ({
+          ...prevState,
+          profileImage: profileImageUpload,
+          aadharImage: aadharImageUpload
+        }));
+        setAadhar(aadharImageUpload);
+        setProfile(profileImageUpload)
+      
         console.log('Profile Image URL:', profileImageUpload);
         console.log('Aadhar Image URL:', aadharImageUpload);
 
+        console.log(formData)
+      
       } catch (error) {
         console.error('Error uploading documents:', error);
         Alert.alert('Error', 'Failed to upload documents. Please try again.');
       }
+      
     } else {
       Alert.alert('Error', 'Please fill out all required fields.');
     }
+
+    try {
+      const response = await axios.post("http://192.168.147.133:4000/registration", {
+        info:formData,
+        aadhar:aadhar,
+        profile:profile
+      });
+      console.log('Response:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    
   };
 
   const pickImage = async (type) => {
