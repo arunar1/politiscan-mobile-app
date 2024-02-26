@@ -126,7 +126,7 @@ const SignupScreen = () => {
     }
 
     try {
-      const response = await axios.post("http://192.168.147.133:4000/registration", {
+      const response = await axios.post("http://192.168.16.133:4000/registration", {
         info:formData,
         aadhar:aadhar,
         profile:profile

@@ -4,17 +4,19 @@ import {images} from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
 
-const DashboardUser = ({navigation}) => {
+const DashboardUser = ({navigation,route}) => {
+  const { data} = route.params;
+  console.log(data.profileImage)
   return (
     
       <View style={styles.container}>
       <Seperator height={setWidth(2)} />
       <View style={styles.header}>
         <Image
-          source={images.PROFILE_PIC}
+          source={{ uri: data.profileImage }}
           style={styles.profilePic}
         />
-        <Text style={styles.name}>ARUN A R</Text>
+        <Text style={styles.name}>{data.name}</Text>
       </View>
 
       <View style={styles.userInfo}>

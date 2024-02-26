@@ -2,19 +2,41 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RadioButton } from 'react-native-paper';
-
+import axios from 'axios';
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [data,setdata]=useState([]);
+  const [token,setToken]=useState()
 
-  const handleLogin = () => {
+
+
+
+  const handleLogin = async() => {
     console.log('Login pressed');
     console.log('Email:', email);
     console.log('Password:', password);
     console.log('Remember Me:', rememberMe);
-    navigation.navigate('admindash')
+    try {
+      const response = await axios.post("http://192.168.16.133:4000/login", {
+        email:email,
+        password:password
+      });
+      console.log('Response:', response.data);
+      setdata(response.data.details)
+      setToken(response.data.token)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    if(data.userType==='user'){
+      navigation.navigate('dash',{data:data})
+    }
+    else if(data.usertype==='admin'){
+      navigation.navigate('admindash',{data:data})
+    }
+    
   };
 
   const handleSignUp = () => {
