@@ -19,6 +19,7 @@ const SignupScreen = () => {
     name: '',
     age: '',
     gender: '',
+    aadharNo:'',
     constituency: '',
     mobileNumber: '',
     email: '',
@@ -35,6 +36,7 @@ const SignupScreen = () => {
     gender: false,
     constituency: false,
     mobileNumber: false,
+    aadharNo:false,
     email: false,
     password: false,
     adminId: false,
@@ -156,7 +158,7 @@ const SignupScreen = () => {
   };
 
   const validateFields = () => {
-    const { name, age, gender, constituency, mobileNumber, email, password, adminId, profileImage, aadharImage } = formData;
+    const { name, age, gender, constituency, mobileNumber, email, password, adminId, profileImage, aadharImage, aadharNo } = formData;
     const formErrors = {
       name: !name.trim(),
       age: !age.trim(),
@@ -167,7 +169,8 @@ const SignupScreen = () => {
       password: !password.trim(),
       adminId: formData.userType === 'admin' && !adminId.trim(),
       profileImage: !profileImage,
-      aadharImage: !aadharImage
+      aadharImage: !aadharImage,
+      aadharNo: !aadharNo.trim() 
     };
 
     setErrors(formErrors);
@@ -223,6 +226,15 @@ const SignupScreen = () => {
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, age: text }))}
       />
 
+      <TextInput
+      style={[styles.input]}
+      placeholder="Aadhar Number"
+      keyboardType="numeric"
+      value={formData.aadharNo}
+      onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
+      autoCompleteType="off"
+      />
+
       <View style={styles.border}>
         <Picker
           selectedValue={formData.gender}
@@ -235,6 +247,9 @@ const SignupScreen = () => {
           <Picker.Item label="Other" value="Other" />
         </Picker>
       </View>
+
+
+      
 
       <View style={[styles.border]}>
         <Picker 
@@ -255,7 +270,10 @@ const SignupScreen = () => {
         keyboardType="numeric"
         value={formData.mobileNumber}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, mobileNumber: text }))}
+        autoCompleteType="off"
       />
+
+
 
       <TextInput
         style={[styles.input, errors.email && styles.errorInput]}
