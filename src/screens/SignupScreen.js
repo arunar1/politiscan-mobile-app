@@ -10,7 +10,7 @@ import * as FileSystem from 'expo-file-system';
 
 
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
 
   const [profile,setProfile]=useState();
   const [aadhar,setAadhar]=useState();
@@ -115,6 +115,7 @@ const SignupScreen = () => {
         console.log('Aadhar Image URL:', aadharImageUpload);
 
         console.log(formData)
+        
       
       } catch (error) {
         console.error('Error uploading documents:', error);
@@ -124,17 +125,19 @@ const SignupScreen = () => {
     } else {
       Alert.alert('Error', 'Please fill out all required fields.');
     }
-
+    if (validateFields()) {
     try {
-      const response = await axios.post("http://192.168.16.133:4000/registration", {
+      const response = await axios.post("http://192.168.16.133:4000/verification", {
         info:formData,
-        aadhar:aadhar,
-        profile:profile
       });
+      if(response){
+        navigation.navigate("validate",{info:formData,aadhar:aadhar,profile:profile})
+      }
       console.log('Response:', response);
     } catch (error) {
       console.error('Error:', error);
     }
+  }
     
   };
 

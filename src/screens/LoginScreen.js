@@ -26,7 +26,7 @@ const LoginScreen = ({navigation}) => {
       });
       console.log('Response:', response.data);
       setdata(response.data.details)
-      setToken(response.data.token)
+      setToken.apply(response.data.token)
     } catch (error) {
       console.error('Error:', error);
     }
