@@ -8,8 +8,9 @@ import 'firebase/storage';
 import * as FileSystem from 'expo-file-system';
 import { Api } from '../constants';
 
-
 const SignupScreen = ({navigation}) => {
+
+
 
   const [profile,setProfile]=useState();
   const [aadhar,setAadhar]=useState();
@@ -160,6 +161,9 @@ const SignupScreen = ({navigation}) => {
       const response = await axios.post(`${Api.API_BACKEND}/verification`, {
         info:formData,
       });
+
+
+      {response?}
 
       if(response.data.message==="Account Already exists"){
         Alert.alert("info","Account already exist")
