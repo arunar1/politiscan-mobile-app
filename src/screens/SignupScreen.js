@@ -6,8 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { firebase } from '../firebase/config';
 import 'firebase/storage'; 
 import * as FileSystem from 'expo-file-system';
-
-
+import { Api } from '../constants';
 
 
 const SignupScreen = ({navigation}) => {
@@ -91,7 +90,38 @@ const SignupScreen = ({navigation}) => {
     }
   };
 
+  const validPhonenumber=()=>{
+    if(formData.mobileNumber.length!=10){
+      Alert.alert("info","Invalid mobile Number")
+      return false
+    }
+    else{
+      return true
+    }
+  }
+ const validAadhar=()=>{
+    if(formData.aadharNo.length!=12){
+      Alert.alert("info","Enter the valid Aadhar number")
+      return false;
+    }
+    else{
+      return true
+    }
+  }
+
+  const passwordCheck=()=>{
+    if(formData.password.length<8){
+      Alert.alert("info", "Enter a strong password")
+      return false
+    }
+    else{
+      return true
+    }
+  }
+
+     
   const handleSignup = async () => {
+    if(validPhonenumber() && validAadhar() && passwordCheck()){
     if (validateFields()) {
       
 
@@ -127,17 +157,27 @@ const SignupScreen = ({navigation}) => {
     }
     if (validateFields()) {
     try {
-      const response = await axios.post("http://192.168.16.133:4000/verification", {
+      const response = await axios.post(`${Api.API_BACKEND}/verification`, {
         info:formData,
       });
-      if(response){
+
+      if(response.data.message==="Account Already exists"){
+        Alert.alert("info","Account already exist")
+
+      }
+      else if(response.status==200){
+        Alert.alert("info",`Email is send to ${formData.email}`)
         navigation.navigate("validate",{info:formData,aadhar:aadhar,profile:profile})
+      }
+      else{
+        Alert.alert("Error","Please try again")
       }
       console.log('Response:', response);
     } catch (error) {
       console.error('Error:', error);
     }
   }
+}
     
   };
 
@@ -175,6 +215,8 @@ const SignupScreen = ({navigation}) => {
       aadharImage: !aadharImage,
       aadharNo: !aadharNo.trim() 
     };
+
+   
 
     setErrors(formErrors);
 
@@ -229,14 +271,14 @@ const SignupScreen = ({navigation}) => {
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, age: text }))}
       />
 
-      <TextInput
-      style={[styles.input]}
-      placeholder="Aadhar Number"
-      keyboardType="numeric"
-      value={formData.aadharNo}
-      onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
-      autoCompleteType="off"
+<TextInput
+        style={[styles.input]}
+        placeholder="Aadhar no"
+        keyboardType="numeric"
+        value={formData.aadharNO}
+        onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
       />
+     
 
       <View style={styles.border}>
         <Picker
@@ -295,12 +337,12 @@ const SignupScreen = ({navigation}) => {
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
       />
 
-      <TouchableOpacity style={styles.uploadButton} onPress={() => pickImage('profile')}>
+      <TouchableOpacity style={[styles.uploadButton,formData.profileImage  && {backgroundColor:"red"}]} onPress={() => pickImage('profile')}>
         <Text style={styles.uploadButtonText}>Upload Profile Image</Text>
       </TouchableOpacity>
       {errors.profileImage && <Text style={styles.errorText}>Profile image is required</Text>}
 
-      <TouchableOpacity style={styles.uploadButton} onPress={() => pickImage('aadhar')}>
+      <TouchableOpacity style={[styles.uploadButton,formData.aadharImage && {backgroundColor:"red"}]} onPress={() => pickImage('aadhar')}>
         <Text style={styles.uploadButtonText}>Upload Aadhar Image</Text>
       </TouchableOpacity>
       {errors.aadharImage && <Text style={styles.errorText}>Aadhar image is required</Text>}
