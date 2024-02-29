@@ -163,7 +163,6 @@ const SignupScreen = ({navigation}) => {
       });
 
 
-      {response?}
 
       if(response.data.message==="Account Already exists"){
         Alert.alert("info","Account already exist")

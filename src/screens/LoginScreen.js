@@ -33,7 +33,7 @@ const LoginScreen = ({navigation}) => {
     if(data.userType==='user'){
       navigation.navigate('dash',{data:data})
     }
-    else if(data.usertype==='admin'){
+    else if(data.userType==='admin'){
       navigation.navigate('admindash',{data:data})
     }
     

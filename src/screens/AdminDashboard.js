@@ -5,7 +5,8 @@ import { images } from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
 
-const AdminDashboard = ({ navigation }) => {
+const AdminDashboard = ({ navigation ,route}) => {
+  const { data} = route.params;
     return (
     
         <View style={styles.container}>
@@ -40,7 +41,7 @@ const AdminDashboard = ({ navigation }) => {
     
           <View style={styles.buttonsContainer}>
           <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => console.log('Add Project Button Pressed')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("add-details",{constituency:data.constituency})}>
           <Text style={styles.buttonText}>Add Project</Text>
         </TouchableOpacity>
 

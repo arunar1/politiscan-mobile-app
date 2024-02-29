@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-const AddProjectScreen = ({navigation,route}) => {
+const AddProjectScreen = ({ navigation, route }) => {
+    const { constituency } = route.params;
+    console.log(constituency);
+
     const [projectId, setProjectId] = useState('');
+    const [projectName, setProjectName] = useState('');
+    const [projectType, setProjectType] = useState('');
+    const [totalBudget, setTotalBudget] = useState('');
     const [projectDescription, setProjectDescription] = useState('');
 
-
     const generateRandomId = () => {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let randomId = '';
-        for (let i = 0; i < 2; i++) {
-            randomId += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-    setProjectId(randomId);
-        // Generate a random number between 1000 and 9999
-        // const randomId = Math.floor(Math.random() * 9000) + 1000;
-        // setProjectId(randomId.toString());
-        
+        const characters = constituency.slice(0, 2).toUpperCase();
+        const randomId = Math.floor(Math.random() * 9000) + 1000;
+        setProjectId(characters + randomId.toString());
     };
 
     const handleAddProject = () => {
         // Here you can handle adding the project to your database or perform any other actions
         console.log('Project ID:', projectId);
+        console.log('Project Name:', projectName);
+        console.log('Project Type:', projectType);
+        console.log('Total Budget:', totalBudget);
         console.log('Project Description:', projectDescription);
     };
 
@@ -38,6 +39,30 @@ const AddProjectScreen = ({navigation,route}) => {
             <TouchableOpacity style={styles.generateButton} onPress={generateRandomId}>
                 <Text style={styles.buttonText}>Generate Random ID</Text>
             </TouchableOpacity>
+
+            <Text style={styles.label}>Project Name:</Text>
+            <TextInput
+                style={styles.input}
+                value={projectName}
+                onChangeText={setProjectName}
+                placeholder="Enter project name"
+            />
+
+            <Text style={styles.label}>Project Type:</Text>
+            <TextInput
+                style={styles.input}
+                value={projectType}
+                onChangeText={setProjectType}
+                placeholder="Enter project type"
+            />
+
+            <Text style={styles.label}>Total Budget:</Text>
+            <TextInput
+                style={styles.input}
+                value={totalBudget}
+                onChangeText={setTotalBudget}
+                placeholder="Enter total budget"
+            />
 
             <Text style={styles.label}>Project Description:</Text>
             <TextInput
