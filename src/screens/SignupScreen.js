@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert, Platform, PermissionsAndroid } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert, Platform, PermissionsAndroid ,ScrollView} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
@@ -8,17 +8,17 @@ import 'firebase/storage';
 import * as FileSystem from 'expo-file-system';
 import { Api } from '../constants';
 
+import { constituencies,districtList } from '../constants/constituency';
+
 const SignupScreen = ({navigation}) => {
 
-
-
-  const [profile,setProfile]=useState();
-  const [aadhar,setAadhar]=useState();
+  const [constituenciesList, setConstituenciesList] = useState([]);
 
   const [formData, setFormData] = useState({
     name: '',
     age: '',
     gender: '',
+    district:'',
     aadharNo:'',
     constituency: '',
     mobileNumber: '',
@@ -30,10 +30,25 @@ const SignupScreen = ({navigation}) => {
     userType: 'user'
   });
 
+  useEffect(() => {
+    if (formData.district) {
+      setConstituenciesList(constituencies[formData.district]);
+    }
+  }, [formData.district]);
+
+
+
+
+  const [profile,setProfile]=useState();
+  const [aadhar,setAadhar]=useState();
+
+
+
   const [errors, setErrors] = useState({
     name: false,
     age: false,
     gender: false,
+    district:false,
     constituency: false,
     mobileNumber: false,
     aadharNo:false,
@@ -204,11 +219,12 @@ const SignupScreen = ({navigation}) => {
   };
 
   const validateFields = () => {
-    const { name, age, gender, constituency, mobileNumber, email, password, adminId, profileImage, aadharImage, aadharNo } = formData;
+    const { name, age, gender,district, constituency, mobileNumber, email, password, adminId, profileImage, aadharImage, aadharNo } = formData;
     const formErrors = {
       name: !name.trim(),
       age: !age.trim(),
       gender: !gender,
+      district:!district,
       constituency: !constituency,
       mobileNumber: !mobileNumber.trim(),
       email: !email.trim(),
@@ -233,11 +249,13 @@ const SignupScreen = ({navigation}) => {
         placeholder="Admin ID"
         value={formData.adminId}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, adminId: text }))}
+        placeholderTextColor="black"
       />
     );
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.userAdminButtons}>
         <TouchableOpacity
@@ -262,6 +280,7 @@ const SignupScreen = ({navigation}) => {
         placeholder="Name"
         value={formData.name}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, name: text }))}
+        placeholderTextColor="black"
       />
       
       {formData.userType !== 'user' ? renderAdminFields() : null}
@@ -272,6 +291,7 @@ const SignupScreen = ({navigation}) => {
         keyboardType="numeric"
         value={formData.age}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, age: text }))}
+        placeholderTextColor="black"
       />
 
 <TextInput
@@ -280,13 +300,14 @@ const SignupScreen = ({navigation}) => {
         keyboardType="numeric"
         value={formData.aadharNO}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
+        placeholderTextColor="black"
       />
      
 
       <View style={styles.border}>
         <Picker
           selectedValue={formData.gender}
-          style={[styles.border,styles.input, errors.gender && styles.errorInput]}
+          style={[styles.input, errors.gender && styles.errorInput]}
           onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, gender: itemValue }))}
         >
           <Picker.Item label="Select Gender" value="" />
@@ -296,20 +317,34 @@ const SignupScreen = ({navigation}) => {
         </Picker>
       </View>
 
+      <View style={styles.border}>
+      <Picker
+        selectedValue={formData.district}
+        onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, district: itemValue }))}
+        
+
+      >
+        <Picker.Item label="Select District" value="" />
+        {districtList.map((district, index) => ( // Use districtList here
+          <Picker.Item key={index} label={district} value={district} />
+        ))}
+      </Picker>
+      </View>
+
 
       
 
       <View style={[styles.border]}>
-        <Picker 
-          selectedValue={formData.constituency}
-          style={[styles.border,styles.input, errors.constituency && styles.errorInput]}
-          onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, constituency: itemValue }))}
-        >
-          <Picker.Item label="Select Constituency" value="" />
-          <Picker.Item label="Constituency 1" value="Constituency 1" />
-          <Picker.Item label="Constituency 2" value="Constituency 2" />
-          <Picker.Item label="Constituency 3" value="Constituency 3" />
-        </Picker>
+      <Picker
+        selectedValue={formData.constituency}
+        onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, constituency: itemValue }))}
+
+      >
+        <Picker.Item label="Select Constituency" value="" />
+        {constituenciesList.map((constituency, index) => (
+          <Picker.Item key={index} label={constituency} value={constituency} />
+        ))}
+      </Picker>
       </View>
 
       <TextInput
@@ -319,6 +354,7 @@ const SignupScreen = ({navigation}) => {
         value={formData.mobileNumber}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, mobileNumber: text }))}
         autoCompleteType="off"
+        placeholderTextColor="black"
       />
 
 
@@ -330,6 +366,7 @@ const SignupScreen = ({navigation}) => {
         autoCapitalize="none"
         value={formData.email}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
+        placeholderTextColor="black"
       />
 
       <TextInput
@@ -338,6 +375,7 @@ const SignupScreen = ({navigation}) => {
         secureTextEntry
         value={formData.password}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, password: text }))}
+        placeholderTextColor="black"
       />
 
       <TouchableOpacity style={[styles.uploadButton,formData.profileImage  && {backgroundColor:"red"}]} onPress={() => pickImage('profile')}>
@@ -352,6 +390,7 @@ const SignupScreen = ({navigation}) => {
 
       <Button title="Signup" onPress={handleSignup} />
     </View>
+    </ScrollView>
   );
 };
 
@@ -361,6 +400,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+    paddingTop:60
   },
   userAdminButtons: {
     flexDirection: 'row',

@@ -1,70 +1,54 @@
-// AdminDashboard.js
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { images } from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
 
-const AdminDashboard = ({ navigation ,route}) => {
-  const { data} = route.params;
-    return (
-    
-        <View style={styles.container}>
-          <Seperator height={setWidth(2)} />
-          <View style={styles.header}>
-            <Image
-              source={images.PROFILE_PIC}
-              style={styles.profilePic}
-            />
-            <Text style={{ ...styles.name, width: 200 }} numberOfLines={2} multiline>Kanathil Jamila</Text>
+const AdminDashboard = ({ navigation, route }) => {
+  const { data } = route.params;
+  return (
+    <View style={styles.container}>
+      <Seperator height={setWidth(2)} />
+      <View style={styles.header}>
+        <Image
+          source={images.PROFILE_PIC}
+          style={styles.profilePic}
+        />
+        <Text style={styles.name} numberOfLines={2} multiline>{data.name}</Text>
+      </View>
 
-          </View>
-    
-          <View style={styles.userInfo}>
-            <Text style={styles.label}>Role:</Text>
-            <Text style={styles.info}>MLA</Text>
+      <View style={styles.userInfo}>
+        <Text style={styles.label}>Role:</Text>
+        <Text style={styles.info}>MLA</Text>
 
-            <Text style={styles.label}>Constituency:</Text>
-            <Text style={styles.info}>Koyilandy</Text>
-    
-            
-    
-            <Text style={styles.label}>District:</Text>
-            <Text style={styles.info}>kozhikode</Text>
-    
-            <Text style={styles.label}>Phone Number:</Text>
-            <Text style={styles.info}>123-456-7890</Text>
-    
-            <Text style={styles.label}>Email ID:</Text>
-            <Text style={styles.info}>arunar@example.com</Text>
-          </View>
-    
-          <View style={styles.buttonsContainer}>
-          <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("add-details",{constituency:data.constituency})}>
+        <Text style={styles.label}>Constituency:</Text>
+        <Text style={styles.info}>{data.constituency}</Text>
+
+        <Text style={styles.label}>District:</Text>
+        <Text style={styles.info}>Kozhikode</Text>
+
+        <Text style={styles.label}>Phone Number:</Text>
+        <Text style={styles.info}>123-456-7890</Text>
+
+        <Text style={styles.label}>Email ID:</Text>
+        <Text style={styles.info}>arunar@example.com</Text>
+      </View>
+
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("add-details", { constituency: data.constituency })}>
           <Text style={styles.buttonText}>Add Project</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate('projectlist');
-          }}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist')}>
           <Text style={styles.buttonText}>Show Projects</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate('rating');
-          }}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('rating')}>
           <Text style={styles.buttonText}>Rated Project</Text>
         </TouchableOpacity>
+      </View>
     </View>
-          </View>
-        </View>
-      );
-  
+  );
 };
 
 const styles = StyleSheet.create({
@@ -87,6 +71,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 34,
     fontWeight: 'bold',
+    width: 200,
   },
   userInfo: {
     marginBottom: 20,
@@ -95,7 +80,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   info: {
     fontSize: 16,
@@ -104,15 +89,14 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '100%',
     alignItems: 'center',
+   
   },
   button: {
-    width: 100,
     backgroundColor: '#3498db',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: setWidth(100),
   },
   buttonText: {
     color: 'white',

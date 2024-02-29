@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 
 const AddProjectScreen = ({ navigation, route }) => {
     const { constituency } = route.params;
@@ -27,7 +27,7 @@ const AddProjectScreen = ({ navigation, route }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.label}>Project ID:</Text>
             <TextInput
                 style={styles.input}
@@ -65,27 +65,33 @@ const AddProjectScreen = ({ navigation, route }) => {
             />
 
             <Text style={styles.label}>Project Description:</Text>
-            <TextInput
-                style={styles.input}
-                value={projectDescription}
-                onChangeText={setProjectDescription}
-                placeholder="Enter project description"
-                multiline={true}
-                numberOfLines={4}
-            />
+            <ScrollView style={styles.descriptionContainer} nestedScrollEnabled={true}>
+                <TextInput
+                    style={styles.descriptionInput}
+                    value={projectDescription}
+                    onChangeText={setProjectDescription}
+                    placeholder="Enter project description"
+                    multiline={true}
+                    numberOfLines={4}
+                    textAlignVertical="top"
+                    autoGrow={true}
+                    minHeight={100}
+                    maxHeight={200}
+                />
+            </ScrollView>
 
             <TouchableOpacity style={styles.addButton} onPress={handleAddProject}>
                 <Text style={styles.buttonText}>Add Project</Text>
             </TouchableOpacity>
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        paddingTop:70,
+        flexGrow: 1,
         padding: 20,
-        justifyContent: 'center',
     },
     label: {
         fontSize: 18,
@@ -115,6 +121,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
+    },
+    descriptionContainer: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        marginBottom: 20,
+    },
+    descriptionInput: {
+        padding: 10,
+        minHeight: 100,
+        maxHeight: 200,
     },
 });
 
