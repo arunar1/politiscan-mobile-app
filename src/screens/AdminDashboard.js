@@ -11,7 +11,7 @@ const AdminDashboard = ({ navigation, route }) => {
       <Seperator height={setWidth(2)} />
       <View style={styles.header}>
         <Image
-          source={images.PROFILE_PIC}
+          source={{uri: data.profileImage }}
           style={styles.profilePic}
         />
         <Text style={styles.name} numberOfLines={2} multiline>{data.name}</Text>
@@ -25,25 +25,27 @@ const AdminDashboard = ({ navigation, route }) => {
         <Text style={styles.info}>{data.constituency}</Text>
 
         <Text style={styles.label}>District:</Text>
-        <Text style={styles.info}>Kozhikode</Text>
+        <Text style={styles.info}>{data.district}</Text>
 
         <Text style={styles.label}>Phone Number:</Text>
-        <Text style={styles.info}>123-456-7890</Text>
+        <Text style={styles.info}>{data.mobileNumber}</Text>
 
         <Text style={styles.label}>Email ID:</Text>
-        <Text style={styles.info}>arunar@example.com</Text>
+        <Text style={styles.info}>{data.email}</Text>
       </View>
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("add-details", { constituency: data.constituency })}>
-          <Text style={styles.buttonText}>Add Project</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("add-details", { constituency: data.constituency })}>
+            <Text style={styles.buttonText}>Add Project</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist')}>
-          <Text style={styles.buttonText}>Show Projects</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist')}>
+            <Text style={styles.buttonText}>Show Projects</Text>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('rating')}>
+        <TouchableOpacity style={[styles.button, styles.singleButton]} onPress={() => navigation.navigate('rating')}>
           <Text style={styles.buttonText}>Rated Project</Text>
         </TouchableOpacity>
       </View>
@@ -58,9 +60,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   header: {
+    width:setWidth(90),
     flexDirection: 'row',
     alignItems: 'center',
-    height: setWidth(25),
+   
+    height: setWidth(45),
+    backgroundColor:'#82d5e3',
+    borderRadius:setWidth(5)
   },
   profilePic: {
     width: 150,
@@ -71,11 +77,14 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 34,
     fontWeight: 'bold',
-    width: 200,
+    width:setWidth(50)
+
   },
   userInfo: {
-    marginBottom: 20,
-    marginLeft: 20,
+    marginBottom: 2,
+    borderRadius:setWidth(5),
+    backgroundColor:'#cbedeb',
+    padding:30
   },
   label: {
     fontSize: 16,
@@ -87,16 +96,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
-   
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    width:'100%',
+    justifyContent: 'space-between',
+    marginBottom: 10,
   },
   button: {
     backgroundColor: '#3498db',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: setWidth(100),
+    marginBottom: 20,
+    width:setWidth(40)
+  },
+  singleButton: {
+    width: '50%',
   },
   buttonText: {
     color: 'white',

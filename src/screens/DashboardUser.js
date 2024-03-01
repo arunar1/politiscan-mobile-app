@@ -15,24 +15,24 @@ const DashboardUser = ({ navigation, route }) => {
           source={{ uri: data.profileImage }}
           style={styles.profilePic}
         />
-        <Text style={styles.name}>{data.name}</Text>
+        <Text style={styles.name} numberOfLines={2} multiline >{data.name}</Text>
       </View>
 
       <View style={styles.userInfo}>
         <Text style={styles.label}>Constituency:</Text>
-        <Text style={styles.info}>Koyilandy</Text>
+        <Text style={styles.info}>{data.constituency}</Text>
 
         <Text style={styles.label}>MLA</Text>
         <Text style={styles.info}>kanathil jamila</Text>
 
         <Text style={styles.label}>District:</Text>
-        <Text style={styles.info}>kozhikode</Text>
+        <Text style={styles.info}>{data.district}</Text>
 
         <Text style={styles.label}>Phone Number:</Text>
-        <Text style={styles.info}>123-456-7890</Text>
+        <Text style={styles.info}>{data.mobileNumber}</Text>
 
         <Text style={styles.label}>Email ID:</Text>
-        <Text style={styles.info}>arunar@example.com</Text>
+        <Text style={styles.info}>{data.email}</Text>
       </View>
 
       <View style={styles.buttonsContainer}>
@@ -63,9 +63,13 @@ const styles = StyleSheet.create({
 
   },
   header: {
+    width:setWidth(90),
     flexDirection: 'row',
     alignItems: 'center',
-    height: setWidth(25)
+    justifyContent:'space-around',
+    height: setWidth(45),
+    backgroundColor:'#82d5e3',
+    borderRadius:setWidth(5)
   },
   profilePic: {
     width: 150,
@@ -76,10 +80,14 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 34,
     fontWeight: 'bold',
+    width:setWidth(50)
+
   },
   userInfo: {
     marginBottom: 2,
-    marginLeft: 20,
+    borderRadius:setWidth(5),
+    backgroundColor:'#cbedeb',
+    padding:30,
   },
   label: {
     fontSize: 16,
@@ -105,6 +113,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+    borderRadius:setWidth(50),
+    alignItems:'center'
   },
   buttonText: {
     color: 'white',

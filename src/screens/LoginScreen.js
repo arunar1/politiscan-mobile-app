@@ -159,12 +159,12 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     color: 'blue',
-    marginBottom: 16,
+    marginBottom: 20,
   },
   additionalOptions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 16,
+    marginTop: 26,
   },
   linkText: {
     color: 'blue',
