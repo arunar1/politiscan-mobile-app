@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { PieChart } from 'react-native-svg-charts';
+import { setHeight } from '../utils';
 
 const ViewResultScreen = () => {
   const data = [
@@ -8,82 +8,59 @@ const ViewResultScreen = () => {
     { label: 'No', value: Math.floor(Math.random() * 100), color: 'red' },
   ];
 
-  const pieData = data.map((item, index) => ({
-    key: `pie-${index}`,
-    value: item.value,
-    svg: { fill: item.color },
-    arc: { outerRadius: '100%', padAngle: 0.01 },
-    label: `${item.label}  (${item.value}%)`, // Include percentage in label
-  }));
-
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {data.length > 0 ? (
-        <>
-          <PieChart
-            style={{ height: 300, width: 200 }}
-            data={pieData}
-            innerRadius="0%"
-            outerRadius="80%"
-          >
-            <Labels />
-          </PieChart>
-          <View style={styles.legendContainer}>
-            {data.map((item, index) => (
-              <View key={index} style={styles.legendItem}>
-                <View style={[styles.legendColorBox, { backgroundColor: item.color }]} />
-                <Text style={styles.legendText}>{item.label}</Text>
-              </View>
-            ))}
-          </View>
-        </>
-      ) : (
-        <Text>Loading...</Text>
-      )}
+    <View style={styles.container}>
+    <View style={styles.chart}>
+      <View style={[styles.bar, { height: setHeight(23/2),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
+      <View style={[styles.bar, { height: setHeight(67/2) }]} ><Text style={styles.text} >Yes</Text></View>
+    </View>
+
+      <Text>View Result Screen</Text>
+      {data.map((item, index) => (
+        <View key={index} style={styles.item}>
+          <Text style={[styles.label, { color: item.color }]}>{item.label}</Text>
+          <Text style={styles.value}>{item.value}</Text>
+        </View>
+      ))}
     </View>
   );
 };
 
-const Labels = ({ slices }) => {
-  return slices.map((slice, index) => {
-    const { labelCentroid, data } = slice;
-    return (
-      <Text
-        key={index}
-        x={labelCentroid[0]}
-        y={labelCentroid[1]}
-        fill={'white'}
-        textAnchor={'middle'}
-        alignmentBaseline={'middle'}
-        fontSize={16}
-      >
-        {data.label}
-      </Text>
-    );
-  });
-};
-
 const styles = StyleSheet.create({
-  legendContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  container: {
+    flex: 1,
     justifyContent: 'center',
-    marginTop: 10,
+    alignItems: 'center',
   },
-  legendItem: {
+  item: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 5,
+  },
+  label: {
     marginRight: 10,
   },
-  legendColorBox: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    marginRight: 5,
+  value: {
+    fontWeight: 'bold',
   },
-  legendText: {
-    fontSize: 16,
+  chart: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    width: '50%',
+    height: 300, 
+    paddingHorizontal: 10,
   },
+  bar: {
+    flex: 1,
+    backgroundColor: '#3498db', 
+    margin:20,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  text:{
+    color:'white'
+  }
 });
 
 export default ViewResultScreen;

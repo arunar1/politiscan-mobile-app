@@ -26,6 +26,7 @@
     "firebase": "^10.8.0",
     "react": "18.2.0",
     "react-native": "0.73.4",
+    "react-native-chart-kit": "^6.12.0",
     "react-native-document-picker": "^9.1.0",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-gesture-handler": "~2.14.0",
@@ -36,7 +37,8 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-vector-icons": "^10.0.3",
-    "semver": "^7.5.2"
+    "semver": "^7.5.2",
+    "victory-native": "^40.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

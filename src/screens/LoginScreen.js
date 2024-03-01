@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
+import { Api } from '../constants';
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +21,7 @@ const LoginScreen = ({navigation}) => {
     console.log('Password:', password);
     console.log('Remember Me:', rememberMe);
     try {
-      const response = await axios.post("http://192.168.16.133:4000/login", {
+      const response = await axios.post(`${Api.API_BACKEND}/login`, {
         email:email,
         password:password
       });

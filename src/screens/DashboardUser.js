@@ -1,15 +1,14 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet,ScrollView } from 'react-native';
-import {images} from '../constants';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { images } from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
 
-const DashboardUser = ({navigation,route}) => {
-  const { data} = route.params;
+const DashboardUser = ({ navigation, route }) => {
+  const { data } = route.params;
   console.log(data.profileImage)
   return (
-    
-      <View style={styles.container}>
+    <View style={styles.container}>
       <Seperator height={setWidth(2)} />
       <View style={styles.header}>
         <Image
@@ -37,19 +36,22 @@ const DashboardUser = ({navigation,route}) => {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => console.log('Notification Button Pressed')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('')}>
           <Text style={styles.buttonText}>Notification</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={() => console.log('Projects Button Pressed')}>
-          <Text style={styles.buttonText} onPress={()=>{
+          <Text style={styles.buttonText} onPress={() => {
             navigation.navigate('projectlist')
-          }}>Show_Projects</Text>
+          }}>Show Projects</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.centeredButtonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => console.log('Centered Button Pressed')}>
+          <Text style={styles.buttonText}>Rate Projects</Text>
         </TouchableOpacity>
       </View>
     </View>
-    
-    
   );
 };
 
@@ -58,12 +60,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'space-evenly',
-    
+
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    height:setWidth(25)
+    height: setWidth(25)
   },
   profilePic: {
     width: 150,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     marginBottom: 2,
-    marginLeft:20,
+    marginLeft: 20,
   },
   label: {
     fontSize: 16,
@@ -90,29 +92,26 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     width: '100%',
     alignItems: 'center',
-    
+  },
+  centeredButtonContainer: {
+    alignItems: 'center',
   },
   button: {
-    width:setWidth(40),
+    width: setWidth(40),
     backgroundColor: '#3498db',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
-    justifyContent:'center'
+    justifyContent: 'center'
   },
-  seperator:{
-    backgroundColor:'red',
-
-  }
 });
 
 export default DashboardUser;

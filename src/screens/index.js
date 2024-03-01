@@ -7,9 +7,9 @@
 import ProjectListScreen from "./ProjectListScreen";
 import ProjectDetailsScreen from "./ProjectDetailsScreen";
 import AdminDashboard from "./AdminDashboard";
-import viewResultScreen from "./ViewResultScreen";
+import ViewResultScreen from "./ViewResultScreen";
 import AddProjectScreen from "./AddProjectScreen";
 import Emailvalidation from "./validation/Emailvalidation";
 
  export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
-viewResultScreen,AddProjectScreen,Emailvalidation};
+ViewResultScreen,AddProjectScreen,Emailvalidation};
