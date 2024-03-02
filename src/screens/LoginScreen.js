@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
@@ -27,16 +27,23 @@ const LoginScreen = ({navigation}) => {
       });
       console.log('Response:', response.data);
       setdata(response.data.details)
-      setToken.apply(response.data.token)
+      setToken(response.data.token)
+      
+      if(data && data.userType==='user'){
+        navigation.navigate('dash',{data:data})
+      }
+      else if(data && data.userType==='admin'){
+        navigation.navigate('admindash',{data:data})
+      }
+      else{
+        Alert.alert("Error",response.data.error)
+      }
     } catch (error) {
+      
       console.error('Error:', error);
     }
-    if(data.userType==='user'){
-      navigation.navigate('dash',{data:data})
-    }
-    else if(data.userType==='admin'){
-      navigation.navigate('admindash',{data:data})
-    }
+    
+    
     
   };
 

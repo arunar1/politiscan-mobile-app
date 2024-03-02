@@ -65,22 +65,21 @@ const styles = StyleSheet.create({
   header: {
     width:setWidth(90),
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent:'space-around',
-    height: setWidth(45),
+    justifyContent:'space-evenly',
+    height: setWidth(35),
     backgroundColor:'#82d5e3',
     borderRadius:setWidth(5)
   },
   profilePic: {
-    width: 150,
-    height: 150,
-    borderRadius: 40,
+    width: 100,
+    height: 100,
+    borderRadius: 75,
     marginRight: 15,
   },
   name: {
     fontSize: 34,
     fontWeight: 'bold',
-    width:setWidth(50)
+    width:setWidth(40)
 
   },
   userInfo: {
