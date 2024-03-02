@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
+import { Api } from '../constants';
 
 const AddProjectScreen = ({ navigation, route }) => {
     const { constituency } = route.params;
@@ -12,18 +14,45 @@ const AddProjectScreen = ({ navigation, route }) => {
     const [projectDescription, setProjectDescription] = useState('');
 
     const generateRandomId = () => {
-        const characters = constituency.slice(0, 2).toUpperCase();
+
+        const characters = constituency.slice(0, 4).toUpperCase();
         const randomId = Math.floor(Math.random() * 9000) + 1000;
         setProjectId(characters + randomId.toString());
     };
 
-    const handleAddProject = () => {
+    const handleAddProject = async() => {
         // Here you can handle adding the project to your database or perform any other actions
         console.log('Project ID:', projectId);
         console.log('Project Name:', projectName);
         console.log('Project Type:', projectType);
         console.log('Total Budget:', totalBudget);
         console.log('Project Description:', projectDescription);
+
+        if (!constituency || !projectId.trim() || !projectName.trim() || !projectType.trim() || !totalBudget.trim() || !projectDescription.trim()) {
+            Alert.alert('Error', 'All fields are required');
+            return;
+        }
+
+
+        try {
+            const response = await axios.post(`${Api.API_BACKEND}/project/projectadd`, {
+                info: { constituency, projectId, projectName, projectType, totalBudget, projectDescription }
+            });
+        
+            console.log('Response:', response); 
+        
+        if(response.data){
+            Alert.alert("success",response.data.message)
+        }
+
+
+            
+        } catch (error) {
+            Alert.alert("Error",error)
+        }
+        
+
+        
     };
 
     return (
@@ -60,6 +89,7 @@ const AddProjectScreen = ({ navigation, route }) => {
             <TextInput
                 style={styles.input}
                 value={totalBudget}
+                keyboardType="numeric"
                 onChangeText={setTotalBudget}
                 placeholder="Enter total budget"
             />

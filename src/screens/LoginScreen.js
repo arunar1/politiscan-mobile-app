@@ -9,7 +9,6 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [data,setdata]=useState([]);
   const [token,setToken]=useState()
 
 
@@ -26,20 +25,18 @@ const LoginScreen = ({navigation}) => {
         password:password
       });
       console.log('Response:', response.data);
-      setdata(response.data.details)
+      // setdata(response.data.details)
       setToken(response.data.token)
       
-      if(data && data.userType==='user'){
-        navigation.navigate('dash',{data:data})
-      }
-      else if(data && data.userType==='admin'){
-        navigation.navigate('admindash',{data:data})
-      }
-      else{
-        Alert.alert("Error",response.data.error)
+      if (response.data.details && response.data.details.userType === 'user') {
+        navigation.navigate('dash', { data: response.data.details });
+      } else if (response.data.details && response.data.details.userType === 'admin') {
+        navigation.navigate('admindash', { data: response.data.details });
+      } else {
+        Alert.alert("Error", response.data.error);
       }
     } catch (error) {
-      
+      Alert.alert('Error', error);
       console.error('Error:', error);
     }
     

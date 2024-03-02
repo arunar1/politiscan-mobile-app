@@ -15,7 +15,7 @@ const DashboardUser = ({ navigation, route }) => {
           source={{ uri: data.profileImage }}
           style={styles.profilePic}
         />
-        <Text style={styles.name} numberOfLines={2} multiline >{data.name}</Text>
+        <Text style={styles.name} numberOfLines={2} multiline >bahi suni</Text>
       </View>
 
       <View style={styles.userInfo}>

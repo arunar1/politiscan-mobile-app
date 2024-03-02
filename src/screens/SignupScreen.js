@@ -301,6 +301,7 @@ const SignupScreen = ({navigation}) => {
         value={formData.aadharNO}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
         placeholderTextColor="black"
+        
       />
      
 
