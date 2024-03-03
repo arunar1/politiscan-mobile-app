@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert, Platform, PermissionsAndroid ,ScrollView} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
@@ -7,10 +7,14 @@ import { firebase } from '../firebase/config';
 import 'firebase/storage'; 
 import * as FileSystem from 'expo-file-system';
 import { Api } from '../constants';
+import { setWidth } from '../utils';
+import LottieView from 'lottie-react-native';
 
 import { constituencies,districtList } from '../constants/constituency';
 
 const SignupScreen = ({navigation}) => {
+  const animation = useRef(null);
+  const [signClick,setSignClick] = useState(false)
 
   const [constituenciesList, setConstituenciesList] = useState([]);
 
@@ -137,8 +141,10 @@ const SignupScreen = ({navigation}) => {
 
      
   const handleSignup = async () => {
+    
     if(validPhonenumber() && validAadhar() && passwordCheck()){
     if (validateFields()) {
+      setSignClick(true)
       
 
       console.log('Signup pressed');
@@ -164,6 +170,7 @@ const SignupScreen = ({navigation}) => {
         
       
       } catch (error) {
+        setSignClick(false)
         console.error('Error uploading documents:', error);
         Alert.alert('Error', 'Failed to upload documents. Please try again.');
       }
@@ -189,6 +196,7 @@ const SignupScreen = ({navigation}) => {
       }
       else{
         Alert.alert("Error","Please try again")
+        setSignClick(false)
       }
       console.log('Response:', response);
     } catch (error) {
@@ -301,7 +309,7 @@ const SignupScreen = ({navigation}) => {
         value={formData.aadharNO}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
         placeholderTextColor="black"
-        
+
       />
      
 
@@ -389,8 +397,21 @@ const SignupScreen = ({navigation}) => {
       </TouchableOpacity>
       {errors.aadharImage && <Text style={styles.errorText}>Aadhar image is required</Text>}
 
-      <Button title="Signup" onPress={handleSignup} />
-    </View>
+      <TouchableOpacity style={styles.login} onPress={handleSignup}>
+        {!signClick?<Text>Sign up</Text>:<LottieView
+       
+       autoPlay
+       ref={animation}
+       style={{
+         width: 100,
+         height: 250,
+       }}
+         source={require('../assets/images/loading.json')} 
+       />}
+        
+      </TouchableOpacity>
+
+      </View>
     </ScrollView>
   );
 };
@@ -421,6 +442,14 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: '600',
     fontSize: 15,
+  },
+  login: {
+    width: setWidth(20),
+    backgroundColor:'#ccc',
+    justifyContent:'center',
+    alignItems: 'center',
+    height: 30, 
+    borderRadius: 15,
   },
   title: {
     fontSize: 24,

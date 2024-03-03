@@ -1,33 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
+import LottieView from 'lottie-react-native'; // Import LottieView
 import { Api } from '../constants';
-const LoginScreen = ({navigation}) => {
+import { setWidth } from '../utils';
+
+const LoginScreen = ({ navigation }) => {
+  const animation = useRef(null);
+ 
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [token,setToken]=useState()
+  const [token, setToken] = useState();
+  const [loginClick,setLoginClick] = useState(false)
 
-
-
-
-  const handleLogin = async() => {
-    console.log('Login pressed');
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Remember Me:', rememberMe);
+  const handleLogin = async () => {
+    if(!email.trim() && !password.trim()){
+      Alert.alert("info","All Field are required")
+      return 
+    }
+    setLoginClick(true)
     try {
       const response = await axios.post(`${Api.API_BACKEND}/login`, {
-        email:email,
-        password:password
+        email: email,
+        password: password
       });
-      console.log('Response:', response.data);
-      // setdata(response.data.details)
-      setToken(response.data.token)
-      
+
+      if(!response.data.details){
+        setLoginClick(false)
+      }
+
+      setToken(response.data.token);
+
       if (response.data.details && response.data.details.userType === 'user') {
         navigation.navigate('dash', { data: response.data.details });
       } else if (response.data.details && response.data.details.userType === 'admin') {
@@ -36,22 +44,17 @@ const LoginScreen = ({navigation}) => {
         Alert.alert("Error", response.data.error);
       }
     } catch (error) {
-      Alert.alert('Error', error);
+      setLoginClick(false)
+      Alert.alert('Error', error.message);
       console.error('Error:', error);
     }
-    
-    
-    
   };
 
   const handleSignUp = () => {
-    //  sign-up navigation logic 
-    navigation.navigate('signup')
-    console.log('Sign up pressed');
+    navigation.navigate('signup');
   };
 
   const handleForgotPassword = () => {
-    //  forgot password navigation logic 
     console.log('Forgot Password pressed');
   };
 
@@ -99,7 +102,19 @@ const LoginScreen = ({navigation}) => {
         <Text style={styles.forgotPassword}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <Button title="Login" onPress={handleLogin} />
+      <TouchableOpacity style={styles.login} onPress={handleLogin}>
+        {!loginClick?<Text>Login</Text>:<LottieView
+       
+       autoPlay
+       ref={animation}
+       style={{
+         width: 100,
+         height: 250,
+       }}
+         source={require('../assets/images/loading.json')} 
+       />}
+        
+      </TouchableOpacity>
 
       <View style={styles.additionalOptions}>
         <TouchableOpacity onPress={handleSignUp}>
@@ -156,6 +171,14 @@ const styles = StyleSheet.create({
   checkbox: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  login: {
+    width: setWidth(20),
+    backgroundColor:'#ccc',
+    justifyContent:'center',
+    alignItems: 'center',
+    height: 30, 
+    borderRadius: 15,
   },
   checkboxText: {
     marginLeft: 8,
