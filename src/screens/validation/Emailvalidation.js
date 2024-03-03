@@ -21,8 +21,12 @@ const Emailvalidation = ({navigation,route}) => {
   const [code, setCode] = useState('');
 
   const handleVerify = async () => {
+    if(!code.trim){
+      Alert.alert('Error','Enter the code')
+      return
+    }
+    setValidClick(true)
     try {
-      // Make a POST request to your backend endpoint for verifying the code
       const response = await axios.post(`${Api.API_BACKEND}/registration`, {
         verificationCode: code,
         aadhar:aadhar,
@@ -43,9 +47,9 @@ const Emailvalidation = ({navigation,route}) => {
       }
      
     } catch (error) {
-      // Handle verification error
       Alert.alert('Error', error.response.data.error);
       navigation.navigate('signup')
+
     }
     if(response.status==200){
         navigation.navigate("login")
