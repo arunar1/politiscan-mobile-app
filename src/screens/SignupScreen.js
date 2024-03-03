@@ -497,7 +497,6 @@ const styles = StyleSheet.create({
 
   },
   uploadButtonText: {
-    
     textAlign: 'center',
   },
   errorText: {

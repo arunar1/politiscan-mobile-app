@@ -27,7 +27,7 @@ const LoginScreen = ({ navigation }) => {
   const [loginClick,setLoginClick] = useState(false)
 
   const handleLogin = async () => {
-    if(!email.trim() && !password.trim()){
+    if(!email.trim() || !password.trim()){
       Alert.alert("info","All Field are required")
       return 
     }

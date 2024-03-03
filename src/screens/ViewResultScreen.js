@@ -11,8 +11,8 @@ const ViewResultScreen = () => {
   return (
     <View style={styles.container}>
     <View style={styles.chart}>
-      <View style={[styles.bar, { height: setHeight(23/2),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
-      <View style={[styles.bar, { height: setHeight(67/2) }]} ><Text style={styles.text} >Yes</Text></View>
+      <View style={[styles.bar, { height: setHeight(data[0].value/2) }]} ><Text style={styles.text} >Yes</Text></View>
+      <View style={[styles.bar, { height: setHeight(data[1].value/2),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
     </View>
 
       <Text>View Result Screen</Text>
