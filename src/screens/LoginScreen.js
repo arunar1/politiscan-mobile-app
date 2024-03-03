@@ -110,13 +110,13 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.forgotPassword}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.login} onPress={handleLogin}>
+      <TouchableOpacity   style={[styles.login, !loginClick ? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]} onPress={handleLogin}>
         {!loginClick?<Text>Login</Text>:<LottieView
        
        autoPlay
        ref={animation}
        style={{
-         width: 100,
+         width: 200,
          height: 250,
        }}
          source={require('../assets/images/loading.json')} 
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
   },
   login: {
     width: setWidth(20),
-    backgroundColor:'#ccc',
     justifyContent:'center',
     alignItems: 'center',
     height: 30, 

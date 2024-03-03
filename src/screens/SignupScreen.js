@@ -148,11 +148,24 @@ const SignupScreen = ({navigation}) => {
       return true
     }
   }
+  const emailvalidate=()=>{
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail.com$/;
+    if (!gmailRegex.test(formData.email)) {
+      Alert.alert("Error","Provide a valid Email")
+      return false
+    }
+    else{
+      return true
+    }
+
+  }
+     
+        
 
      
   const handleSignup = async () => {
     
-    if(validPhonenumber() && validAadhar() && passwordCheck()){
+    if(validPhonenumber() && validAadhar() && passwordCheck() && emailvalidate()){
     if (validateFields()) {
       setSignClick(true)
       
@@ -196,16 +209,24 @@ const SignupScreen = ({navigation}) => {
       });
 
 
+      console.log(response)
+
 
       if(response.data.message==="Account Already exists"){
         Alert.alert("info","Account already exist")
+        setSignClick(false)
         navigation.navigate('signup')
 
       }
-      else if(response.status==200){
+      else if(response.data.message=="Email send"){
         Alert.alert("info",`Email is send to ${formData.email}`)
         navigation.navigate("validate",{info:formData,aadhar:aadhar,profile:profile})
       }
+      else if(response.data.message=="Provide a valid email"){
+        Alert.alert("Error",response.data.message)
+        setSignClick(false)
+      }
+
       else{
         Alert.alert("Error","Please try again")
         setSignClick(false)
@@ -213,6 +234,7 @@ const SignupScreen = ({navigation}) => {
       console.log('Response:', response);
     } catch (error) {
       console.error('Error:', error);
+      setSignClick(false)
     }
   }
 }
@@ -409,13 +431,13 @@ const SignupScreen = ({navigation}) => {
       </TouchableOpacity>
       {errors.aadharImage && <Text style={styles.errorText}>Aadhar image is required</Text>}
 
-      <TouchableOpacity style={styles.login} onPress={handleSignup}>
+      <TouchableOpacity style={[styles.login, !signClick ? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]}  onPress={handleSignup}>
         {!signClick?<Text>Sign up</Text>:<LottieView
        
        autoPlay
        ref={animation}
        style={{
-         width: 100,
+         width: 200,
          height: 250,
        }}
          source={require('../assets/images/loading.json')} 
@@ -456,8 +478,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   login: {
+    marginTop:4,
     width: setWidth(20),
-    backgroundColor:'#ccc',
     justifyContent:'center',
     alignItems: 'center',
     height: 30, 

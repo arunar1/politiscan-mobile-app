@@ -1,7 +1,11 @@
 import React, { useState,useRef } from 'react';
-import { View, TextInput, Button, Alert,Text,StyleSheet } from 'react-native';
+import { View, TextInput, Button, Alert,Text,StyleSheet,TouchableOpacity } from 'react-native';
 import axios from 'axios'; 
 import { Api } from '../../constants';
+import { setWidth } from '../../utils';
+import { useFocusEffect } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
+
 const Emailvalidation = ({navigation,route}) => {
   const animation = useRef(null);
   const [validClick,setValidClick] = useState(false)
@@ -10,7 +14,7 @@ const Emailvalidation = ({navigation,route}) => {
   useFocusEffect(
     React.useCallback(() => {
       return () => {
-        setSignClick(false)
+        setValidClick(false)
       };
     }, [])
   );
@@ -51,9 +55,7 @@ const Emailvalidation = ({navigation,route}) => {
       navigation.navigate('signup')
 
     }
-    if(response.status==200){
-        navigation.navigate("login")
-    }
+    
   };
 
   return (
@@ -65,16 +67,16 @@ const Emailvalidation = ({navigation,route}) => {
         onChangeText={text => setCode(text)}
         value={code}
       />
-      <TouchableOpacity style={styles.login} onPress={handleVerify}>
-        {!signClick?<Text>Verify</Text>:<LottieView
+      <TouchableOpacity style={[styles.login, !validClick? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]}  onPress={handleVerify}>
+        {!validClick?<Text>Verify</Text>:<LottieView
        
        autoPlay
        ref={animation}
        style={{
-         width: 100,
+         width: 200,
          height: 250,
        }}
-         source={require('../assets/images/loading.json')} 
+         source={require('../../assets/images/loading.json')} 
        />}
         
       </TouchableOpacity>
