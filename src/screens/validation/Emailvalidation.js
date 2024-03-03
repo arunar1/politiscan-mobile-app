@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { View, TextInput, Button, Alert,Text,StyleSheet } from 'react-native';
 import axios from 'axios'; 
 import { Api } from '../../constants';
 const Emailvalidation = ({navigation,route}) => {
+  const animation = useRef(null);
+  const [validClick,setValidClick] = useState(false)
+  
 
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setSignClick(false)
+      };
+    }, [])
+  );
     const {info,aadhar,profile}=route.params;
 
     console.log(info)
@@ -21,7 +31,6 @@ const Emailvalidation = ({navigation,route}) => {
 
       });
 
-      // Handle successful verification
 
       console.log(response)
       if(response.data.message=="Registered successfully"){
@@ -47,12 +56,24 @@ const Emailvalidation = ({navigation,route}) => {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={styles.text}>{info.email}</Text>
       <TextInput
-        style={{ height: 40, width: 300, borderColor: 'gray', borderWidth: 1, marginBottom: 20,marginTop:10 }}
+        style={{ height: 40, width: 300, borderColor: 'gray', borderWidth: 1, marginBottom: 20,marginTop:10 ,paddingLeft:20}}
         placeholder="  Enter verification code"
         onChangeText={text => setCode(text)}
         value={code}
       />
-      <Button title="Verify" onPress={handleVerify} />
+      <TouchableOpacity style={styles.login} onPress={handleVerify}>
+        {!signClick?<Text>Verify</Text>:<LottieView
+       
+       autoPlay
+       ref={animation}
+       style={{
+         width: 100,
+         height: 250,
+       }}
+         source={require('../assets/images/loading.json')} 
+       />}
+        
+      </TouchableOpacity>
     </View>
   );
 };
@@ -61,7 +82,16 @@ const styles=StyleSheet.create({
     text:{
         fontSize:20,
         paddingBottom:30,
-        color:'red'
+        color:'red',
+        
+    },
+    login: {
+      width: setWidth(20),
+      backgroundColor:'#ccc',
+      justifyContent:'center',
+      alignItems: 'center',
+      height: 30, 
+      borderRadius: 15,
     }
 })
 

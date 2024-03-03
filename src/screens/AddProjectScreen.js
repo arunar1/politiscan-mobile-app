@@ -59,7 +59,7 @@ const AddProjectScreen = ({ navigation, route }) => {
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.label}>Project ID:</Text>
             <TextInput
-                style={styles.input}
+                style={[styles.input,{color:'red'}]}
                 value={projectId}
                 onChangeText={setProjectId}
                 placeholder="Auto-generated or enter manually"
