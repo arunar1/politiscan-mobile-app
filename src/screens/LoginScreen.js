@@ -3,12 +3,20 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } fr
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
+import { useFocusEffect } from '@react-navigation/native';
 import LottieView from 'lottie-react-native'; // Import LottieView
 import { Api } from '../constants';
 import { setWidth } from '../utils';
 
 const LoginScreen = ({ navigation }) => {
   const animation = useRef(null);
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setLoginClick(false)
+      };
+    }, [])
+  );
  
 
   const [email, setEmail] = useState('');

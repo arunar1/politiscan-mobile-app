@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { firebase } from '../firebase/config';
 import 'firebase/storage'; 
 import * as FileSystem from 'expo-file-system';
+import { useFocusEffect } from '@react-navigation/native';
 import { Api } from '../constants';
 import { setWidth } from '../utils';
 import LottieView from 'lottie-react-native';
@@ -15,6 +16,17 @@ import { constituencies,districtList } from '../constants/constituency';
 const SignupScreen = ({navigation}) => {
   const animation = useRef(null);
   const [signClick,setSignClick] = useState(false)
+  useEffect(()=>{
+    setSignClick(false)
+  },[])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setSignClick(false)
+      };
+    }, [])
+  );
 
   const [constituenciesList, setConstituenciesList] = useState([]);
 
@@ -168,6 +180,7 @@ const SignupScreen = ({navigation}) => {
 
         console.log(formData)
         
+        
       
       } catch (error) {
         setSignClick(false)
@@ -188,6 +201,7 @@ const SignupScreen = ({navigation}) => {
 
       if(response.data.message==="Account Already exists"){
         Alert.alert("info","Account already exist")
+        navigation.navigate('signup')
 
       }
       else if(response.status==200){
@@ -303,14 +317,15 @@ const SignupScreen = ({navigation}) => {
       />
 
 <TextInput
-        style={[styles.input]}
-        placeholder="Aadhar no"
-        keyboardType="numeric"
-        value={formData.aadharNO}
-        onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
-        placeholderTextColor="black"
+  style={[styles.input]}
+  placeholder="Aadhar no"
+  keyboardType="numeric"
+  value={formData.aadharNo}
+  onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
+  placeholderTextColor="black"
+  autoCompleteType="off"
+/>
 
-      />
      
 
       <View style={styles.border}>
@@ -362,7 +377,6 @@ const SignupScreen = ({navigation}) => {
         keyboardType="numeric"
         value={formData.mobileNumber}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, mobileNumber: text }))}
-        autoCompleteType="off"
         placeholderTextColor="black"
       />
 
@@ -432,7 +446,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: 'lightblue',
-    borderRadius: 5,
+    borderRadius: 25,
     marginHorizontal: 8,
     alignItems: 'center',
   },
@@ -478,10 +492,11 @@ const styles = StyleSheet.create({
   uploadButton: {
     backgroundColor: 'blue',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 25,
     marginBottom: 16,
     width: '100%',
     alignItems: 'center',
+
   },
   uploadButtonText: {
     color: 'white',

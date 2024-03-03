@@ -23,11 +23,20 @@ const Emailvalidation = ({navigation,route}) => {
 
       // Handle successful verification
 
-
-      Alert.alert('Message', response.data.message);
+      console.log(response)
+      if(response.data.message=="Registered successfully"){
+        Alert.alert('Message', response.data.message);
+        navigation.navigate('login')
+      }
+      else{
+        Alert.alert("Message",response.data.message);
+        navigation.navigate('signup')
+      }
+     
     } catch (error) {
       // Handle verification error
       Alert.alert('Error', error.response.data.error);
+      navigation.navigate('signup')
     }
     if(response.status==200){
         navigation.navigate("login")
