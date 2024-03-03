@@ -16,9 +16,7 @@ import { constituencies,districtList } from '../constants/constituency';
 const SignupScreen = ({navigation}) => {
   const animation = useRef(null);
   const [signClick,setSignClick] = useState(false)
-  useEffect(()=>{
-    setSignClick(false)
-  },[])
+  
 
   useFocusEffect(
     React.useCallback(() => {
@@ -490,7 +488,7 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
   },
   uploadButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'lightblue',
     padding: 10,
     borderRadius: 25,
     marginBottom: 16,
@@ -499,7 +497,7 @@ const styles = StyleSheet.create({
 
   },
   uploadButtonText: {
-    color: 'white',
+    
     textAlign: 'center',
   },
   errorText: {
