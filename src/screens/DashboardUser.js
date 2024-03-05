@@ -39,11 +39,8 @@ const DashboardUser = ({ navigation, route }) => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('')}>
           <Text style={styles.buttonText}>Notification</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => console.log('Projects Button Pressed')}>
-          <Text style={styles.buttonText} onPress={() => {
-            navigation.navigate('projectlist')
-          }}>Show Projects</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist',{data: data})}>
+          <Text style={styles.buttonText}>Show Projects</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.centeredButtonContainer}>

@@ -1,33 +1,56 @@
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { useEffect ,useState} from 'react';
-const ProjectListScreen = ({ navigation }) => {
-// const [projects, setProjects] = useState([]);
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import axios from 'axios';
+import { Api } from '../constants';
 
-  const projects = [
-    { projectId: 1, projectName: 'Project A' },
-    { projectId: 2, projectName: 'Project B' },
-    { projectId: 3, projectName: 'Project C' },
-  ];
+const ProjectListScreen = ({ navigation,route }) => {
+  
+  
+  const {data} = route.params
+  const [projects, setProjects] = useState([]);
 
-//   useEffect(() => {
-//     fetch('https://your-backend-api/projects')
-//       .then((response) => response.json())
-//       .then((data) => setProjects(data))
-//       .catch((error) => console.error('Error fetching projects:', error));
-//   }, []); 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.post(`${Api.API_BACKEND}/project/getByConstituency`, {
+          constituency: data.constituency
+        });
+
+        console.log(response)
+        if (response.status === 200) {
+          const { projects } = response.data;
+          if (projects && projects.length > 0) {
+            setProjects(projects);
+          } else {
+            Alert.alert('No Projects', 'No projects found for the specified constituency');
+            navigation.goBack();
+          }
+        } else {
+          throw new Error('Failed to fetch projects');
+        }
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+        Alert.alert('Error', 'Failed to fetch projects. Please try again.');
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <View style={styles.container}>
       <FlatList
         data={projects}
-        keyExtractor={(item) => item.projectId.toString()} // Assuming 'projectId' is a number
+        keyExtractor={(item) => item.projectId.toString()} 
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.projectItem}
-            onPress={() => navigation.navigate('projectdetails', { projectId: 1, projectName: 'Battery company' })}
-          >
-            <Text style={styles.projectTitle}>{item.projectName}</Text>
+            onPress={() => navigation.navigate('projectdetails', { item:item, data:data })}
+          > 
+          <Text style={styles.projectTitle}>{item.projectId}</Text>
+           <Text style={styles.projectTitle}>{item.projectName.trim()}</Text>
+           
+         
           </TouchableOpacity>
         )}
       />
@@ -38,7 +61,7 @@ const ProjectListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:55,
+    marginTop: 55,
     padding: 16,
   },
   projectItem: {

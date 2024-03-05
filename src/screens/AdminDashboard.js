@@ -41,7 +41,7 @@ const AdminDashboard = ({ navigation, route }) => {
             <Text style={styles.buttonText}>Add Project</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist')}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist',{data: data})}>
             <Text style={styles.buttonText}>Show Projects</Text>
           </TouchableOpacity>
         </View>
