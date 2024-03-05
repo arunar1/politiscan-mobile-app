@@ -5,7 +5,6 @@ import { Api } from '../constants';
 
 const ProjectDetailsScreen = ({ route, navigation }) => {
   const {item, data } = route.params;
-  console.log("`````````````````````````````````````````````````````````",data.userType)
   const [feedback, setFeedback] = useState('');
 
   const submitFeedback = async () => {
@@ -23,10 +22,12 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
       console.log(response.status)
 
-      if (response.status === 200) {
-        Alert.alert('Feedback Submitted', response.data.message);
-      } else {
-        throw new Error('Failed to submit feedback');
+      if (response.status === 200 || response.status===201) {
+        Alert.alert('Message', response.data.message);
+      } 
+      
+      else {
+        Alert.alert("Error",response.data.message)
       }
     } catch (error) {
       console.error('Error submitting feedback:', error);
@@ -36,7 +37,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
 
   const showResult =()=>{
-
+    navigation.navigate('rating',{item:item})
   }
 
   return (
