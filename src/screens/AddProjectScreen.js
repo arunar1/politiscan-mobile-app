@@ -41,18 +41,17 @@ const AddProjectScreen = ({ navigation, route }) => {
         
             console.log('Response:', response); 
         
-        if(response.data){
-            Alert.alert("success",response.data.message)
-        }
-
-
-            
+            if (response.data && response.data.message) {
+                Alert.alert("Success", response.data.message);
+                navigation.goBack(); 
+            } else if (response.data && response.data.error) {
+                Alert.alert("Error", "Project ID and Project Name need to be unique. Please try again.");
+            } else {
+                Alert.alert("Error", "Please try again.");
+            }
         } catch (error) {
-            Alert.alert("Error",error)
+            Alert.alert("Error", error.message || "An error occurred while adding the project. Please try again.");
         }
-        
-
-        
     };
 
     return (

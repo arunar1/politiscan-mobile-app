@@ -6,6 +6,7 @@ import { Seperator } from '../components';
 
 const AdminDashboard = ({ navigation, route }) => {
   const { data } = route.params;
+  console.log(data)
   return (
     <View style={styles.container}>
       <Seperator height={setWidth(2)} />

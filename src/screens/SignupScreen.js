@@ -222,7 +222,7 @@ const SignupScreen = ({navigation}) => {
         Alert.alert("info",`Email is send to ${formData.email}`)
         navigation.navigate("validate",{info:formData,aadhar:aadhar,profile:profile})
       }
-      else if(response.data.message=="Provide a valid email"){
+      else if(response.data.message){
         Alert.alert("Error",response.data.message)
         setSignClick(false)
       }
