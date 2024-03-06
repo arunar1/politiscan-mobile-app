@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
+import { setWidth } from '../utils';
 
 const AdminResult = ({ navigation, route }) => {
     const { data } = route.params;
@@ -54,9 +55,9 @@ const AdminResult = ({ navigation, route }) => {
                         style={styles.projectItem}
                         onPress={() => navigation.navigate('projectdetails', {item:item, data:data})}
                     >
-                        <Text style={styles.projectTitle}>Project ID: {item.projectId}</Text>
-                        <Text>Total Positive   Sentiments: {getPositiveSentiments(item)}</Text>
-                        <Text>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
+                        <Text style={[styles.projectTitle,styles.text]}>Project ID: {item.projectId}</Text>
+                        <Text style={styles.text}>Total Positive   Sentiments: {getPositiveSentiments(item)}</Text>
+                        <Text style={styles.text}>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
                     </TouchableOpacity>
                 )}
             />
@@ -77,12 +78,21 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderWidth: 1,
         borderColor: '#ddd',
+        justifyContent:'center',
+        alignItems:'center'
     },
     projectTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
     },
+    text:{
+        backgroundColor:'#ccc',
+        width:setWidth(50),
+        borderRadius:20,
+        padding:5,
+        margin:10,
+    }
 });
 
 export default AdminResult;
