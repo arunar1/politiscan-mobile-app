@@ -62,7 +62,7 @@ const WelcomeScreen = ({navigation}) => {
 
             </View>
             <Pagination index={welcomeIndex}/>
-            <Seperator height={setHeight(9)}/>
+            <Seperator height={setHeight(15)}/>
             {welcomeIndex==2 ? "" : (
                 <View style={styles.buttonContainer} >
                 <TouchableOpacity onPress ={()=>{
