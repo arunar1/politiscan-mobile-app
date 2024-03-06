@@ -39,7 +39,8 @@
     "react-native-vector-icons": "^10.0.3",
     "semver": "^7.5.2",
     "victory-native": "^40.0.4",
-    "lottie-react-native": "6.5.1"
+    "lottie-react-native": "6.5.1",
+    "@expo/vector-icons": "^14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -3,13 +3,23 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { images } from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const AdminDashboard = ({ navigation, route }) => {
   const { data } = route.params;
+  const handleLogout = () => {    
+    navigation.navigate('login');
+  };
+
+
   console.log(data)
   return (
     <View style={styles.container}>
-      <Seperator height={setWidth(2)} />
+       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+       <MaterialCommunityIcons name="logout" size={24} color="black" />
+      </TouchableOpacity>
+      {/* <Seperator height={setWidth(2)} /> */}
       <View style={styles.header}>
         <Image
           source={{uri: data.profileImage }}
@@ -58,7 +68,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
+
   },
   header: {
     width:setWidth(90),
@@ -123,6 +134,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  logoutButton: {
+    alignSelf: 'flex-end',
+    marginRight: 20,
+    marginBottom:-50,
+    borderRadius: 5,
+  },
+  logoutButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
