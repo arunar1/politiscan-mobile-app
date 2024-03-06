@@ -28,6 +28,20 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
   }
   console.log(details)
 
+  const validationFeedback=()=>{
+    if(feedback.trim().length==0){
+      Alert.alert('Error','Feedback is empty')
+      false
+    }else if(feedback.trim().length<20){
+      Alert.alert('info','feedback is too small add some more')
+    }
+    else{
+      return true
+    }
+  }
+  
+  
+
   const submitFeedback = async () => {
     try {
       const response = await axios.post(`${Api.API_BACKEND}/project/projectsentiment`, {
@@ -104,7 +118,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           value={feedback}
           onChangeText={(text) => setFeedback(text)}
         />
-        <TouchableOpacity style={styles.submitButton} onPress={submitFeedback}>
+        <TouchableOpacity style={styles.submitButton} onPress={()=>{validationFeedback() && submitFeedback()}}>
           <Text style={styles.submitButtonText}>Submit Feedback</Text>
         </TouchableOpacity>
       </View>}
