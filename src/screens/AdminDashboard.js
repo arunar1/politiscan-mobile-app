@@ -46,7 +46,7 @@ const AdminDashboard = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={[styles.button, styles.singleButton]} onPress={() => navigation.navigate('rating')}>
+        <TouchableOpacity style={[styles.button, styles.singleButton]} onPress={() => navigation.navigate('adminresult',{data: data})}>
           <Text style={styles.buttonText}>Rated Project</Text>
         </TouchableOpacity>
       </View>

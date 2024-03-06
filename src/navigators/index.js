@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { AddProjectScreen,ViewResultScreen,AdminDashboard, DashboardUser, DemoScreen, LoginScreen, ProjectDetailsScreen, ProjectListScreen, SignupScreen, SplashScreen,WelcomeScreen,Emailvalidation } from "../screens";
+import { AddProjectScreen,ViewResultScreen,AdminDashboard, DashboardUser, DemoScreen, LoginScreen, ProjectDetailsScreen, ProjectListScreen, SignupScreen, SplashScreen,WelcomeScreen,Emailvalidation,AdminResult } from "../screens";
 
 const stack=createStackNavigator()
 
@@ -21,6 +21,7 @@ const Navigators=()=>{
                 <stack.Screen name="add-details" component={AddProjectScreen} />
                 <stack.Screen name="rating" component={ViewResultScreen} />
                 <stack.Screen name="validate" component={Emailvalidation} />
+                <stack.Screen name="adminresult" component={AdminResult} />
                 
 
             </stack.Navigator>

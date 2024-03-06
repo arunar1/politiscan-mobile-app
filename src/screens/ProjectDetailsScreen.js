@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
@@ -6,6 +6,27 @@ import { Api } from '../constants';
 const ProjectDetailsScreen = ({ route, navigation }) => {
   const {item, data } = route.params;
   const [feedback, setFeedback] = useState('');
+  const [details,seDetails]=useState([])
+
+  useEffect(()=>{
+    getData()
+  },[])
+
+  const getData= async()=>{
+    try {
+      const response= await axios.post(`${Api.API_BACKEND}/project/getProjectByCode`,{
+        code:item.projectId
+      })
+      
+      seDetails(response.data[0])
+
+      
+    } catch (error) {
+      
+    }
+    
+  }
+  console.log(details)
 
   const submitFeedback = async () => {
     try {
@@ -35,6 +56,8 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     }
   };
 
+  console.log(details)
+
 
   const showResult =()=>{
     navigation.navigate('rating',{item:item})
@@ -44,7 +67,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.projectId}>Project ID: {item.projectId}</Text>
+          <Text style={styles.projectId}>Project ID: {details.projectId}</Text>
           <Text style={styles.projectName}>{item.projectName}</Text>
         </View>
 
@@ -53,17 +76,17 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
         <View style={styles.detailsContainer}>
           <View style={styles.detailItem}>
             <Text style={styles.detailLabel}>Total Budget:</Text>
-            <Text style={styles.detailValue}>${item.totalBudget}</Text>
+            <Text style={styles.detailValue}>${details.totalBudget}</Text>
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailLabel}>Type of Project:</Text>
-            <Text style={styles.detailValue}>{item.projectType}</Text>
+            <Text style={styles.detailValue}>{details.projectType}</Text>
           </View>
           <View style={styles.detailItempro}>
             <Text style={styles.detailLabel}>Project Details:</Text>
           </View>
           <View>
-            <Text style={styles.discription}>{item.projectDetails}</Text>
+            <Text style={styles.discription}>{details.projectDetails}</Text>
           </View>
         </View>
 

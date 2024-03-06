@@ -10,6 +10,7 @@ import AdminDashboard from "./AdminDashboard";
 import ViewResultScreen from "./ViewResultScreen";
 import AddProjectScreen from "./AddProjectScreen";
 import Emailvalidation from "./validation/Emailvalidation";
+import AdminResult from "./AdminResult";
 
  export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
-ViewResultScreen,AddProjectScreen,Emailvalidation};
+ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult};

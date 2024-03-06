@@ -7,7 +7,6 @@ import { Api } from '../constants';
 const ViewResultScreen = ({navigation,route}) => {
 
   const {item} =route.params || {}
-
   
 
   const [data1, setData] = useState([]);
@@ -23,13 +22,12 @@ const ViewResultScreen = ({navigation,route}) => {
     }
   };
 
-  console.log(data1)
+  
+
+  
 
   useEffect(() => {
-    if(item){
       fetchData();
-    }
-    
   }, []);
 
   let positive=0;
