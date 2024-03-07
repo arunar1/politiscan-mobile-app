@@ -55,7 +55,7 @@ const AdminResult = ({ navigation, route }) => {
                         style={styles.projectItem}
                         onPress={() => navigation.navigate('projectdetails', {item:item, data:data})}
                     >
-                        <Text style={[styles.projectTitle,styles.text]}>Project ID: {item.projectId}</Text>
+                        <Text style={[styles.projectTitle]}>Project ID: {item.projectId}</Text>
                         <Text style={styles.text}>Total Positive   Sentiments: {getPositiveSentiments(item)}</Text>
                         <Text style={styles.text}>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
                     </TouchableOpacity>
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 55,
         padding: 16,
+       
     },
     projectItem: {
         backgroundColor: '#fff',
@@ -85,11 +86,17 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
+        backgroundColor:'#ccc',
+        paddingHorizontal:20,
+        paddingVertical:10,
+        borderRadius:10,
+        width:setWidth(80),
+        textAlign:'center'
     },
     text:{
         backgroundColor:'#ccc',
         width:setWidth(50),
-        borderRadius:20,
+        borderRadius:10,
         padding:5,
         margin:10,
     }
