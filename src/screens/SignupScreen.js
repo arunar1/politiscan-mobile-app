@@ -488,6 +488,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 16,
+    color:'black'
   },
   input: {
     height: 40,
@@ -496,6 +497,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 16,
     paddingLeft: 18,
+    fontSize: 15,
+    color:'black'
   },
   errorInput: {
     borderColor: 'red',
@@ -508,6 +511,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 16,
     paddingLeft: 0,
+    fontSize: 15,
   },
   uploadButton: {
     backgroundColor: 'lightblue',
