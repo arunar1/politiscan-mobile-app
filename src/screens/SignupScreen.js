@@ -206,6 +206,8 @@ const SignupScreen = ({navigation}) => {
     try {
       const response = await axios.post(`${Api.API_BACKEND}/verification`, {
         info:formData,
+        aadhar:aadhar,
+        profile:profile
       });
 
 
