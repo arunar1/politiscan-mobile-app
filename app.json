@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "politiscan",
+    "name": "PolitiScan",
     "slug": "politiscan",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.arun_ar.politiscan"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "283a03cb-9e62-4cb9-ab94-ae0fcab4ceaa"
+      }
     }
   }
 }
