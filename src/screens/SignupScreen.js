@@ -220,7 +220,7 @@ const SignupScreen = ({navigation}) => {
         navigation.navigate('signup')
 
       }
-      else if(response.data.message=="Email send"){
+      else if(response.data.message==="Email sent"){
         Alert.alert("info",`Email is send to ${formData.email}`)
         navigation.navigate("validate",{info:formData,aadhar:aadhar,profile:profile})
       }

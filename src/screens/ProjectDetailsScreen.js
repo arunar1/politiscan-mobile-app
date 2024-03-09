@@ -29,7 +29,10 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
       if (response.data.message==='Already Feedback added') {
         setResponded(true)
-        setResult(response.data.details)
+        if(response.data.details){
+          setResult(response.data.details)
+        }
+        
       } 
       
     } catch (error) {
