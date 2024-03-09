@@ -7,10 +7,35 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
   const {item, data } = route.params;
   const [feedback, setFeedback] = useState('');
   const [details,seDetails]=useState([])
+  const [responded,setResponded]=useState(false);
+  const [result,setResult]=useState([]);
 
   useEffect(()=>{
     getData()
+    checkFeedback()
   },[])
+
+
+  const checkFeedback = async () => {
+    try {
+      const response = await axios.post(`${Api.API_BACKEND}/project/projectSentimentCheck`, {
+        projectId: item.projectId,
+        sentimentData: {
+          aadharNo: data.aadharNo, 
+        },
+        constituency:data.constituency
+      });
+
+
+      if (response.data.message==='Already Feedback added') {
+        setResponded(true)
+        setResult(response.data.details)
+      } 
+      
+    } catch (error) {
+      Alert.alert('Error', 'Please try again.');
+    }
+  };
 
   const getData= async()=>{
     try {
@@ -26,7 +51,6 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     }
     
   }
-  console.log(details)
 
   const validationFeedback=()=>{
     if(feedback.trim().length==0){
@@ -70,12 +94,13 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     }
   };
 
-  console.log(details)
 
 
   const showResult =()=>{
     navigation.navigate('rating',{item:item})
   }
+
+  console.log(result.sentiment)
 
   return (
     <ScrollView>
@@ -109,7 +134,8 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           <Text style={styles.submitButtonText}>Show Result</Text>
         </TouchableOpacity>
     
-        ):<View style={styles.feedbackContainer}>
+        ):responded!=true ? (
+          <View style={styles.feedbackContainer}>
         <Text style={styles.feedbackLabel}>Feedback:</Text>
         <TextInput
           style={styles.feedbackInput}
@@ -121,7 +147,11 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
         <TouchableOpacity style={styles.submitButton} onPress={()=>{validationFeedback() && submitFeedback()}}>
           <Text style={styles.submitButtonText}>Submit Feedback</Text>
         </TouchableOpacity>
-      </View>}
+      </View>
+        ):<View style={styles.responded}>
+          <Text>Already submitted your feedback</Text>
+          <Text style={styles.responded}>{result.sentiment} : {result.sentimentValue==0 ? <Text>Negative</Text>:<Text>Positive</Text>}</Text>
+        </View>}
 
           
       </View>
@@ -204,6 +234,9 @@ const styles = StyleSheet.create({
   },
   discription:{
     padding:20,
+  },
+  responded:{
+    padding:30,
   }
 });
 
