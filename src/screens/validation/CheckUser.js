@@ -1,49 +1,66 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import { Api } from '../../constants';
-import { FlatList } from 'react-native-gesture-handler';
 
-const CheckUser = () => {
+const CheckUser = ({ navigation }) => {
+    const [userRecords, setUserRecords] = useState([]);
 
     useEffect(() => {
-        getResponse();
+        getRecords();
     }, []);
 
-    const [details, setDetails] = useState([]);
-
-    const getResponse = async () => {
+    const getRecords = async () => {
         try {
-            const response = await axios.get(`${Api.API_BACKEND}/checkUser`);
-            setDetails(response.data);
-
-            
+            const response = await axios.get(`${Api.API_BACKEND}/login/checkUser`);
+            setUserRecords(response.data);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching user records:', error);
         }
     };
+
+    const handleItemPress = (item) => {
+        navigation.navigate('verifyadmin', { item: item });
+    };
+
+    const renderUserItem = ({ item }) => (
+        <TouchableOpacity style={styles.itemContainer} onPress={() => handleItemPress(item)}>
+            <Text style={styles.email}>{item.email}</Text>
+            <Text style={styles.email}>{item.name}</Text>
+            <Text style={styles.email}>{item.constituency}</Text>
+        </TouchableOpacity>
+    );
 
     return (
         <View style={styles.container}>
             <FlatList
-                data={details}
-                keyExtractor={(item) => item.email}
-                renderItem={({ item }) => (
-                    <TouchableOpacity>
-                        <Text>{item.email}</Text>
-                    </TouchableOpacity>
-                )}
+                data={userRecords}
+                keyExtractor={(item) => item._id}
+                renderItem={renderUserItem}
             />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 55,
         padding: 16,
-    }
-})
+    },
+    itemContainer: {
+        backgroundColor: '#fff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#ddd',
+    },
+    email: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+});
 
 export default CheckUser;
