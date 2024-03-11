@@ -44,6 +44,11 @@ const LoginScreen = ({ navigation }) => {
 
       setToken(response.data.token);
 
+      if(response.status==204){
+          navigation.navigate('checker')
+          return 
+      }
+
       if (response.data.details && response.data.details.userType === 'user') {
         navigation.navigate('dash', { data: response.data.details });
       } else if (response.data.details && response.data.details.userType === 'admin') {

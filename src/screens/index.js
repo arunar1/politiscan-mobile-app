@@ -12,6 +12,7 @@ import AddProjectScreen from "./AddProjectScreen";
 import Emailvalidation from "./validation/Emailvalidation";
 import AdminResult from "./AdminResult";
 import Notification from "./Notification";
+import CheckUser from "./validation/CheckUser";
 
  export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
-ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification};
+ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser};

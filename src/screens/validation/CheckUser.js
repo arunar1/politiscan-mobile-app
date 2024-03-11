@@ -16,6 +16,8 @@ const CheckUser = () => {
         try {
             const response = await axios.get(`${Api.API_BACKEND}/checkUser`);
             setDetails(response.data);
+
+            
         } catch (error) {
             console.error('Error fetching data:', error);
         }
