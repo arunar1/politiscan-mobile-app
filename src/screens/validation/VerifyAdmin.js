@@ -26,9 +26,7 @@ const VerifyAdmin = ({ route }) => {
     return (
         <View style={styles.container}>
             <Text>Email: {item.email}</Text>
-            <Text>Name: {item.name}</Text>
             <Text>Constituency: {item.constituency}</Text>
-            <Text>Aadhar Number: {item.aadharNo}</Text>
 
             {item.aadharImage ? (
                 <Image
@@ -40,6 +38,8 @@ const VerifyAdmin = ({ route }) => {
             ) : (
                 <ActivityIndicator size="large" color="#0000ff" />
             )}
+                        <Text>Name: {item.name}</Text>
+
             {item.profileImage ? (
                 <Image
                     source={{ uri: item.profileImage }}
@@ -50,6 +50,9 @@ const VerifyAdmin = ({ route }) => {
             ) : (
                 <ActivityIndicator size="large" color="#0000ff" />
             )}
+
+                        <Text>Aadhar Number: {item.aadharNo}</Text>
+
             
                 <TouchableOpacity
                 style={styles.verifyButton}
