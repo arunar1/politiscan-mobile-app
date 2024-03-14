@@ -10,52 +10,47 @@ const CheckUser = ({ navigation }) => {
     const [displayAdmin, setDisplayAdmin] = useState(false);
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [selectedConstituency, setSelectedConstituency] = useState('');
-    const [constituencies, setConstituencies] = useState([]);
-    const [districts, setDistricts] = useState([]);
+    const [userConstituencies, setUserConstituencies] = useState([]);
+    const [adminConstituencies, setAdminConstituencies] = useState([]);
+    const [userDistricts, setUserDistricts] = useState([]);
+    const [adminDistricts, setAdminDistricts] = useState([]);
 
     useEffect(() => {
         getRecords();
-    }, [displayAdmin]);
+    }, []);
 
     const getRecords = async () => {
         try {
             const response = await axios.get(`${Api.API_BACKEND}/login/checkUser`);
             setUserRecords(response.data.userdetails);
             setAdminRecords(response.data.admindetails);
-            let districtList
-            if(response.data.userdetails && !displayAdmin){
-                districtList = [...new Set(response.data.userdetails.map(user => user.district))];
-            }
-            else if(response.data.admindetails && displayAdmin){
-                districtList = [...new Set(response.data.admindetails.map(user => user.district))];
-            }
-            setDistricts(districtList);
-            if(response.data.admindetails && displayAdmin){
-                setConstituencies(response.data.admindetails.reduce((acc, curr) => {
-                    acc[curr.district] = acc[curr.district] || [];
-                    if (!acc[curr.district].includes(curr.constituency)) {
-                        acc[curr.district].push(curr.constituency);
-                    }
-                    return acc;
-                }, {}));
-
-            }
-            else{
-                setConstituencies(response.data.userdetails.reduce((acc, curr) => {
-                    acc[curr.district] = acc[curr.district] || [];
-                    if (!acc[curr.district].includes(curr.constituency)) {
-                        acc[curr.district].push(curr.constituency);
-                    }
-                    return acc;
-                }, {}));
-            }
-            
-            
+    
+            const userDistrictList = [...new Set(response.data.userdetails.map(user => user.district))];
+            setUserDistricts(userDistrictList);
+    
+            const adminDistrictList = [...new Set(response.data.admindetails.map(admin => admin.district))];
+            setAdminDistricts(adminDistrictList);
+    
+            const adminConstituenciesObj = {};
+            adminDistrictList.forEach(district => {
+                adminConstituenciesObj[district] = response.data.admindetails
+                    .filter(admin => admin.district === district)
+                    .map(admin => admin.constituency);
+            });
+            setAdminConstituencies(adminConstituenciesObj);
+    
+            setUserConstituencies(response.data.userdetails.reduce((acc, curr) => {
+                acc[curr.district] = acc[curr.district] || [];
+                if (!acc[curr.district].includes(curr.constituency)) {
+                    acc[curr.district].push(curr.constituency);
+                }
+                return acc;
+            }, {}));
         } catch (error) {
             console.error('Error fetching records:', error);
         }
     };
-
+    
     const handleItemPress = (item) => {
         navigation.navigate('verifyadmin', { item: item });
     };
@@ -77,6 +72,8 @@ const CheckUser = ({ navigation }) => {
     );
 
     const toggleDisplay = () => {
+        setSelectedConstituency(null)
+        setSelectedDistrict(null)
         setDisplayAdmin(!displayAdmin);
     };
 
@@ -92,6 +89,8 @@ const CheckUser = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
+            <Text style={styles.textHead}>{displayAdmin ? 'Admins' : 'Users'}</Text>
+
                 <TouchableOpacity style={styles.button} onPress={toggleDisplay}>
                     <Text style={styles.buttonText}>{displayAdmin ? 'Show Users' : 'Show Admins'}</Text>
                 </TouchableOpacity>
@@ -102,7 +101,9 @@ const CheckUser = ({ navigation }) => {
                 onValueChange={(itemValue) => handleDistrictChange(itemValue)}
             >
                 <Picker.Item label="Select District" value="" />
-                {districts.map((district, index) => (
+                {displayAdmin ? adminDistricts.map((district, index) => (
+                    <Picker.Item key={index} label={district} value={district} />
+                )) : userDistricts.map((district, index) => (
                     <Picker.Item key={index} label={district} value={district} />
                 ))}
             </Picker>
@@ -113,12 +114,16 @@ const CheckUser = ({ navigation }) => {
                     onValueChange={(itemValue) => handleConstituencyChange(itemValue)}
                 >
                     <Picker.Item label="Select Constituency" value="" />
-                    {constituencies[selectedDistrict].map((constituency, index) => (
+                    {(displayAdmin && adminConstituencies[selectedDistrict]) ? adminConstituencies[selectedDistrict].map((constituency, index) => (
                         <Picker.Item key={index} label={constituency} value={constituency} />
-                    ))}
+                    )) : (
+                        userConstituencies[selectedDistrict] && userConstituencies[selectedDistrict].map((constituency, index) => (
+                            <Picker.Item key={index} label={constituency} value={constituency} />
+                        ))
+                    )}
                 </Picker>
             )}
-            {displayAdmin ? (
+            {selectedDistrict && (displayAdmin ? (
                 <FlatList
                     data={adminRecords.filter(admin => admin.district === selectedDistrict && (!selectedConstituency || admin.constituency === selectedConstituency))}
                     keyExtractor={(item) => item._id}
@@ -130,7 +135,7 @@ const CheckUser = ({ navigation }) => {
                     keyExtractor={(item) => item._id}
                     renderItem={renderUserItem}
                 />
-            )}
+            ))}
         </View>
     );
 };
@@ -150,13 +155,22 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#ddd',
     },
+    textHead:{
+        marginBottom: 10,
+        color:"red",
+        fontSize:20,
+        fontWeight:'900',
+        paddingLeft:20,
+        paddingTop:10,
+
+    },
     email: {
         fontSize: 16,
         fontWeight: 'bold',
     },
     buttonContainer: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         marginBottom: 10,
     },
     button: {
