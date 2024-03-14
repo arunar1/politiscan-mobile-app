@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { setHeight } from '../utils';
 import axios from 'axios';
 import { Api } from '../constants';
+import { Alert } from 'react-native';
 
 const ViewResultScreen = ({navigation,route}) => {
 
@@ -16,11 +17,18 @@ const ViewResultScreen = ({navigation,route}) => {
       const response = await axios.post(`${Api.API_BACKEND}/project/sentimentResult`, {
         projectId: item.projectId
       });
-      setData(response.data[0].sentimentData);
+      if(response.data[0].sentimentData==null){
+        return
+      }
+      
+        setData(response.data[0].sentimentData);
+     
     } catch (error) {
-      console.error('Error fetching data:', error);
+      // console.error('Error fetching data:', error);
+      Alert.alert("info","No feedback is added")
     }
   };
+
 
   
 
