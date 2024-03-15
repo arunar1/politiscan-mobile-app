@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Api } from '../constants';
 
-const Notification = ({navigation}) => {
+const Notification = ({navigation,route}) => {
+
+    const {data}=route.params
+
     const [poll, setPoll] = useState([]);
 
     useEffect(() => {
@@ -26,7 +29,7 @@ const Notification = ({navigation}) => {
     );
 
     const handlePollPress = (pollItem) => {
-        navigation.navigate('polladdscreen',{})
+        navigation.navigate('polladdscreen',{item:data , pollItem:pollItem})
     };
 
     return (

@@ -1,18 +1,44 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Button, Alert,Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, Button, Alert, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-const PollAddScreen = ({navigation,route}) => {
-    const {item}= route.params
+import { setWidth } from '../utils';
+
+
+const PollAddScreen = ({ navigation, route }) => {
+    const { item, pollItem } = route.params;
+    console.log(pollItem)
     const [vote, setVote] = useState('');
+    const [yesClicked, setYesClicked] = useState(false);
+    const [noClicked, setNoClicked] = useState(false);
+    const [flag,setFlag]=useState(false)
+
+    useEffect(()=>{
+        getData()
+    },[])
+
+    console.log(item)
+
+    const getData = async()=>{
+        try {
+            const response = await axios.post(`${Api.API_BACKEND}/addingPollCheck`,{aadhar:item.aadharNo,description:pollItem.description})
+            setFlag(response.data.flag)
+        } catch (error) {
+            
+        }
+    }
+
+    console.log(flag)
 
     const handleAddVote = async () => {
         try {
-            const response = await addVote(item.aadharNo,vote);
+            if (!vote) {
+                throw new Error('Please select a vote option');
+            }
+
+            const response = await addVote(pollItem.description,item.district,item.constituency,item.aadharNo,vote);
             if (response.status === 200) {
-                Alert.alert('Success', 'Vote added successfully');
-               
+                Alert.alert('Success', response.data.message);
             } else {
                 throw new Error('Failed to add vote');
             }
@@ -22,24 +48,48 @@ const PollAddScreen = ({navigation,route}) => {
         }
     };
 
-    
+    const handleVoteClick = (option) => {
+        setVote(option);
+        if (option === 'yes') {
+            setYesClicked(true);
+            setNoClicked(false);
+        } else if (option === 'no') {
+            setYesClicked(false);
+            setNoClicked(true);
+        }
+    };
 
- 
-
-   
-
-    const addVote = async (description, aadhar, vote) => {
-        return await axios.post(`${Api.API_BACKEND}/addvote`, { description, aadhar, vote });
+    const addVote = async (description,district,constituency,aadhar,vote) => {
+        return await axios.post(`${Api.API_BACKEND}/addingpoll`, { description,district,constituency,aadhar,vote });
     };
 
     return (
         <View style={styles.container}>
-            <View style={styles.voteButton}>
-                <TouchableOpacity style={styles.click}><Text>Yes</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.click}><Text>No</Text></TouchableOpacity>
-
+           {!flag ? (
+            <View>
+                <View style={styles.voteButtons}>
+                    <TouchableOpacity
+                        style={[styles.button, yesClicked ? styles.clicked : null]}
+                        onPress={() => handleVoteClick('yes')}
+                        disabled={yesClicked}
+                    >
+                        <Text>Yes</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.button, noClicked ? styles.clicked : null]}
+                        onPress={() => handleVoteClick('no')}
+                        disabled={noClicked}
+                    >
+                        <Text>No</Text>
+                    </TouchableOpacity>
+                </View>
+                <Button title="Add Vote" onPress={handleAddVote} disabled={!vote || flag || isLoading} />
             </View>
-            <Button title="Add Vote" onPress={handleAddVote} />
+
+                
+            ) : (
+                <Text style={styles.alreadyResponded}>Already responded</Text>
+            )}
         </View>
     );
 };
@@ -49,30 +99,29 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 55,
         padding: 16,
-        justifyContent:'center'
+        justifyContent: 'center',
     },
-    input: {
+    voteButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: 20,
+    },
+    button: {
+        backgroundColor: '#ccc',
+        width: 80,
         height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
     },
-    voteButton:{
-        flexDirection:'row',
-        justifyContent:'space-around',
-        padding:20,
-        marginBottom:20,
+    clicked: {
+        backgroundColor: 'green',
     },
-    click:{
-        backgroundColor:'#ccc',
-        width:40,
-        height:40,
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:5,
-
-
+    alreadyResponded:{
+        width:setWidth(100),
+        textAlign:'center',
+        color:'red',
+        fontSize:20,
     }
 });
 

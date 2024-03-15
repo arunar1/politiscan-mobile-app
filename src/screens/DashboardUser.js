@@ -48,7 +48,7 @@ const DashboardUser = ({ navigation, route }) => {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('notification')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('notification',{data: data})}>
           <Text style={styles.buttonText}>Notification</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist',{data: data})}>
