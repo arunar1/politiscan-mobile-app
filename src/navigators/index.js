@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { AddProjectScreen,ViewResultScreen,AdminDashboard, DashboardUser, DemoScreen, LoginScreen, ProjectDetailsScreen, ProjectListScreen, SignupScreen, SplashScreen,WelcomeScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin} from "../screens";
+import { AddProjectScreen,ViewResultScreen,AdminDashboard, DashboardUser, DemoScreen, LoginScreen, ProjectDetailsScreen, ProjectListScreen, SignupScreen, SplashScreen,WelcomeScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen} from "../screens";
 
 const stack=createStackNavigator()
 
@@ -25,6 +25,8 @@ const Navigators=()=>{
                 <stack.Screen name="notification" component={Notification} />
                 <stack.Screen name="checker" component={CheckUser} />
                 <stack.Screen name="verifyadmin" component={VerifyAdmin} />
+                <stack.Screen name="pollscreen" component={PollScreen} />
+                <stack.Screen name="polladdscreen" component={PollAddScreen} />
             </stack.Navigator>
         </NavigationContainer>
     )

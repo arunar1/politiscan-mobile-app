@@ -14,6 +14,9 @@ import AdminResult from "./AdminResult";
 import Notification from "./Notification";
 import CheckUser from "./validation/CheckUser";
 import VerifyAdmin from "./validation/VerifyAdmin";
+import PollScreen from "./validation/PollScreen";
+import PollAddScreen from "./PollAddScreen";
+
 
  export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
-ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin};
+ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen};

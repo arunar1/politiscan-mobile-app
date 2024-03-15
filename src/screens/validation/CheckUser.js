@@ -94,6 +94,11 @@ const CheckUser = ({ navigation }) => {
                 <TouchableOpacity style={styles.button} onPress={toggleDisplay}>
                     <Text style={styles.buttonText}>{displayAdmin ? 'Show Users' : 'Show Admins'}</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('pollscreen')}}>
+                    <Text style={styles.buttonText}>Poll</Text>
+                </TouchableOpacity>
+
             </View>
             <Picker
                 selectedValue={selectedDistrict}
