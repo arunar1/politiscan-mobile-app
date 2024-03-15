@@ -83,7 +83,7 @@ const PollAddScreen = ({ navigation, route }) => {
                         <Text>No</Text>
                     </TouchableOpacity>
                 </View>
-                <Button title="Add Vote" onPress={handleAddVote} disabled={!vote || flag || isLoading} />
+                <Button title="Add Vote" onPress={handleAddVote} disabled={!vote || flag } />
             </View>
 
                 

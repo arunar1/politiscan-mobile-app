@@ -1,10 +1,36 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import React, { useState,useEffect } from 'react';
+import { View, StyleSheet, TextInput, Button, Alert,FlatList,TouchableOpacity,Text } from 'react-native';
 import axios from 'axios';
 import { Api } from '../../constants';
 
-const PollScreen = () => {
+const PollScreen = ({navigation}) => {
     const [pollDescription, setPollDescription] = useState('');
+
+    const [poll, setPoll] = useState([]);
+
+    useEffect(() => {
+        getPoll();
+    }, [pollDescription]);
+
+    const getPoll = async () => {
+        try {
+            const response = await axios.get(`${Api.API_BACKEND}/getpoll`, {});
+            setPoll(response.data.data);
+        } catch (error) {
+            console.error('Error fetching poll:', error);
+        }
+    };
+    console.log(poll)
+
+    const handlePollPress =(pollItem)=>{
+            navigation.navigate('pollresultscreen',{item:pollItem})
+    }
+
+    const renderPollItem = ({ item }) => (
+        <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
+            <Text>{item.description}</Text>
+        </TouchableOpacity>
+    );
 
     const handleAddPoll = async () => {
         try {
@@ -32,23 +58,12 @@ const PollScreen = () => {
         }
     }
 
-    const handleGetPollDetails = async () => {
-        try {
-            const pollDetailsResponse = await getPollDetails();
-            console.log('Poll Details:', pollDetailsResponse.data);
-        } catch (error) {
-            console.error('Error fetching poll details:', error);
-            Alert.alert('Error', 'Failed to fetch poll details. Please try again.');
-        }
-    };
+    
 
     const addPoll = async (description) => {
         return await axios.post(`${Api.API_BACKEND}/addpoll`, { description });
     };
 
-    const getPollDetails = async () => {
-        return await axios.get(`${Api.API_BACKEND}/getpollvote`);
-    };
 
     return (
         <View style={styles.container}>
@@ -58,8 +73,15 @@ const PollScreen = () => {
                 value={pollDescription}
                 onChangeText={text => setPollDescription(text)}
             />
-            <Button title="Add Poll" onPress={() => pollvalidation() && handleAddPoll()} />
+            <Button style={styles.Button} title="Add Poll" onPress={() => pollvalidation() && handleAddPoll()} />
+              
 
+
+            <FlatList
+                data={poll}
+                renderItem={renderPollItem}
+                keyExtractor={(item) => item._id}
+            />
         </View>
     );
 };
@@ -77,6 +99,15 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         paddingHorizontal: 10,
     },
+    pollItem: {
+    
+        padding: 20,
+        marginVertical: 10,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        elevation: 5, 
+    },
+    
 });
 
 export default PollScreen;
