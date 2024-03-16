@@ -2,15 +2,19 @@ import React, { useState,useEffect } from 'react';
 import { View, StyleSheet, TextInput, Button, Alert,FlatList,TouchableOpacity,Text } from 'react-native';
 import axios from 'axios';
 import { Api } from '../../constants';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const PollScreen = ({navigation}) => {
     const [pollDescription, setPollDescription] = useState('');
+
+
+    const [deletedItem,setDeletedItem]=useState('')
 
     const [poll, setPoll] = useState([]);
 
     useEffect(() => {
         getPoll();
-    }, [pollDescription]);
+    }, [pollDescription,deletedItem]);
 
     const getPoll = async () => {
         try {
@@ -26,9 +30,40 @@ const PollScreen = ({navigation}) => {
             navigation.navigate('pollresultscreen',{item:pollItem})
     }
 
+    const deleteItem = async (item) => {
+        Alert.alert(
+            'Confirm Deletion',
+            'Are you sure you want to delete this item?',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel'
+                },
+                {
+                    text: 'OK',
+                    onPress: async () => {
+                        console.log('OK Pressed');
+                        try {
+                            const response = await axios.delete(`${Api.API_BACKEND}/deletePoll`, { data: { description: item } });
+                            console.log(response.data);
+                            setDeletedItem(response.data.message);
+                        } catch (error) {
+                            console.error('Error deleting poll:', error);
+                        }
+                    }
+                }
+            ],
+            { cancelable: false }
+        );
+    };
+    
+
     const renderPollItem = ({ item }) => (
         <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
             <Text>{item.description}</Text>
+            <MaterialCommunityIcons name="delete" size={24} color="black"  onPress={()=>deleteItem(item.description)}/>
+
         </TouchableOpacity>
     );
 
@@ -106,6 +141,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 10,
         elevation: 5, 
+        flexDirection:'row',
+        justifyContent:'space-between'
     },
     
 });
