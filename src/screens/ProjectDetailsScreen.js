@@ -10,10 +10,14 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
   const [responded,setResponded]=useState(false);
   const [result,setResult]=useState([]);
 
+  
+
   useEffect(()=>{
     getData()
     checkFeedback()
-  },[])
+  },[feedback])
+
+  
 
 
   const checkFeedback = async () => {

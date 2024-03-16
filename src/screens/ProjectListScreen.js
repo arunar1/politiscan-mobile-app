@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const ProjectListScreen = ({ navigation,route }) => {
-  
+
+  const [details,setDetails]=useState([])
+
   
   const {data} = route.params
   const [projects, setProjects] = useState([]);
-
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -37,6 +40,20 @@ const ProjectListScreen = ({ navigation,route }) => {
     fetchProjects();
   }, []);
 
+
+ 
+
+
+  
+ 
+
+
+  
+  
+
+
+  const deleteProject =()=>{}
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -44,14 +61,19 @@ const ProjectListScreen = ({ navigation,route }) => {
         keyExtractor={(item) => item.projectId.toString()} 
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={styles.projectItem}
-            onPress={() => navigation.navigate('projectdetails', { item:item, data:data })}
-          > 
-          <Text style={styles.projectTitle}>{item.projectId}</Text>
-           <Text style={styles.projectTitle}>{item.projectName.trim()}</Text>
-           
-         
-          </TouchableOpacity>
+    style={styles.projectItem}
+    onPress={() => navigation.navigate('projectdetails', { item: item, data: data })}
+>
+    <View>
+        <Text style={styles.projectTitle}>{item.projectId}</Text>
+        <Text style={styles.projectTitle}>{item.projectName.trim()}</Text>
+    </View>
+    {data.userType === 'admin' ? (
+        <MaterialCommunityIcons name="delete" size={24} color="black" onPress={deleteProject} />
+    ) : null}
+</TouchableOpacity>
+
+
         )}
       />
     </View>
@@ -71,6 +93,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#ddd',
+    flexDirection:'row',
+    justifyContent:'space-between'
   },
   projectTitle: {
     fontSize: 18,
