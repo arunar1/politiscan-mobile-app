@@ -19,7 +19,7 @@ const DashboardUser = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-      <MaterialCommunityIcons name="logout" size={24} color="black" />
+      <MaterialCommunityIcons  name="logout" size={24} color="black" />
       </TouchableOpacity>
       {/* <Seperator height={setWidth(2)} /> */}
       <View style={styles.header}>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    width: setWidth(40),
+    width: setWidth(45),
     backgroundColor: '#3498db',
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -130,8 +130,9 @@ const styles = StyleSheet.create({
   logoutButton: {
     alignSelf: 'flex-end',
     marginRight: 20,
-    marginBottom:-50,
+    marginBottom:-20,
     borderRadius: 5,
+    marginTop:20,
   },
 });
 

@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width:'100%',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: 1,
   },
   button: {
     backgroundColor: '#3498db',
@@ -124,10 +124,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: setWidth(100),
     marginBottom: 20,
-    width:setWidth(40)
+    width:setWidth(45)
   },
   singleButton: {
-    width: '50%',
+    width: setWidth(45),
   },
   buttonText: {
     color: 'white',
@@ -138,8 +138,9 @@ const styles = StyleSheet.create({
   logoutButton: {
     alignSelf: 'flex-end',
     marginRight: 20,
-    marginBottom:-50,
+    marginBottom:-20,
     borderRadius: 5,
+    marginTop:20,
   },
   logoutButtonText: {
     color: 'white',
