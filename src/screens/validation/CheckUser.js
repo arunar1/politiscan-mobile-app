@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native
 import axios from 'axios';
 import { Api } from '../../constants';
 import { Picker } from '@react-native-picker/picker';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const CheckUser = ({ navigation }) => {
     const [userRecords, setUserRecords] = useState([]);
@@ -14,6 +15,11 @@ const CheckUser = ({ navigation }) => {
     const [adminConstituencies, setAdminConstituencies] = useState([]);
     const [userDistricts, setUserDistricts] = useState([]);
     const [adminDistricts, setAdminDistricts] = useState([]);
+
+
+    const handleLogout = () => {    
+        navigation.navigate('login');
+      };
 
     useEffect(() => {
         getRecords();
@@ -97,6 +103,10 @@ const CheckUser = ({ navigation }) => {
 
                 <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('pollscreen')}}>
                     <Text style={styles.buttonText}>Poll</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                     <MaterialCommunityIcons name="logout" size={40} color="black" />
                 </TouchableOpacity>
 
             </View>
@@ -195,6 +205,12 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
     },
+    logoutButton: {
+        alignSelf: 'flex-end',
+        marginRight: 10,
+        // marginBottom:10,
+        borderRadius: 5,
+      }
 });
 
 export default CheckUser;

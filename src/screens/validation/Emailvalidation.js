@@ -6,6 +6,7 @@ import { setWidth } from '../../utils';
 import { useFocusEffect } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 
+
 const Emailvalidation = ({navigation,route}) => {
   const animation = useRef(null);
   const [validClick,setValidClick] = useState(false)

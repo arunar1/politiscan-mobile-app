@@ -17,7 +17,7 @@ const AdminDashboard = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-       <MaterialCommunityIcons name="logout" size={24} color="black" />
+       <MaterialCommunityIcons name="logout" size={40} color="black" />
       </TouchableOpacity>
       {/* <Seperator height={setWidth(2)} /> */}
       <View style={styles.header}>
