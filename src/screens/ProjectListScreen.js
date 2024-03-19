@@ -88,7 +88,7 @@ const ProjectListScreen = ({ navigation,route }) => {
 
     return (
       <TouchableOpacity
-        style={[styles.projectItem, { backgroundColor: hasSentimentData ? '#c0e6ff' : '#fff' }]}
+        style={[styles.projectItem, data.userType==='admin'? '':{ backgroundColor: hasSentimentData ? '#c0e6ff' : '#fff' }]}
         onPress={() => navigation.navigate('projectdetails', { item: item, data: data })}
       >
         <View>

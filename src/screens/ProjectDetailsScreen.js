@@ -14,6 +14,9 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
   useEffect(()=>{
     getData()
+    
+  },[])
+  useEffect(()=>{
     checkFeedback()
   },[feedback])
 
@@ -74,6 +77,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
   
 
   const submitFeedback = async () => {
+    
     try {
       const response = await axios.post(`${Api.API_BACKEND}/project/projectsentiment`, {
         projectId: item.projectId,
@@ -151,7 +155,9 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           value={feedback}
           onChangeText={(text) => setFeedback(text)}
         />
-        <TouchableOpacity style={styles.submitButton} onPress={()=>{validationFeedback() && submitFeedback()}}>
+        <TouchableOpacity style={styles.submitButton} onPress={()=>{
+          validationFeedback() && submitFeedback()
+        }}>
           <Text style={styles.submitButtonText}>Submit Feedback</Text>
         </TouchableOpacity>
       </View>
