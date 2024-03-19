@@ -15,10 +15,10 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
   useEffect(()=>{
     getData()
     
-  },[])
+  },[feedback])
   useEffect(()=>{
     checkFeedback()
-  },[feedback])
+  },[])
 
   
 
@@ -78,30 +78,32 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
   const submitFeedback = async () => {
     
-    try {
-      const response = await axios.post(`${Api.API_BACKEND}/project/projectsentiment`, {
-        projectId: item.projectId,
-        sentimentData: {
-          aadharNo: data.aadharNo, 
-          sentiment: feedback,
-        },
-        constituency:data.constituency
-      });
-
-      console.log(response.data)
-
-      console.log(response.status)
-
-      if (response.status === 200 || response.status===201) {
-        Alert.alert('Message', response.data.message);
-      } 
-      
-      else {
-        Alert.alert("Error",response.data.message)
+    if(validationFeedback()){
+      try {
+        const response = await axios.post(`${Api.API_BACKEND}/project/projectsentiment`, {
+          projectId: item.projectId,
+          sentimentData: {
+            aadharNo: data.aadharNo, 
+            sentiment: feedback,
+          },
+          constituency:data.constituency
+        });
+  
+        console.log(response.data)
+  
+        console.log(response.status)
+  
+        if (response.status === 200 || response.status===201) {
+          Alert.alert('Message', response.data.message);
+        } 
+        
+        else {
+          Alert.alert("Error",response.data.message)
+        }
+      } catch (error) {
+        console.error('Error submitting feedback:', error);
+        Alert.alert('Error', 'Failed to submit feedback. Please try again.');
       }
-    } catch (error) {
-      console.error('Error submitting feedback:', error);
-      Alert.alert('Error', 'Failed to submit feedback. Please try again.');
     }
   };
 
@@ -155,9 +157,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           value={feedback}
           onChangeText={(text) => setFeedback(text)}
         />
-        <TouchableOpacity style={styles.submitButton} onPress={()=>{
-          validationFeedback() && submitFeedback()
-        }}>
+        <TouchableOpacity style={styles.submitButton} onPress={submitFeedback}>
           <Text style={styles.submitButtonText}>Submit Feedback</Text>
         </TouchableOpacity>
       </View>

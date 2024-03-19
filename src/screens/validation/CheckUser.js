@@ -62,7 +62,7 @@ const CheckUser = ({ navigation }) => {
     };
 
     const renderUserItem = ({ item }) => (
-        <TouchableOpacity style={styles.itemContainer} onPress={() => handleItemPress(item)}>
+        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#ccc'}:'white']} onPress={() => handleItemPress(item)}>
             <Text style={styles.email}>{item.email}</Text>
             <Text style={styles.email}>{item.name}</Text>
             <Text style={styles.email}>{item.constituency}</Text>
@@ -70,8 +70,10 @@ const CheckUser = ({ navigation }) => {
     );
 
     const renderAdminItem = ({ item }) => (
-        <TouchableOpacity style={styles.itemContainer} onPress={() => handleItemPress(item)}>
+        
+        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#ccc'}:'white']} onPress={() => handleItemPress(item)}>
             <Text style={styles.email}>{item.email}</Text>
+            {console.log(item.verified)}
             <Text style={styles.email}>{item.name}</Text>
             <Text style={styles.email}>{item.constituency}</Text>
         </TouchableOpacity>
