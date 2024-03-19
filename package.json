@@ -20,7 +20,6 @@
     "expo": "~50.0.11",
     "expo-document-picker": "~11.10.1",
     "expo-file-system": "~16.0.8",
-    "expo-firebase-analytics": "^8.0.0",
     "expo-firebase-app": "^2.0.0",
     "expo-font": "~11.10.3",
     "expo-image-picker": "~14.7.1",
@@ -45,7 +44,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "metro": "~0.80.4",
+    "metro": "^0.80.6",
     "metro-config": "~0.80.4",
     "metro-resolver": "^0.80.6"
   },
