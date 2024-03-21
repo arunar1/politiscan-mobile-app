@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'rea
 import { images } from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign} from '@expo/vector-icons';
 import {Octicons} from '@expo/vector-icons'
 
@@ -63,7 +63,7 @@ const DashboardUser = ({ navigation, route }) => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist',{data: data})}>
           {/* <Text style={styles.buttonText}>Show Projects</Text> */}
-          <Octicons name="project" size={30} color="white"/>
+          <Ionicons name="list" size={30} color="white"/>
         </TouchableOpacity>
       </View>
       

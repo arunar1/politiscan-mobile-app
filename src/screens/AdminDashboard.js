@@ -61,7 +61,7 @@ const AdminDashboard = ({ navigation, route }) => {
 
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist',{data: data})}>
             {/* <Text style={styles.buttonText}>Show Projects</Text> */}
-            <Octicons name="project" size={30} color="white"/>
+            <Ionicons name="list" size={30} color="white"/>
 
           </TouchableOpacity>
 

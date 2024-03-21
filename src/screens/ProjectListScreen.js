@@ -119,6 +119,7 @@ const ProjectListScreen = ({ navigation,route }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.head}>Projects</Text>
      <FlatList
   data={projects}
   keyExtractor={(item) => item.projectId.toString()} 
@@ -174,7 +175,11 @@ const styles = StyleSheet.create({
   },
   projectName:{
     fontSize:18,
-  }
+  },
+  head: {
+    fontSize: 22,
+    marginBottom: 10,
+},
 });
 
 export default ProjectListScreen;

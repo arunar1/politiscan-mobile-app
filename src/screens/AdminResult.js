@@ -51,6 +51,7 @@ const AdminResult = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.head}>Rating</Text>
             <FlatList
                 data={dataSet}
                 keyExtractor={(item) => item._id}
@@ -103,7 +104,11 @@ const styles = StyleSheet.create({
         borderRadius:10,
         padding:5,
         margin:10,
-    }
+    },
+    head: {
+        fontSize: 22,
+        marginBottom: 10,
+    },
 });
 
 export default AdminResult;
