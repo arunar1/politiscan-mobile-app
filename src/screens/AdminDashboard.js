@@ -32,7 +32,9 @@ const AdminDashboard = ({ navigation, route }) => {
           source={{uri: data.profileImage }}
           style={styles.profilePic}
         />
-        <Text style={styles.name} numberOfLines={2} multiline>{data.name.toUpperCase()}</Text>
+        <Text style={styles.name} numberOfLines={2} ellipsizeMode="tail" multiline={true}>
+            {data.name.toUpperCase()}
+        </Text>
       </View>
 
       <View style={styles.userInfo}>
@@ -86,24 +88,22 @@ const styles = StyleSheet.create({
   },
   header: {
     width:setWidth(90),
-    flexDirection: 'row',
     justifyContent:'space-evenly',
-    alignItems: 'center',
-    height: setWidth(35),
+    height: setWidth(60),
     backgroundColor:'#82d5e3',
-    borderRadius:setWidth(5)
+    borderRadius:setWidth(5),
+    alignItems:'center'
   },
   profilePic: {
-    width: 100,
-    height: 100,
+    width: 130,
+    height: 130,
     borderRadius: 75,
     marginRight: 15,
-
   },
   name: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
-    width:setWidth(40)
+    // width:setWidth(40)
 
   },
   userInfo: {
