@@ -59,10 +59,14 @@ const AdminResult = ({ navigation, route }) => {
                     <TouchableOpacity
                         style={styles.projectItem}
                         onPress={() => navigation.navigate('projectdetails', {item:item, data:data})}
+                    
                     >
+                        {console.log(item)}
                         <Text style={[styles.projectTitle]}>Project ID: {item.projectId}</Text>
+                        <Text style={[styles.projectTitle]} numberOfLines={2} multiline>Project Name: {item.projectName}</Text>
+
                         <Text style={styles.text}>Total Positive   Sentiments: {getPositiveSentiments(item)}</Text>
-                        <Text style={styles.text}>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
+                        <Text  style={styles.text}>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
                     </TouchableOpacity>
                 )}
             />

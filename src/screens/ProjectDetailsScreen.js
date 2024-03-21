@@ -44,7 +44,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
         sentimentData: {
           aadharNo: data.aadharNo, 
         },
-        constituency:data.constituency
+        constituency:data.constituency,
       });
 
 
@@ -57,7 +57,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
       } 
       
     } catch (error) {
-      Alert.alert('Error', 'Please try again.');
+      // Alert.alert('Error', 'Please try again.');
     }
   };
 
@@ -106,7 +106,9 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
             aadharNo: data.aadharNo, 
             sentiment: feedback,
           },
-          constituency:data.constituency
+          constituency:data.constituency,
+          projectName:item.projectName
+
         });
   
         console.log(response.data)

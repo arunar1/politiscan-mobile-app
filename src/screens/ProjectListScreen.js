@@ -65,7 +65,7 @@ const ProjectListScreen = ({ navigation,route }) => {
       setDetails(response.data.projectDetails)
       
     } catch (error) {
-      Alert.alert('Error', 'Please try again.');
+      // Alert.alert('Error', 'Please try again.');
     }
   };
 
