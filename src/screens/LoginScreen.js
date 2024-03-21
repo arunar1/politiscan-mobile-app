@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
-import LottieView from 'lottie-react-native'; // Import LottieView
+import LottieView from 'lottie-react-native'; 
 import { Api } from '../constants';
 import { setWidth } from '../utils';
 

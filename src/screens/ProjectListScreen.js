@@ -134,9 +134,9 @@ const ProjectListScreen = ({ navigation,route }) => {
         onPress={() => navigation.navigate('projectdetails', { item: item, data: data })}
       >
         <View>
-          <Text style={styles.projectTitle}>{item.projectId}</Text>
+          <Text style={styles.projectTitle}>{item.projectId}  :  <Text style={[styles.projectName,{color:'red'}]}>{item.Date}</Text></Text>
           <Text style={styles.projectName}>{item.projectName.trim()}</Text>
-          <Text style={styles.projectName}>{item.Date}</Text>
+          
 
         </View>
         {data.userType === 'admin' ? (
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 55,
     padding: 16,
+    
   },
   projectItem: {
     backgroundColor: '#fff',
@@ -175,6 +176,8 @@ const styles = StyleSheet.create({
   },
   projectName:{
     fontSize:18,
+    padding:5,
+    fontWeight:'500'
   },
   head: {
     fontSize: 22,

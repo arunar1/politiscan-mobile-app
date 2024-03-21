@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef} from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
+import LottieView from 'lottie-react-native'; // Import LottieView
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 const ProjectDetailsScreen = ({ route, navigation }) => {
   const {item, data } = route.params;
@@ -9,16 +13,26 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
   const [details,seDetails]=useState([])
   const [responded,setResponded]=useState(false);
   const [result,setResult]=useState([]);
+  const [feedClick,setFeedClick] = useState(false)
+
+  const animation = useRef(null);
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setFeedClick(false)
+      };
+    }, [])
+  );
 
   
 
   useEffect(()=>{
     getData()
     
-  },[feedback])
+  },[])
   useEffect(()=>{
     checkFeedback()
-  },[])
+  },[feedClick])
 
   
 
@@ -69,6 +83,10 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     }else if(feedback.trim().length<20){
       Alert.alert('info','feedback is too small add some more')
     }
+    else if(feedback.trim().length>60){
+      Alert.alert('info','feedback is too big')
+    }
+
     else{
       return true
     }
@@ -79,6 +97,8 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
   const submitFeedback = async () => {
     
     if(validationFeedback()){
+      setFeedClick(true)
+      console.log(feedback)
       try {
         const response = await axios.post(`${Api.API_BACKEND}/project/projectsentiment`, {
           projectId: item.projectId,
@@ -90,17 +110,21 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
         });
   
         console.log(response.data)
+
   
         console.log(response.status)
   
         if (response.status === 200 || response.status===201) {
+          setFeedClick(false)
           Alert.alert('Message', response.data.message);
         } 
         
         else {
+          setFeedClick(false)
           Alert.alert("Error",response.data.message)
         }
       } catch (error) {
+        setFeedClick(false)
         console.error('Error submitting feedback:', error);
         Alert.alert('Error', 'Failed to submit feedback. Please try again.');
       }
@@ -149,7 +173,10 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     
         ):responded!=true ? (
           <View style={styles.feedbackContainer}>
-        <Text style={styles.feedbackLabel}>Feedback:</Text>
+        <View style={styles.feedcount}><Text style={styles.feedbackLabel}>Feedback: </Text>
+        <Text>{`${feedback.length}/60`}</Text>
+        </View>
+        
         <TextInput
           style={styles.feedbackInput}
           placeholder="Add your feedback here"
@@ -157,9 +184,26 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           value={feedback}
           onChangeText={(text) => setFeedback(text)}
         />
-        <TouchableOpacity style={styles.submitButton} onPress={submitFeedback}>
+
+
+<TouchableOpacity   style={[styles.submitButton,!feedClick? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]} onPress={submitFeedback}>
+        {!feedClick?<Text>Submit Feedback</Text>:<LottieView
+       
+       autoPlay
+       ref={animation}
+       style={{
+         width: 200,
+         height: 250,
+       }}
+         source={require('../assets/images/loading.json')} 
+       />}
+        
+      </TouchableOpacity>
+
+
+        {/* <TouchableOpacity style={styles.submitButton} onPress={submitFeedback}>
           <Text style={styles.submitButtonText}>Submit Feedback</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
         ):<View style={styles.responded}>
           <Text>Already submitted your feedback</Text>
@@ -250,6 +294,9 @@ const styles = StyleSheet.create({
   },
   responded:{
     padding:30,
+  },feedcount:{
+    flexDirection:'row',
+    justifyContent:'space-between'
   }
 });
 
