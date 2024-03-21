@@ -4,6 +4,8 @@ import { images } from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign} from '@expo/vector-icons';
+import {Octicons} from '@expo/vector-icons'
 
 
 const DashboardUser = ({ navigation, route }) => {
@@ -18,9 +20,15 @@ const DashboardUser = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+              <View style={styles.btnStyle}>
+              
+              <TouchableOpacity style={styles.settingButton} >
+              <MaterialCommunityIcons  name="cog" size={40} color="black" />
+              </TouchableOpacity>
               <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
               <MaterialCommunityIcons  name="logout" size={40} color="black" />
               </TouchableOpacity>
+              </View>
       {/* <Seperator height={setWidth(2)} /> */}
       <View style={styles.header}>
         <Image
@@ -49,10 +57,13 @@ const DashboardUser = ({ navigation, route }) => {
 
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('notification',{data: data})}>
-          <Text style={styles.buttonText}>Notification</Text>
+          {/* <Text style={styles.buttonText}>Notification</Text> */}
+          <AntDesign name="notification" size={30} color="white" />
+
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist',{data: data})}>
-          <Text style={styles.buttonText}>Show Projects</Text>
+          {/* <Text style={styles.buttonText}>Show Projects</Text> */}
+          <Octicons name="project" size={30} color="white"/>
         </TouchableOpacity>
       </View>
       
@@ -113,7 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    width: setWidth(45),
+    width: setWidth(40),
     backgroundColor: '#3498db',
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -134,6 +145,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop:20,
   },
+  settingButton:{
+    marginRight: 20,
+    marginBottom:-20,
+    borderRadius: 5,
+    marginTop:20,
+
+  },
+  btnStyle:{
+    flexDirection:'row',
+    justifyContent:'space-between'
+  }
 });
 
 export default DashboardUser;

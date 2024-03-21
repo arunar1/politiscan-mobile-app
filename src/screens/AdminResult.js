@@ -16,6 +16,10 @@ const AdminResult = ({ navigation, route }) => {
                 constituency: data.constituency
             });
             setDataSet(response.data);
+           if(response.data.length===0){
+            Alert.alert("alert","No project rated")
+            navigation.goBack()
+           }
         } catch (error) {
             console.error('Error fetching data:', error);
         }

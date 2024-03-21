@@ -12,6 +12,9 @@ const ProjectListScreen = ({ navigation,route }) => {
 
 
   
+
+
+  
   const {data} = route.params
   const [projects, setProjects] = useState([]);
   useEffect(() => {
@@ -26,6 +29,7 @@ const ProjectListScreen = ({ navigation,route }) => {
           const { projects } = response.data;
           if (projects && projects.length > 0) {
             setProjects(projects);
+            projects.reverse();
           } else {
             Alert.alert('No Projects', 'No projects found for the specified constituency');
             navigation.goBack();
@@ -40,8 +44,12 @@ const ProjectListScreen = ({ navigation,route }) => {
     };
 
     fetchProjects();
-    checkFeedback();
+    
   }, []);
+
+  useEffect(()=>{
+    checkFeedback();
+  },[])
 
 
   const checkFeedback = async () => {
@@ -74,7 +82,40 @@ const ProjectListScreen = ({ navigation,route }) => {
   
 
 
-  const deleteProject =()=>{}
+  const deleteProject =(item)=>{
+
+    Alert.alert(
+      'Confirm Deletion',
+      'Are you sure you want to delete this item?',
+      [
+          {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel'
+          },
+          {
+              text: 'OK',
+              onPress: async () => {
+                  console.log('OK Pressed');
+                  try {
+                    const response=axios.delete(`${Api.API_BACKEND}/project/deleteProject`,{
+                      data:{projectId:item}
+                    })
+                    setProjects(projects.filter(project => project.projectId !== item));
+
+                    
+                  } catch (error) {
+                    
+                  }
+                  
+              }
+          }
+      ],
+      { cancelable: false }
+  );
+
+    
+  }
 
   return (
     <View style={styles.container}>
@@ -88,15 +129,17 @@ const ProjectListScreen = ({ navigation,route }) => {
 
     return (
       <TouchableOpacity
-        style={[styles.projectItem, data.userType==='admin'? '':{ backgroundColor: hasSentimentData ? '#c0e6ff' : '#fff' }]}
+        style={[styles.projectItem, data.userType==='admin'? '':{ backgroundColor: hasSentimentData ? '#ccc' : '#fff' }]}
         onPress={() => navigation.navigate('projectdetails', { item: item, data: data })}
       >
         <View>
           <Text style={styles.projectTitle}>{item.projectId}</Text>
-          <Text style={styles.projectTitle}>{item.projectName.trim()}</Text>
+          <Text style={styles.projectName}>{item.projectName.trim()}</Text>
+          <Text style={styles.projectName}>{item.Date}</Text>
+
         </View>
         {data.userType === 'admin' ? (
-          <MaterialCommunityIcons name="delete" size={24} color="black" onPress={deleteProject} />
+          <MaterialCommunityIcons name="delete" size={40} color="black" onPress={()=>{deleteProject(item.projectId)}} />
         ) : null}
       </TouchableOpacity>
     );
@@ -127,7 +170,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
+    color:'blue'
   },
+  projectName:{
+    fontSize:18,
+  }
 });
 
 export default ProjectListScreen;

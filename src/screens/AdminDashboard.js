@@ -4,7 +4,9 @@ import { images } from '../constants';
 import { setWidth } from '../utils';
 import { Seperator } from '../components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import {Ionicons} from '@expo/vector-icons'
+import {Octicons} from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 
 const AdminDashboard = ({ navigation, route }) => {
   const { data } = route.params;
@@ -16,9 +18,14 @@ const AdminDashboard = ({ navigation, route }) => {
   console.log(data)
   return (
     <View style={styles.container}>
-       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+       <View style={styles.btnStyle}>
+      <TouchableOpacity style={styles.settingButton} >
+      <MaterialCommunityIcons  name="cog" size={40} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
        <MaterialCommunityIcons name="logout" size={40} color="black" />
       </TouchableOpacity>
+       </View>
       {/* <Seperator height={setWidth(2)} /> */}
       <View style={styles.header}>
         <Image
@@ -48,17 +55,23 @@ const AdminDashboard = ({ navigation, route }) => {
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("add-details", { constituency: data.constituency })}>
-            <Text style={styles.buttonText}>Add Project</Text>
+            {/* <Text style={styles.buttonText}>Add Project</Text> */}
+            <Ionicons name="add-circle" size={30} color="white" />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('projectlist',{data: data})}>
-            <Text style={styles.buttonText}>Show Projects</Text>
+            {/* <Text style={styles.buttonText}>Show Projects</Text> */}
+            <Octicons name="project" size={30} color="white"/>
+
           </TouchableOpacity>
+
+          <TouchableOpacity style={[styles.button]} onPress={() => navigation.navigate('adminresult',{data: data})}>
+          {/* <Text style={styles.buttonText}>Rated Project</Text> */}
+          <MaterialIcons name="star-rate" size={30} color="white" />
+        </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={[styles.button, styles.singleButton]} onPress={() => navigation.navigate('adminresult',{data: data})}>
-          <Text style={styles.buttonText}>Rated Project</Text>
-        </TouchableOpacity>
+        
       </View>
     </View>
   );
@@ -124,7 +137,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: setWidth(100),
     marginBottom: 20,
-    width:setWidth(45)
+    width:setWidth(25),
+    alignItems:'center'
   },
   singleButton: {
     width: setWidth(45),
@@ -145,6 +159,17 @@ const styles = StyleSheet.create({
   logoutButtonText: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  btnStyle:{
+    flexDirection:'row',
+    justifyContent:'space-between'
+  },
+  settingButton:{
+    marginRight: 20,
+    marginBottom:-20,
+    borderRadius: 5,
+    marginTop:20,
+
   },
 });
 
