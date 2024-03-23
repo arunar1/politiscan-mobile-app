@@ -17,7 +17,8 @@ import VerifyAdmin from "./validation/VerifyAdmin";
 import PollScreen from "./validation/PollScreen";
 import PollAddScreen from "./PollAddScreen";
 import PollResultScreen from "./PollResultScreen";
+import Forgotpass from "./Forgotpass";
 
 
  export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
-ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen,PollResultScreen};
+ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen,PollResultScreen,Forgotpass};

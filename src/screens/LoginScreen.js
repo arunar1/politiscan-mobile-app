@@ -69,6 +69,7 @@ const LoginScreen = ({ navigation }) => {
 
   const handleForgotPassword = () => {
     console.log('Forgot Password pressed');
+    navigation.navigate('forgotpass')
   };
 
   return (
