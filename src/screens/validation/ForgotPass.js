@@ -46,12 +46,13 @@ const ForgotPassVerify = ({navigation,route}) => {
       });
       console.log(response.data.message)
 
-      if(response.data.message==="code accepted"){
+      if(response.data.message=="code accepted"){
         setValidClick(false)
         setEnabler(true)
       }
       else{
         setValidClick(false)
+        Alert.alert("Error","Code is not accepted")
       }
 
 

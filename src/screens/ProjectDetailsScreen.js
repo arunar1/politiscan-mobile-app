@@ -232,9 +232,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   projectName: {
-    fontSize: 24,
+    fontSize: 18,
     marginTop: 8,
-    fontFamily:'Italic'
+
 
   },
   detailsContainer: {
