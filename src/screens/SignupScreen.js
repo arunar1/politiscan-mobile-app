@@ -5,7 +5,6 @@ import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 import { firebase } from '../firebase/config';
 import 'firebase/storage'; 
-import * as FileSystem from 'expo-file-system';
 import { useFocusEffect } from '@react-navigation/native';
 import { Api } from '../constants';
 import { setWidth } from '../utils';

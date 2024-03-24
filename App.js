@@ -1,10 +1,10 @@
 import React from 'react';
 import Navigators from './src/navigators';
 import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
 import LottieView from 'lottie-react-native';
-import { useRef } from 'react/cjs/react.development';
 import { StyleSheet } from 'react-native';
+import {useRef } from 'react';
+
 
 const App = () => {
     const animation = useRef(null);
