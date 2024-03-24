@@ -20,7 +20,10 @@ const DashboardUser = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-              <View style={styles.btnStyle}>
+              
+      <Seperator height={setWidth(2)} />
+      <View style={styles.header}>
+      <View style={styles.btnStyle}>
               
               <TouchableOpacity style={styles.settingButton} >
               <MaterialCommunityIcons  name="cog" size={40} color="black" />
@@ -29,8 +32,6 @@ const DashboardUser = ({ navigation, route }) => {
               <MaterialCommunityIcons  name="logout" size={40} color="black" />
               </TouchableOpacity>
               </View>
-      {/* <Seperator height={setWidth(2)} /> */}
-      <View style={styles.header}>
         <Image
           source={{ uri: data.profileImage }}
           style={styles.profilePic}
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   header: {
     width:setWidth(90),
     justifyContent:'space-evenly',
-    height: setWidth(60),
+    height: setWidth(65),
     backgroundColor:'#82d5e3',
     borderRadius:setWidth(5),
     alignItems:'center'
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily:'Bold'
     // width:setWidth(40)
 
   },
@@ -105,11 +106,14 @@ const styles = StyleSheet.create({
     borderRadius:setWidth(5),
     backgroundColor:'#cbedeb',
     padding:30,
+    
   },
   label: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 14,
+    fontFamily:'Italic'
+
   },
   info: {
     fontSize: 16,
@@ -140,22 +144,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   logoutButton: {
-    alignSelf: 'flex-end',
-    marginRight: 20,
-    marginBottom:-20,
-    borderRadius: 5,
-    marginTop:20,
+    // alignSelf: 'flex-end',
+    // marginRight: 20,
+    // marginBottom:-20,
+    // borderRadius: 5,
+    // marginTop:20,
   },
   settingButton:{
-    marginRight: 20,
-    marginBottom:-20,
-    borderRadius: 5,
-    marginTop:20,
+    // marginRight: 20,
+    // marginBottom:-20,
+    // borderRadius: 5,
+    // marginTop:20,
 
   },
   btnStyle:{
     flexDirection:'row',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    width:setWidth(70)
   }
 });
 

@@ -18,7 +18,10 @@ const AdminDashboard = ({ navigation, route }) => {
   console.log(data)
   return (
     <View style={styles.container}>
-       <View style={styles.btnStyle}>
+       
+      <Seperator height={setWidth(2)} />
+      <View style={styles.header}>
+      <View style={styles.btnStyle}>
       <TouchableOpacity style={styles.settingButton} >
       <MaterialCommunityIcons  name="cog" size={40} color="black" />
       </TouchableOpacity>
@@ -26,8 +29,6 @@ const AdminDashboard = ({ navigation, route }) => {
        <MaterialCommunityIcons name="logout" size={40} color="black" />
       </TouchableOpacity>
        </View>
-      {/* <Seperator height={setWidth(2)} /> */}
-      <View style={styles.header}>
         <Image
           source={{uri: data.profileImage }}
           style={styles.profilePic}
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   header: {
     width:setWidth(90),
     justifyContent:'space-evenly',
-    height: setWidth(60),
+    height: setWidth(65),
     backgroundColor:'#82d5e3',
     borderRadius:setWidth(5),
     alignItems:'center'
@@ -150,11 +151,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   logoutButton: {
-    alignSelf: 'flex-end',
-    marginRight: 20,
-    marginBottom:-20,
-    borderRadius: 5,
-    marginTop:20,
+    // alignSelf: 'flex-end',
+    // marginRight: 20,
+    // marginBottom:-20,
+    // borderRadius: 5,
+    // marginTop:20,
   },
   logoutButtonText: {
     color: 'white',
@@ -162,13 +163,14 @@ const styles = StyleSheet.create({
   },
   btnStyle:{
     flexDirection:'row',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    width:setWidth(70)
   },
   settingButton:{
-    marginRight: 20,
-    marginBottom:-20,
-    borderRadius: 5,
-    marginTop:20,
+    // marginRight: 20,
+    // marginBottom:-20,
+    // borderRadius: 5,
+    // marginTop:20,
 
   },
 });

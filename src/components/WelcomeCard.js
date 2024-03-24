@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'orange',
         alignItems:'center',
-        fontWeight:'900'
+        fontFamily:'Italic',
 
     },
     contentText:{
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         fontSize:15,
         textAlign:'center',
         marginHorizontal:20,
+        fontFamily:'Italic'
 
     }
 })

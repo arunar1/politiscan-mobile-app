@@ -233,8 +233,9 @@ const styles = StyleSheet.create({
   },
   projectName: {
     fontSize: 24,
-    fontWeight: 'bold',
     marginTop: 8,
+    fontFamily:'Italic'
+
   },
   detailsContainer: {
     borderWidth: 1,
@@ -260,9 +261,13 @@ const styles = StyleSheet.create({
   detailValue: {
     fontSize: 16,
     padding: 20,
+    fontFamily:'Italic'
+
   },
   projectDetails: {
     textAlign: 'justify',
+    
+    
   },
   feedbackContainer: {
     marginTop: 20,
@@ -293,9 +298,13 @@ const styles = StyleSheet.create({
   },
   discription:{
     padding:20,
+    fontFamily:'Italic'
+
   },
   responded:{
     padding:30,
+    fontFamily:'Italic'
+
   },feedcount:{
     flexDirection:'row',
     justifyContent:'space-between'

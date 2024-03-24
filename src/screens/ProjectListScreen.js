@@ -130,7 +130,7 @@ const ProjectListScreen = ({ navigation,route }) => {
 
     return (
       <TouchableOpacity
-        style={[styles.projectItem, data.userType==='admin'? '':{ backgroundColor: hasSentimentData ? '#ccc' : '#fff' }]}
+        style={[styles.projectItem, data.userType==='admin'? '':{ backgroundColor: hasSentimentData ? '#d0eeec' : '#fff' }]}
         onPress={() => navigation.navigate('projectdetails', { item: item, data: data })}
       >
         <View>
@@ -177,7 +177,9 @@ const styles = StyleSheet.create({
   projectName:{
     fontSize:18,
     padding:5,
-    fontWeight:'500'
+    fontWeight:'500',
+    fontFamily:'Italic'
+
   },
   head: {
     fontSize: 22,
