@@ -2,8 +2,13 @@ import React from 'react';
 import Navigators from './src/navigators';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import LottieView from 'lottie-react-native';
+import { useRef } from 'react/cjs/react.development';
+import { StyleSheet } from 'react-native';
 
 const App = () => {
+    const animation = useRef(null);
+    
     const [fontLoaded] = useFonts({
         Regular: require('./src/font/LibreBaskerville-Regular.ttf'),
         Bold: require('./src/font/LibreBaskerville-Bold.ttf'),
@@ -15,9 +20,23 @@ const App = () => {
     return fontLoaded ? (
         <Navigators />
     ) : (
-        // <AppLoading />
-        null
+        <LottieView
+       
+       autoPlay
+       ref={animation}
+       style={[styles.container]}
+         source={require('./src/assets/images/loading.json')} 
+       />
+        
+        // null
     );
 }
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        justifyContent:"center",
+    },
+})
 
 export default App;

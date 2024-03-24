@@ -23,6 +23,7 @@
     "expo-file-system": "~16.0.8",
     "expo-font": "~11.10.3",
     "expo-image-picker": "~14.7.1",
+    "expo-splash-screen": "^0.26.4",
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.8.0",
     "lottie-react-native": "6.5.1",
