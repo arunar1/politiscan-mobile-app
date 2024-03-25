@@ -3,9 +3,11 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react
 import axios from 'axios';
 import { Api } from '../constants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import LottieView from 'lottie-react-native';
+import {useRef } from 'react';
 
 const ProjectListScreen = ({ navigation,route }) => {
+  const animation = useRef(null);
 
   const [details,setDetails]=useState([])
   const [result,setResult]=useState([]);
@@ -117,7 +119,7 @@ const ProjectListScreen = ({ navigation,route }) => {
     
   }
 
-  return (
+  return projects ? (
     <View style={styles.container}>
       <Text style={styles.head}>Projects</Text>
      <FlatList
@@ -148,7 +150,16 @@ const ProjectListScreen = ({ navigation,route }) => {
 />
 
     </View>
-  );
+  ):(
+    <LottieView
+
+    autoPlay
+       ref={animation}
+       style={[styles.containerload]}
+         source={require('../assets/images/loading.json')} 
+    
+    />
+  )
 };
 
 const styles = StyleSheet.create({
@@ -186,6 +197,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily:'Regular'
 },
+containerload:{
+  flex:1,
+  justifyContent:"center",
+}
 });
 
 export default ProjectListScreen;

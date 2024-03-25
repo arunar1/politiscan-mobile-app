@@ -209,7 +209,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
       </View>
         ):<View style={styles.responded}>
           {/* <Text>Already submitted your feedback</Text> */}
-          <Text>Feedback</Text>
+          <Text style={styles.detailLabelfeed}>Feedback</Text>
           <Text style={styles.respond}>{result.sentiment} : {result.sentimentValue==0 ? <Text>Negative</Text>:<Text>Positive</Text>}</Text>
         </View>}
 
@@ -261,6 +261,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily:'Bold',
     padding: 20,
+  },
+  detailLabelfeed:{
+    fontSize: 16,
+    fontFamily:'Bold',
   },
   detailValue: {
     fontSize: 16,
