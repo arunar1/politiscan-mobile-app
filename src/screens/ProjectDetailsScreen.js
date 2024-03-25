@@ -153,15 +153,15 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
         <View style={styles.detailsContainer}>
           <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Total Budget:</Text>
+            <Text style={styles.detailLabel}>Total Budget </Text>
             <Text style={styles.detailValue}>${details.totalBudget}</Text>
           </View>
           <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Type of Project:</Text>
+            <Text style={styles.detailLabel}>Type of Project </Text>
             <Text style={styles.detailValue}>{details.projectType}</Text>
           </View>
           <View style={styles.detailItempro}>
-            <Text style={styles.detailLabel}>Project Details:</Text>
+            <Text style={styles.detailLabel}>Project Details</Text>
           </View>
           <View>
             <Text style={styles.discription}>{details.projectDetails}</Text>
@@ -208,8 +208,9 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
         </TouchableOpacity> */}
       </View>
         ):<View style={styles.responded}>
-          <Text>Already submitted your feedback</Text>
-          <Text style={styles.responded}>{result.sentiment} : {result.sentimentValue==0 ? <Text>Negative</Text>:<Text>Positive</Text>}</Text>
+          {/* <Text>Already submitted your feedback</Text> */}
+          <Text>Feedback</Text>
+          <Text style={styles.respond}>{result.sentiment} : {result.sentimentValue==0 ? <Text>Negative</Text>:<Text>Positive</Text>}</Text>
         </View>}
 
           
@@ -229,11 +230,14 @@ const styles = StyleSheet.create({
   },
   projectId: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:'Bold'
+
   },
   projectName: {
-    fontSize: 18,
+    fontSize: 20,
     marginTop: 8,
+    fontFamily:'Bold',
+    color:'blue'
 
 
   },
@@ -255,7 +259,7 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily:'Bold',
     padding: 20,
   },
   detailValue: {
@@ -302,10 +306,23 @@ const styles = StyleSheet.create({
 
   },
   responded:{
-    padding:30,
-    fontFamily:'Italic'
+    marginTop:20,
+    padding:20,
 
-  },feedcount:{
+  },
+  respond:{
+    fontFamily:'Italic',
+    backgroundColor:'#ccc',
+    padding:20,
+    borderRadius:20,
+    marginTop:20,
+
+
+
+
+
+  },
+  feedcount:{
     flexDirection:'row',
     justifyContent:'space-between'
   }

@@ -19,7 +19,7 @@ import PollAddScreen from "./PollAddScreen";
 import PollResultScreen from "./PollResultScreen";
 import Forgotpass from "./Forgotpass";
 import ForgotPassVerify from "./validation/ForgotPass";
-
+import SettingScreen from "./SettingScreen";
 
  export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
-ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen,PollResultScreen,Forgotpass,ForgotPassVerify};
+ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen,PollResultScreen,Forgotpass,ForgotPassVerify,SettingScreen};

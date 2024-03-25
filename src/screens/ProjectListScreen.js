@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
   head: {
     fontSize: 22,
     marginBottom: 10,
+    fontFamily:'Regular'
 },
 });
 

@@ -16,6 +16,10 @@ const DashboardUser = ({ navigation, route }) => {
     navigation.navigate('login');
   };
 
+  const showSetting=()=>{
+    navigation.navigate('setting',{data})
+  }
+
 
 
   return (
@@ -26,7 +30,7 @@ const DashboardUser = ({ navigation, route }) => {
       <View style={styles.btnStyle}>
               
               <TouchableOpacity style={styles.settingButton} >
-              <MaterialCommunityIcons  name="cog" size={40} color="black" />
+              <MaterialCommunityIcons  name="cog" size={40} color="black"  onPress={showSetting}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
               <MaterialCommunityIcons  name="logout" size={40} color="black" />
