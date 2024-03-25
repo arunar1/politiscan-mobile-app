@@ -114,14 +114,17 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     marginBottom: 14,
-    fontFamily:'Italic'
+    fontFamily:'Bold',
+    marginTop:10,
+
 
   },
   info: {
     fontSize: 16,
     marginBottom: 10,
+    fontFamily:'Regular'
   },
   buttonsContainer: {
     flexDirection: 'row',

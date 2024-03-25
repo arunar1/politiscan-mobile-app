@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   },
   projectTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:'Bold',
     marginBottom: 8,
     color:'blue'
   },
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     fontSize:18,
     padding:5,
     fontWeight:'500',
-    fontFamily:'Italic'
+    fontFamily:'Regular'
 
   },
   head: {

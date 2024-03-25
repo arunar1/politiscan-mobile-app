@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     },
     projectTitle: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontFamily:'Bold',
         marginBottom: 8,
         backgroundColor:'#ccc',
         paddingHorizontal:20,
@@ -104,14 +104,17 @@ const styles = StyleSheet.create({
     },
     text:{
         backgroundColor:'#ccc',
-        width:setWidth(50),
+        width:setWidth(60),
         borderRadius:10,
         padding:5,
         margin:10,
+        fontFamily:'Regular',
+        textAlign:'center'
     },
     head: {
         fontSize: 22,
         marginBottom: 10,
+        fontFamily:'Regular'
     },
 });
 

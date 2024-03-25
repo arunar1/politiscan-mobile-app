@@ -56,7 +56,7 @@ const AddProjectScreen = ({ navigation, route }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.label}>Project ID:</Text>
+            <Text style={styles.label}>Project ID</Text>
             <TextInput
                 style={[styles.input,{color:'red'}]}
                 value={projectId}
@@ -68,7 +68,7 @@ const AddProjectScreen = ({ navigation, route }) => {
                 <Text style={styles.buttonText}>Generate Random ID</Text>
             </TouchableOpacity>
 
-            <Text style={styles.label}>Project Name:</Text>
+            <Text style={styles.label}>Project Name</Text>
             <TextInput
                 style={styles.input}
                 value={projectName}
@@ -76,7 +76,7 @@ const AddProjectScreen = ({ navigation, route }) => {
                 placeholder="Enter project name"
             />
 
-            <Text style={styles.label}>Project Type:</Text>
+            <Text style={styles.label}>Project Type</Text>
             <TextInput
                 style={styles.input}
                 value={projectType}
@@ -84,7 +84,7 @@ const AddProjectScreen = ({ navigation, route }) => {
                 placeholder="Enter project type"
             />
 
-            <Text style={styles.label}>Total Budget:</Text>
+            <Text style={styles.label}>Total Budget</Text>
             <TextInput
                 style={styles.input}
                 value={totalBudget}
@@ -93,7 +93,7 @@ const AddProjectScreen = ({ navigation, route }) => {
                 placeholder="Enter total budget"
             />
 
-            <Text style={styles.label}>Project Description:</Text>
+            <Text style={styles.label}>Project Description</Text>
             <ScrollView style={styles.descriptionContainer} nestedScrollEnabled={true}>
                 <TextInput
                     style={styles.descriptionInput}
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontFamily:'Bold',
         marginBottom: 5,
     },
     input: {
@@ -148,8 +148,9 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 16,
-        fontWeight: 'bold',
         textAlign: 'center',
+        fontFamily:'Regular'
+
     },
     descriptionContainer: {
         borderWidth: 1,

@@ -25,8 +25,8 @@ const VerifyAdmin = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Text>Email: {item.email}</Text>
-            <Text>Constituency: {item.constituency}</Text>
+            <Text style={styles.text}>Email : {item.email}</Text>
+            <Text style={styles.text}>Constituency : {item.constituency}</Text>
 
             {item.aadharImage ? (
                 <Image
@@ -38,7 +38,7 @@ const VerifyAdmin = ({ route }) => {
             ) : (
                 <ActivityIndicator size="large" color="#0000ff" />
             )}
-                        <Text>Name: {item.name}</Text>
+                        <Text style={styles.text}>Name : {item.name}</Text>
 
             {item.profileImage ? (
                 <Image
@@ -51,7 +51,7 @@ const VerifyAdmin = ({ route }) => {
                 <ActivityIndicator size="large" color="#0000ff" />
             )}
 
-                        <Text>Aadhar Number: {item.aadharNo}</Text>
+                        <Text style={styles.text}>Aadhar Number : {item.aadharNo}</Text>
 
             
                 <TouchableOpacity
@@ -88,8 +88,12 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontSize: 16,
-        fontWeight: 'bold',
+        fontFamily:'Bold'
     },
+    text:
+    {
+        fontFamily:'Regular'
+    }
 });
 
 export default VerifyAdmin;

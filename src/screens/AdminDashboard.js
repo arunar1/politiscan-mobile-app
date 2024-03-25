@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily:'Bold'
     // width:setWidth(40)
 
   },
@@ -115,12 +115,16 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: 'bold',
+    marginTop:10,
+    // fontWeight: 'bold',
     marginBottom: 5,
+    fontFamily:'Bold'
   },
   info: {
     fontSize: 16,
     marginBottom: 10,
+    fontFamily:'Regular'
+
   },
   buttonsContainer: {
     alignItems: 'center',

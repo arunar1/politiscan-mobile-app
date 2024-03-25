@@ -62,10 +62,10 @@ const CheckUser = ({ navigation }) => {
     };
 
     const renderUserItem = ({ item }) => (
-        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#ccc'}:'white']} onPress={() => handleItemPress(item)}>
+        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#d0eeec'}:'white']} onPress={() => handleItemPress(item)}>
             <Text style={styles.email}>{item.email}</Text>
-            <Text style={styles.email}>{item.name}</Text>
-            <Text style={styles.email}>{item.constituency}</Text>
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.name}>{item.constituency}</Text>
         </TouchableOpacity>
     );
 
@@ -176,15 +176,20 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         color:"red",
         fontSize:20,
-        fontWeight:'900',
         paddingLeft:20,
         paddingTop:10,
+        fontFamily:'Bold'
 
     },
     email: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontFamily:'Bold'
     },
+    name:{
+        fontSize: 13,
+        fontFamily:'Regular'
+    }
+    ,
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -193,13 +198,13 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#007bff',
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 5,
         borderRadius: 5,
     },
     buttonText: {
         color: '#fff',
         fontSize: 16,
-        fontWeight: 'bold',
+        fontFamily:'Bold'
     },
     picker: {
         height: 50,
