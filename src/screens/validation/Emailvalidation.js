@@ -26,37 +26,41 @@ const Emailvalidation = ({navigation,route}) => {
   const [code, setCode] = useState('');
 
   const handleVerify = async () => {
-    if(!code.trim){
-      Alert.alert('Error','Enter the code')
-      return
-    }
-    setValidClick(true)
-    try {
-      const response = await axios.post(`${Api.API_BACKEND}/registration`, {
-        verificationCode: code,
-        aadhar:aadhar,
-        profile:profile,
-        info:info
-
-      });
-
-
-      console.log(response)
-      if(response.data.message=="Registered successfully"){
-        Alert.alert('Message', response.data.message);
-        navigation.navigate('login')
+    if(code.trim()){
+      if(!code.trim){
+        Alert.alert('Error','Enter the code')
+        return
       }
-      else{
-        Alert.alert("Message",response.data.message);
+      setValidClick(true)
+      try {
+        const response = await axios.post(`${Api.API_BACKEND}/registration`, {
+          verificationCode: code,
+          aadhar:aadhar,
+          profile:profile,
+          info:info
+  
+        });
+  
+  
+        console.log(response)
+        if(response.data.message=="Registered successfully"){
+          Alert.alert('Message', response.data.message);
+          navigation.navigate('login')
+        }
+        else{
+          Alert.alert("Message",response.data.message);
+          // navigation.navigate('signup')
+          setValidClick(false)
+        }
+       
+      } catch (error) {
+        Alert.alert('Error', error.response.data.error);
         navigation.navigate('signup')
+  
       }
-     
-    } catch (error) {
-      Alert.alert('Error', error.response.data.error);
-      navigation.navigate('signup')
-
+    }else{
+      Alert.alert("Error","Enter the code")
     }
-    
   };
 
   return (

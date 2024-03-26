@@ -1,9 +1,56 @@
 import React from 'react';
-import {View, StyleSheet,Text} from 'react-native';
+import {View, StyleSheet,Text, Alert} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Api } from '../constants';
+import axios from 'axios';
+const SettingScreen = ({navigation,route}) => {
 
-const SettingScreen = () => {
+    const {data}=route.params
     const deleteAccount=()=>{
+        
+
+        Alert.alert(
+            'Confirm Deletion',
+            'Are you sure you want to delete this item?',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel'
+                },
+                {
+                    text: 'OK',
+                    onPress: async () => {
+                        console.log('OK Pressed');
+                        try {
+                            const response = await axios.delete(`${Api.API_BACKEND}/delete/deleteaccount`, {
+                                data: {
+                                    userType: data.userType,
+                                    email: data.email
+                                }
+                            });
+
+                            console.log(response.data)
+                    
+                    
+                            if (response.data.message == 'deleted') {
+                                Alert.alert('Success', 'Account deleted successfully');
+                                navigation.navigate('welcome')
+
+                            } else {
+                                Alert.alert('Error', 'Failed to delete account');
+                            }
+                        } catch (error) {
+                            console.error(error);
+                            Alert.alert('Error', 'Please try again');
+                        }
+                        
+                    }
+                }
+            ],
+            { cancelable: false }
+        );
+
         
     }
     return (

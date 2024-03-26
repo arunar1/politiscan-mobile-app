@@ -30,7 +30,7 @@ const VerifyAdmin = ({ route }) => {
 
             {item.aadharImage ? (
                 <Image
-                    source={{ uri: item.aadharImage }}
+                    source={{ uri: item.profileImage }}
                     style={styles.image}
                     resizeMode="cover"
                     onError={(error) => console.error('Image loading error:', error)}
@@ -42,7 +42,7 @@ const VerifyAdmin = ({ route }) => {
 
             {item.profileImage ? (
                 <Image
-                    source={{ uri: item.profileImage }}
+                    source={{ uri: item.aadharImage }}
                     style={styles.image}
                     resizeMode="cover"
                     onError={(error) => console.error('Image loading error:', error)}

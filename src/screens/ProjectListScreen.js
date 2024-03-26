@@ -100,7 +100,7 @@ const ProjectListScreen = ({ navigation,route }) => {
               onPress: async () => {
                   console.log('OK Pressed');
                   try {
-                    const response=axios.delete(`${Api.API_BACKEND}/project/deleteProject`,{
+                    const response=await axios.delete(`${Api.API_BACKEND}/project/deleteProject`,{
                       data:{projectId:item}
                     })
                     setProjects(projects.filter(project => project.projectId !== item));
