@@ -1,18 +1,18 @@
 const WELCOME_CONTENT=[
     {
-        image:"DISCOVER",
-        title:"Discover Politics",
-        content:"If we are not enter to politics, the politics enters to us",
+        image: "DISCOVER",
+        title: "Discover Politics",
+        content: "If we do not enter politics, politics will enter our lives.",
     },
     {
-        image:"ROLE",
-        title:"What is your role in politics",
-        content:"Be a part of society be a part of politics"
+        image: "ROLE",
+        title: "What Is Your Role in Politics?",
+        content: "Be a part of society; be a part of politics.",
     },
     {
-        image:"FEEDBACK",
-        title:"Feed Back make politics transparent",
-        content:"For a better society we need great political transparency which increase the people prosprity",
+        image: "FEEDBACK",
+        title: "Feedback Makes Politics Transparent",
+        content: "For a better society, we need greater political transparency, which increases prosperity for the people.",
     }
 
 ]

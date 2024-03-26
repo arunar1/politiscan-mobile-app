@@ -159,12 +159,22 @@ const SignupScreen = ({navigation}) => {
 
   }
      
+
+  const ageCheck=()=>{
+    if(formData.age<=18){
+      Alert.alert("info", "You can't register minimum age required is 18")
+      return false
+    }
+    else{
+      return true
+    }
+  }
         
 
      
   const handleSignup = async () => {
     
-    if(validPhonenumber() && validAadhar() && passwordCheck() && emailvalidate()){
+    if(validPhonenumber() && validAadhar() && passwordCheck() && emailvalidate()&&ageCheck()){
     if (validateFields()) {
       setSignClick(true)
       
