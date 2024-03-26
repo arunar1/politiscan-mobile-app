@@ -15,7 +15,7 @@ const SplashScreen = ({navigation}) => {
         <View style={styles.container}>
             <StatusBar  barStyle='light-content' backgroundColor={colors.BACK_SB}/>
             <Image source={images.PIC_FRONT} style={{width:setHeight(30),height:setHeight(30),borderRadius:50,}}></Image>
-            <Text  style={{fontSize:35,color:'black',fontWeight:500,margin:26,}}><Text style={{color:'red',fontSize:37,}}>P</Text>oliti<Text style={{color:'red',fontSize:37}}>S</Text>can</Text>
+            <Text  style={{fontSize:35,color:'black',fontWeight:500,margin:26,fontFamily:'Bold'}}><Text style={{color:'red',fontSize:37,}}>P</Text>oliti<Text style={{color:'red',fontSize:37,}}>S</Text>can</Text>
         </View>
     );
 }
