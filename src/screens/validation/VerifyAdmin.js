@@ -3,11 +3,43 @@ import { View, Text, StyleSheet, Image, ActivityIndicator, TouchableOpacity, Ale
 import axios from 'axios';
 import { Api } from '../../constants';
 
-const VerifyAdmin = ({ route }) => {
+const VerifyAdmin = ({ navigation,route }) => {
     const { item } = route.params;
     const [verifying, setVerifying] = useState(false);
+    const [rejecting, setRejectinging] = useState(false);
+
 
     console.log(item.verified)
+
+    const handledelete= async()=>{
+        setRejectinging(true)
+        try {
+            const response = await axios.delete(`${Api.API_BACKEND}/delete/deleteaccount`, {
+                data: {
+                    userType: item.userType,
+                    email: item.email
+                }
+            });
+
+            console.log(response.data)
+            setRejectinging(false)
+    
+    
+            if (response.data.message == 'deleted') {
+                Alert.alert('Success', 'Rejected successfully');
+                navigation.navigate('checker')
+
+            } else {
+                Alert.alert('Error', 'Failed to Rejected');
+            }
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Please try again');
+        }
+
+    }
+
+    
 
     const handleVerify = async () => {
         try {
@@ -54,15 +86,24 @@ const VerifyAdmin = ({ route }) => {
                         <Text style={styles.text}>Aadhar Number : {item.aadharNo}</Text>
 
             
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                    style={styles.verifyButton}
+                    onPress={handleVerify}
+                    disabled={verifying || item.verified}>
+                    <Text style={styles.buttonText}>
+                        {verifying ? 'Verifying...' : item.verified? 'Verified' : 'Verify'}
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                 style={styles.verifyButton}
-                onPress={handleVerify}
-                disabled={verifying || item.verified}
-            >
-                <Text style={styles.buttonText}>
-                    {verifying ? 'Verifying...' : item.verified? 'Verified' : 'Verify'}
-                </Text>
-            </TouchableOpacity>
+                    onPress={handledelete}
+                    disabled={verifying || item.verified}>
+                    <Text style={styles.buttonText}>
+                        {rejecting ? 'Rejecting...':'Reject'}
+                    </Text>
+                </TouchableOpacity>
+                </View>
             
         </View>
     );
@@ -83,6 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#007bff',
         padding: 10,
         borderRadius: 5,
+        margin:10,
         marginTop: 20,
     },
     buttonText: {
@@ -93,6 +135,9 @@ const styles = StyleSheet.create({
     text:
     {
         fontFamily:'Regular'
+    },
+    buttonContainer:{
+        flexDirection:'row'
     }
 });
 

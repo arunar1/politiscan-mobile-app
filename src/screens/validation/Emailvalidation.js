@@ -73,7 +73,7 @@ const Emailvalidation = ({navigation,route}) => {
         value={code}
       />
       <TouchableOpacity style={[styles.login, !validClick? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]}  onPress={handleVerify}>
-        {!validClick?<Text>Verify</Text>:<LottieView
+        {!validClick?<Text style={{fontFamily:'Bold'}}>Verify</Text>:<LottieView
        
        autoPlay
        ref={animation}
@@ -94,6 +94,7 @@ const styles=StyleSheet.create({
         fontSize:20,
         paddingBottom:30,
         color:'red',
+        fontFamily:"Bold"
         
     },
     login: {

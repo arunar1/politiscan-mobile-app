@@ -23,7 +23,7 @@ const CheckUser = ({ navigation }) => {
 
     useEffect(() => {
         getRecords();
-    }, []);
+    }, [userRecords,adminRecords]);
 
     const getRecords = async () => {
         try {
