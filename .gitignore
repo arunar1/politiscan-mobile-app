@@ -35,4 +35,4 @@ yarn-error.*
 *.tsbuildinfo
 
 
-# src/constants/Api.js
+src/constants/Api.js
