@@ -25,6 +25,8 @@ const ForgotPassVerify = ({navigation,route}) => {
       return () => {
         setValidClick(false)
         setValidClickPass(false)
+        setPass('')
+        setCode('')
       };
     }, [])
   );
