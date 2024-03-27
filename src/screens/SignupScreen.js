@@ -393,6 +393,8 @@ const SignupScreen = ({navigation}) => {
       <Picker
         selectedValue={formData.constituency}
         onValueChange={(itemValue) => setFormData(prevState => ({ ...prevState, constituency: itemValue }))}
+        labelStyle={{ fontFamily: 'Bold' }}
+
 
       >
         <Picker.Item label="Select Constituency" value="" />
@@ -409,6 +411,7 @@ const SignupScreen = ({navigation}) => {
         value={formData.mobileNumber}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, mobileNumber: text }))}
         placeholderTextColor="black"
+        
       />
 
 
@@ -424,7 +427,7 @@ const SignupScreen = ({navigation}) => {
       />
 
       <TextInput
-        style={[styles.input, errors.password && styles.errorInput]}
+        style={[styles.input,,errors.password && styles.errorInput]}
         placeholder="Password"
         secureTextEntry
         value={formData.password}
@@ -443,7 +446,7 @@ const SignupScreen = ({navigation}) => {
       {errors.aadharImage && <Text style={styles.errorText}>Aadhar image is required</Text>}
 
       <TouchableOpacity style={[styles.login, !signClick ? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]}  onPress={handleSignup}>
-        {!signClick?<Text>Sign up</Text>:<LottieView
+        {!signClick?<Text style={{fontFamily:'Bold',fontSize:15}}>Sign up</Text>:<LottieView
        
        autoPlay
        ref={animation}
@@ -480,6 +483,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginHorizontal: 8,
     alignItems: 'center',
+    
   },
   activeButton: {
     backgroundColor: 'blue',
@@ -487,6 +491,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: '600',
     fontSize: 15,
+    fontFamily:'Bold'
   },
   login: {
     marginTop:4,
@@ -499,7 +504,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 16,
-    color:'black'
+    color:'black',
+    fontFamily:'Bold'
   },
   input: {
     height: 40,
@@ -509,7 +515,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingLeft: 18,
     fontSize: 15,
-    color:'black'
+    color:'black',
+    // fontFamily:'Bold'
   },
   errorInput: {
     borderColor: 'red',
@@ -523,6 +530,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingLeft: 0,
     fontSize: 15,
+    fontFamily:'Bold'
   },
   uploadButton: {
     backgroundColor: 'lightblue',

@@ -117,7 +117,7 @@ const LoginScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity   style={[styles.login, !loginClick ? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]} onPress={handleLogin}>
-        {!loginClick?<Text>Login</Text>:<LottieView
+        {!loginClick?<Text style={{fontFamily:'Bold'}}>Login</Text>:<LottieView
        
        autoPlay
        ref={animation}
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 16,
+    fontFamily:'Bold'
   },
   input: {
     height: 40,
