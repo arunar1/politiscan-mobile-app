@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Api } from '../../constants';
 import { Picker } from '@react-native-picker/picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 
 const CheckUser = ({ navigation }) => {
     const [userRecords, setUserRecords] = useState([]);
@@ -17,13 +18,25 @@ const CheckUser = ({ navigation }) => {
     const [adminDistricts, setAdminDistricts] = useState([]);
 
 
+
     const handleLogout = () => {    
         navigation.navigate('login');
+    
       };
 
-    useEffect(() => {
+
+      useFocusEffect(
+        React.useCallback(() => {
+          return () => {
+           getRecords()
+          };
+        }, [])
+      );
+      useEffect(() => {
         getRecords();
-    }, [userRecords,adminRecords]);
+    }, []);
+
+    
 
     const getRecords = async () => {
         try {

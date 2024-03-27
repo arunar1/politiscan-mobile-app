@@ -106,6 +106,8 @@ const ForgotPassVerify = ({navigation,route}) => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={styles.textmail}>Verification Code</Text>
+
       <TextInput
         style={{ height: 40, width: 300, borderColor: 'gray', borderWidth: 1, marginBottom: 20,marginTop:10 ,paddingLeft:20}}
         placeholder="  Enter verification code"
@@ -113,7 +115,7 @@ const ForgotPassVerify = ({navigation,route}) => {
         value={code}
       />
       <TouchableOpacity style={[styles.login, !validClick? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]}  onPress={handleVerify}>
-        {!validClick?(!enabler?<Text>Verify</Text>:<Text>Verified</Text>):<LottieView
+        {!validClick?(!enabler?<Text style={{fontFamily:'Bold'}}>Verify</Text>:<Text>Verified</Text>):<LottieView
        
        autoPlay
        ref={animation}
@@ -164,7 +166,11 @@ const styles=StyleSheet.create({
       alignItems: 'center',
       height: 30, 
       borderRadius: 15,
-    }
+    },
+    textmail:{
+      fontSize:22,
+      fontFamily:'Bold'
+  },
 })
 
 export default ForgotPassVerify;

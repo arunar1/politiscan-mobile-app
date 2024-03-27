@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import {View, StyleSheet,Text,TouchableOpacity} from 'react-native';
+import {View, StyleSheet,Text,TouchableOpacity,Alert} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
 import LottieView from 'lottie-react-native'; 
@@ -28,11 +28,16 @@ const animation = useRef(null);
         const response = await axios.post(`${Api.API_BACKEND}/verification/forgotpass`,{
             email:email
         })
-        console.log(response)
+        console.log(response.data.message)
         if(response.data.message==="Email sent"){
             navigation.navigate('forgotpassverify',{email:email})
             setForgotClick(false)
 
+        }
+        else{
+          
+          Alert.alert('Error','Mail id is incorrect')
+          setForgotClick(false)
         }
         setForgotClick(false)
         
@@ -56,7 +61,7 @@ const animation = useRef(null);
       />   
 
       <TouchableOpacity   style={[styles.login, !forgotClick ? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]} onPress={handleForgot} >
-        {!forgotClick?<Text>Forgot</Text>:<LottieView
+        {!forgotClick?<Text style={{fontFamily:'Bold'}}>Forgot</Text>:<LottieView
        
        autoPlay
        ref={animation}
@@ -90,6 +95,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:22,
+        fontFamily:'Bold'
     },
     login:{
     width: setWidth(20),

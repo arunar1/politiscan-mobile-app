@@ -14,7 +14,7 @@ const VerifyAdmin = ({ navigation,route }) => {
     const handledelete= async()=>{
         setRejectinging(true)
         try {
-            const response = await axios.delete(`${Api.API_BACKEND}/delete/deleteaccount`, {
+            const response = await axios.delete(`${Api.API_BACKEND}/delete/deleteaccountbyadmin`, {
                 data: {
                     userType: item.userType,
                     email: item.email
@@ -95,14 +95,17 @@ const VerifyAdmin = ({ navigation,route }) => {
                         {verifying ? 'Verifying...' : item.verified? 'Verified' : 'Verify'}
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                style={styles.verifyButton}
-                    onPress={handledelete}
-                    disabled={verifying || item.verified}>
-                    <Text style={styles.buttonText}>
-                        {rejecting ? 'Rejecting...':'Reject'}
-                    </Text>
-                </TouchableOpacity>
+                {!item.verified ? (
+                    <TouchableOpacity
+                    style={styles.verifyButton}
+                        onPress={handledelete}
+                        disabled={verifying || item.verified}
+                        >
+                        <Text style={styles.buttonText}>
+                            {rejecting ? 'Rejecting...':'Reject'}
+                        </Text>
+                    </TouchableOpacity>
+                ):null}
                 </View>
             
         </View>
