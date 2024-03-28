@@ -24,7 +24,7 @@ const Notification = ({navigation,route}) => {
 
     const renderPollItem = ({ item }) => (
         <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
-            <Text>{item.description}</Text>
+            <Text style={{fontFamily:'Regular'}}>{item.description}</Text>
         </TouchableOpacity>
     );
 

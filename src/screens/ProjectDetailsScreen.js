@@ -8,6 +8,10 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 const ProjectDetailsScreen = ({ route, navigation }) => {
+    
+
+
+
   const {item, data } = route.params;
   const [feedback, setFeedback] = useState('');
   const [details,seDetails]=useState([])
@@ -141,7 +145,9 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
   console.log(result.sentiment)
 
-  return (
+  console.log(details.projectId)
+
+  return details.projectId ?(
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.header}>
@@ -175,7 +181,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     
         ):responded!=true ? (
           <View style={styles.feedbackContainer}>
-        <View style={styles.feedcount}><Text style={styles.feedbackLabel}>Feedback: </Text>
+        <View style={styles.feedcount}><Text style={styles.feedbackLabel}>Feedback </Text>
         <Text>{`${feedback.length}/60`}</Text>
         </View>
         
@@ -216,7 +222,14 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           
       </View>
     </ScrollView>
-  );
+  ):(<LottieView
+    autoPlay
+    ref={animation}
+    style={[styles.containerload]}
+      source={require('../assets/images/loading.json')}
+
+  />
+  )
 };
 
 const styles = StyleSheet.create({
@@ -282,7 +295,7 @@ const styles = StyleSheet.create({
   },
   feedbackLabel: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:'Bold',
     marginBottom: 8,
   },
   feedbackInput: {
@@ -302,7 +315,7 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily:'Bold'
   },
   discription:{
     padding:20,
@@ -320,15 +333,14 @@ const styles = StyleSheet.create({
     padding:20,
     borderRadius:20,
     marginTop:20,
-
-
-
-
-
   },
   feedcount:{
     flexDirection:'row',
     justifyContent:'space-between'
+  },
+  containerload:{
+    flex:1,
+    justifyContent:"center",
   }
 });
 

@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         color:'red',
         fontSize:20,
+        fontFamily:'Regular'
     }
 });
 

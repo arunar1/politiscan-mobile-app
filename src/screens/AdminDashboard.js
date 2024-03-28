@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet,ScrollView } from 'react-native';
 import { images } from '../constants';
-import { setWidth } from '../utils';
+import { setHeight, setWidth } from '../utils';
 import { Seperator } from '../components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {Ionicons} from '@expo/vector-icons'
@@ -21,9 +21,9 @@ const AdminDashboard = ({ navigation, route }) => {
 
   console.log(data)
   return (
-    <View style={styles.container}>
-       
-      <Seperator height={setWidth(2)} />
+    <ScrollView style={styles.container}>
+     <Seperator height={setHeight(5)} />
+
       <View style={styles.header}>
       <View style={styles.btnStyle}>
       <TouchableOpacity style={styles.settingButton} >
@@ -55,9 +55,13 @@ const AdminDashboard = ({ navigation, route }) => {
         <Text style={styles.label}>Phone Number:</Text>
         <Text style={styles.info}>{data.mobileNumber}</Text>
 
+        <Text style={styles.label}>Aadhar No:</Text>
+        <Text style={styles.info}>{data.aadharNo}</Text>
+
         <Text style={styles.label}>Email ID:</Text>
         <Text style={styles.info}>{data.email}</Text>
       </View>
+      <Seperator height={setHeight(5)} />
 
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonRow}>
@@ -80,7 +84,7 @@ const AdminDashboard = ({ navigation, route }) => {
 
         
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
 
   },
   header: {
@@ -121,7 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop:10,
     // fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom:5,
     fontFamily:'Bold'
   },
   info: {
@@ -172,7 +176,7 @@ const styles = StyleSheet.create({
   btnStyle:{
     flexDirection:'row',
     justifyContent:'space-between',
-    width:setWidth(70)
+    width:setWidth(80)
   },
   settingButton:{
     // marginRight: 20,

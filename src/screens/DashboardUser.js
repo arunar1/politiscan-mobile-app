@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { images } from '../constants';
-import { setWidth } from '../utils';
+import { setHeight, setWidth } from '../utils';
 import { Seperator } from '../components';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign} from '@expo/vector-icons';
@@ -25,7 +25,7 @@ const DashboardUser = ({ navigation, route }) => {
   return (
     <ScrollView style={styles.container}>
               
-      <Seperator height={setWidth(2)} />
+      <Seperator height={setHeight(5)} />
       <View style={styles.header}>
       <View style={styles.btnStyle}>
               
@@ -61,6 +61,8 @@ const DashboardUser = ({ navigation, route }) => {
         <Text style={styles.label}>Email ID:</Text>
         <Text style={styles.info}>{data.email}</Text>
       </View>
+      <Seperator height={setHeight(5)} />
+
 
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('notification',{data: data})}>
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
 
   },
   header: {
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
   btnStyle:{
     flexDirection:'row',
     justifyContent:'space-between',
-    width:setWidth(70)
+    width:setWidth(80)
   }
 });
 

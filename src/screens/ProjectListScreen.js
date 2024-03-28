@@ -119,7 +119,9 @@ const ProjectListScreen = ({ navigation,route }) => {
     
   }
 
-  return projects ? (
+  console.log(projects)
+
+  return projects.length ? (
     <View style={styles.container}>
       <Text style={styles.head}>Projects</Text>
      <FlatList
