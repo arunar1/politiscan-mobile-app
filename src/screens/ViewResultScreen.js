@@ -60,14 +60,22 @@ const ViewResultScreen = ({navigation,route}) => {
     { label: 'No', value: negative, color: 'red' },
   ];
 
+  let x=data[0].value + data[1].value
+  if(x==0){
+    x=1
+  }
+  
+
+ 
+
   return (
     <View style={styles.container}>
     <View style={styles.chart}>
-      <View style={[styles.bar, { height: setHeight(data[0].value *2) }]} ><Text style={styles.text} >Yes</Text></View>
-      <View style={[styles.bar, { height: setHeight(data[1].value *2),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
+      <View style={[styles.bar, { height: setHeight(data[0].value*100/(x)) }]} ><Text style={styles.text} >Yes</Text></View>
+      <View style={[styles.bar, { height: setHeight(data[1].value*100/(x)),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
     </View>
 
-      <Text style={{paddingTop:20}}>View Result Screen</Text>
+      <Text style={{paddingTop:20,fontFamily:'Bold',borderTopWidth: 1, borderTopColor: 'lightgray',}}>View Result Screen</Text>
       {data.map((item, index) => (
         <View key={index} style={styles.item}>
           <Text style={[styles.label, { color: item.color }]}>{item.label}</Text>
@@ -100,21 +108,30 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     width: '50%',
-    height: 300, 
+    maxHeight:400, 
     paddingHorizontal: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgray',
-  
+   
+    marginBottom:20,
+
   },
   bar: {
     flex: 1,
     backgroundColor: '#3498db', 
     margin:20,
-    justifyContent:'center',
     alignItems:'center',
+    justifyContent:'flex-end',
+    maxHeight:300,
+    position:'relative'
+   
   },
   text:{
-    color:'white'
+    top:50,
+    width:60,
+    textAlign:'center',
+    height:40,
+    fontFamily:'Regular'
+    
+   
   }
 });
 

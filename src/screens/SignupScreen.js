@@ -543,6 +543,7 @@ const styles = StyleSheet.create({
   },
   uploadButtonText: {
     textAlign: 'center',
+    fontFamily:'Regular'
   },
   errorText: {
     color: 'red',
