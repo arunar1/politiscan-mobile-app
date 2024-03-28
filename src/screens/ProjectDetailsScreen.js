@@ -169,7 +169,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
         </View>
 
         {data.userType === 'admin' ? (
-          <TouchableOpacity style={styles.submitButton} onPress={showResult}>
+          <TouchableOpacity style={[styles.submitButton,{marginTop:30}]} onPress={showResult}>
           <Text style={styles.submitButtonText}>Show Result</Text>
         </TouchableOpacity>
     
