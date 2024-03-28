@@ -87,8 +87,8 @@ const CheckUser = ({ navigation }) => {
         <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#ccc'}:'white']} onPress={() => handleItemPress(item)}>
             <Text style={styles.email}>{item.email}</Text>
             {console.log(item.verified)}
-            <Text style={styles.email}>{item.name}</Text>
-            <Text style={styles.email}>{item.constituency}</Text>
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.name}>{item.constituency}</Text>
         </TouchableOpacity>
     );
 
