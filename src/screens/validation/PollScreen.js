@@ -102,13 +102,17 @@ const PollScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
+            
             <TextInput
                 style={styles.input}
                 placeholder="Enter poll description"
                 value={pollDescription}
                 onChangeText={text => setPollDescription(text)}
             />
-            <Button style={styles.Button} title="Add Poll" onPress={() => pollvalidation() && handleAddPoll()} />
+
+            <TouchableOpacity  style={styles.button} onPress={() => pollvalidation() && handleAddPoll()}>
+                <Text style={styles.buttonText}>Add Poll</Text>
+            </TouchableOpacity>
               
 
 
@@ -144,6 +148,17 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between'
     },
+    button:{
+        justifyContent:'center',
+        alignItems:'center'
+
+    },buttonText:{
+        backgroundColor:'#ccc',
+        padding:10,
+        borderRadius:10,
+        fontFamily:'Regular'
+
+    }
     
 });
 

@@ -195,7 +195,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
 
 <TouchableOpacity   style={[styles.submitButton,!feedClick? { backgroundColor: '#ccc' } : { backgroundColor: 'transparent' }]} onPress={submitFeedback}>
-        {!feedClick?<Text>Submit Feedback</Text>:<LottieView
+        {!feedClick?<Text style={{fontFamily:'Regular'}}>Submit Feedback</Text>:<LottieView
        
        autoPlay
        ref={animation}

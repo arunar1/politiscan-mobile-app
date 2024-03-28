@@ -1,11 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, FlatList, ScrollView,Alert } from 'react-native';
 import { Api } from '../constants';
+import { useRef } from 'react';
+import LottieView from 'lottie-react-native';
 
 const Notification = ({navigation,route}) => {
 
+    const animation = useRef(null);
+
+
     const {data}=route.params
+
+    const [load,setLoad]=useState(false)
 
     const [poll, setPoll] = useState([]);
 
@@ -17,6 +24,12 @@ const Notification = ({navigation,route}) => {
         try {
             const response = await axios.get(`${Api.API_BACKEND}/getpoll`, {});
             setPoll(response.data.data);
+            console.log(response.data.data.length)
+            if(response.data.data.length==0){
+                Alert.alert("Alert","Notification Not Added")
+                setLoad(true)
+                // navigation.goBack()
+               }
         } catch (error) {
             console.error('Error fetching poll:', error);
         }
@@ -32,7 +45,11 @@ const Notification = ({navigation,route}) => {
         navigation.navigate('polladdscreen',{item:data , pollItem:pollItem})
     };
 
-    return (
+    console.log(poll)
+
+
+
+    return poll.length || load ? (
         <View style={styles.container}>
             <Text style={styles.head}>Notification</Text>
             <FlatList
@@ -41,7 +58,16 @@ const Notification = ({navigation,route}) => {
                 keyExtractor={(item) => item._id}
             />
         </View>
-    );
+    ):(
+       <LottieView 
+
+       autoPlay
+    ref={animation}
+    style={[styles.containerload]}
+      source={require('../assets/images/loading.json')}
+       
+       /> 
+    )
 };
 
 const styles = StyleSheet.create({
@@ -62,6 +88,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 5, 
     },
+    containerload:{
+        flex:1,
+        justifyContent:"center",
+      }
 });
 
 export default Notification;

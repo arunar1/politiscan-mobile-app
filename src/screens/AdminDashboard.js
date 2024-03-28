@@ -61,7 +61,7 @@ const AdminDashboard = ({ navigation, route }) => {
         <Text style={styles.label}>Email ID:</Text>
         <Text style={styles.info}>{data.email}</Text>
       </View>
-      <Seperator height={setHeight(5)} />
+      <Seperator height={setHeight(3)} />
 
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonRow}>

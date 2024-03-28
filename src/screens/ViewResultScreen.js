@@ -4,11 +4,17 @@ import { setHeight } from '../utils';
 import axios from 'axios';
 import { Api } from '../constants';
 import { Alert } from 'react-native';
+import { useRef } from 'react';
+import LottieView from 'lottie-react-native';
 
 const ViewResultScreen = ({navigation,route}) => {
 
   const {item} =route.params || {}
+
+  const [load,setLoad]=useState(false)
   
+  const animation = useRef(null);
+
 
   const [data1, setData] = useState([]);
 
@@ -18,6 +24,8 @@ const ViewResultScreen = ({navigation,route}) => {
         projectId: item.projectId
       });
       if(response.data[0].sentimentData==null){
+        setLoad(true)
+
         return
       }
       
@@ -25,7 +33,9 @@ const ViewResultScreen = ({navigation,route}) => {
      
     } catch (error) {
       // console.error('Error fetching data:', error);
-      Alert.alert("info","No feedback is added")
+      setLoad(true)
+      Alert.alert("Info","No feedback is added")
+      // navigation.goBack();
     }
   };
 
@@ -66,9 +76,11 @@ const ViewResultScreen = ({navigation,route}) => {
   }
   
 
+
+  console.log(data1)
  
 
-  return (
+  return  data1.length  || load ?(
     <View style={styles.container}>
     <View style={styles.chart}>
       <View style={[styles.bar, { height: setHeight(data[0].value*100/(x)) }]} ><Text style={styles.text} >Yes</Text></View>
@@ -83,7 +95,18 @@ const ViewResultScreen = ({navigation,route}) => {
         </View>
       ))}
     </View>
-  );
+  ):(
+    <LottieView 
+
+    autoPlay
+    ref={animation}
+    style={[styles.containerload]}
+      source={require('../assets/images/loading.json')}
+    
+    />
+    
+
+  )
 };
 
 const styles = StyleSheet.create({
@@ -132,6 +155,10 @@ const styles = StyleSheet.create({
     fontFamily:'Regular'
     
    
+  },
+  containerload:{
+    flex:1,
+    justifyContent:"center",
   }
 });
 

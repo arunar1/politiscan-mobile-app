@@ -3,10 +3,16 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react
 import axios from 'axios';
 import { Api } from '../constants';
 import { setWidth } from '../utils';
-
+import { useRef } from 'react';
+import LottieView from 'lottie-react-native';
 const AdminResult = ({ navigation, route }) => {
     const { data } = route.params;
     const [dataSet, setDataSet] = useState([]);
+
+    const animation = useRef(null);
+
+    const [load,setLoad]=useState(false)
+
 
 
 
@@ -16,9 +22,10 @@ const AdminResult = ({ navigation, route }) => {
                 constituency: data.constituency
             });
             setDataSet(response.data);
-           if(response.data.length===0){
-            Alert.alert("alert","No project rated")
-            navigation.goBack()
+           if(response.data.length==0){
+            Alert.alert("Alert","No Project Rated")
+                setLoad(true)
+            // navigation.goBack()
            }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -49,7 +56,9 @@ const AdminResult = ({ navigation, route }) => {
         return negative;
     };
 
-    return (
+    console.log(dataSet)
+
+    return dataSet.length || load ? (
         <View style={styles.container}>
             <Text style={styles.head}>Rating</Text>
             <FlatList
@@ -71,7 +80,16 @@ const AdminResult = ({ navigation, route }) => {
                 )}
             />
         </View>
-    );
+    ):(
+        <LottieView 
+        
+
+        autoPlay
+    ref={animation}
+    style={[styles.containerload]}
+    source={require('../assets/images/loading.json')}
+        />
+    )
 };
 
 const styles = StyleSheet.create({
@@ -116,6 +134,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontFamily:'Regular'
     },
+    containerload:{
+        flex:1,
+        justifyContent:"center",
+      }
 });
 
 export default AdminResult;
