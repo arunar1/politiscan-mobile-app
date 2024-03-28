@@ -161,7 +161,7 @@ const SignupScreen = ({navigation}) => {
      
 
   const ageCheck=()=>{
-    if(formData.age<=18){
+    if(formData.age<18){
       Alert.alert("info", "You can't register minimum age required is 18")
       return false
     }

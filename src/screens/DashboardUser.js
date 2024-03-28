@@ -23,7 +23,7 @@ const DashboardUser = ({ navigation, route }) => {
 
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
               
       <Seperator height={setWidth(2)} />
       <View style={styles.header}>
@@ -74,7 +74,7 @@ const DashboardUser = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
       
-    </View>
+    </ScrollView>
   );
 };
 
