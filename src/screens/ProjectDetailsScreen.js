@@ -8,7 +8,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 const ProjectDetailsScreen = ({ route, navigation }) => {
-    
+    const [load,setLoad]=useState(false)
 
 
 
@@ -52,13 +52,19 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
       });
 
 
+
       if (response.data.message==='Already Feedback added') {
         setResponded(true)
         if(response.data.details){
+          setLoad(true)
+
           setResult(response.data.details)
         }
         
-      } 
+      }
+      else{
+        setLoad(true)
+      }
       
     } catch (error) {
       // Alert.alert('Error', 'Please try again.');
@@ -145,9 +151,9 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
 
   console.log(result.sentiment)
 
-  console.log(details.projectId)
+  console.log(load)
 
-  return details.projectId ?(
+  return details.projectId  && load ?(
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.header}>

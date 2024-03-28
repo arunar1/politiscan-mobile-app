@@ -119,7 +119,7 @@ const ProjectListScreen = ({ navigation,route }) => {
     
   }
 
-  console.log(projects)
+ 
 
   return projects.length ? (
     <View style={styles.container}>
@@ -129,7 +129,8 @@ const ProjectListScreen = ({ navigation,route }) => {
   keyExtractor={(item) => item.projectId.toString()} 
   renderItem={({ item }) => {
     const hasSentimentData = details.some(detail => {
-      return detail.projectId === item.projectId && detail.sentimentData.some(data => data.aadharNo === data.aadharNo);
+      return detail.projectId === item.projectId && detail.sentimentData.some(data1 => data1.aadharNo === data.aadharNo);
+
     });
 
     return (
