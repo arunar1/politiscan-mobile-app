@@ -75,7 +75,7 @@ const DashboardUser = ({ navigation, route }) => {
           <Ionicons name="list" size={30} color="white"/>
         </TouchableOpacity>
       </View>
-      <Seperator height={setHeight(5)} />
+      <Seperator height={setHeight(2)} />
 
       
     </ScrollView>

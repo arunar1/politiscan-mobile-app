@@ -82,7 +82,7 @@ const AdminDashboard = ({ navigation, route }) => {
         </TouchableOpacity>
         </View>
 
-        <Seperator height={setHeight(5)} />
+        <Seperator height={setHeight(2)} />
 
 
         
