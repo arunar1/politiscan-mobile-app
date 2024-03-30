@@ -84,7 +84,7 @@ const CheckUser = ({ navigation }) => {
 
     const renderAdminItem = ({ item }) => (
         
-        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#ccc'}:'white']} onPress={() => handleItemPress(item)}>
+        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#d0eeec'}:'white']} onPress={() => handleItemPress(item)}>
             <Text style={styles.email}>{item.email}</Text>
             {console.log(item.verified)}
             <Text style={styles.name}>{item.name}</Text>

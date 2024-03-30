@@ -166,7 +166,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
         <View style={styles.detailsContainer}>
           <View style={styles.detailItem}>
             <Text style={styles.detailLabel}>Total Budget </Text>
-            <Text style={styles.detailValue}>${details.totalBudget}</Text>
+            <Text style={styles.detailValue}>₹ {details.totalBudget}</Text>
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailLabel}>Type of Project </Text>
