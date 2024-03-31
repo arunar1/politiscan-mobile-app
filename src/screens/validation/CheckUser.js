@@ -34,7 +34,7 @@ const CheckUser = ({ navigation }) => {
       );
       useEffect(() => {
         getRecords();
-    }, []);
+    }, [navigation]);
 
     
 
