@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Api } from '../../constants';
 import { Picker } from '@react-native-picker/picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 const CheckUser = ({ navigation }) => {
     const [userRecords, setUserRecords] = useState([]);
@@ -17,6 +17,9 @@ const CheckUser = ({ navigation }) => {
     const [userDistricts, setUserDistricts] = useState([]);
     const [adminDistricts, setAdminDistricts] = useState([]);
 
+
+    const isVisible= useIsFocused();
+    console.log(isVisible)
 
 
     const handleLogout = () => {    
@@ -34,7 +37,8 @@ const CheckUser = ({ navigation }) => {
       );
       useEffect(() => {
         getRecords();
-    }, []);
+    }, [isVisible]);
+
 
     
 

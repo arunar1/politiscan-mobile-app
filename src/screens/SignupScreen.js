@@ -411,6 +411,7 @@ const SignupScreen = ({navigation}) => {
         value={formData.mobileNumber}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, mobileNumber: text }))}
         placeholderTextColor="black"
+        autoComplete='off'
         
       />
 

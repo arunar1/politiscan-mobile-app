@@ -5,12 +5,15 @@ import { Api } from '../constants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import {useRef } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 
 const ProjectListScreen = ({ navigation,route }) => {
   const animation = useRef(null);
 
   const [details,setDetails]=useState([])
   const [result,setResult]=useState([]);
+
+  const isVisible =useIsFocused()
 
 
   
@@ -46,12 +49,12 @@ const ProjectListScreen = ({ navigation,route }) => {
     };
 
     fetchProjects();
-    
-  }, []);
-
-  useEffect(()=>{
     checkFeedback();
-  },[])
+
+    
+  }, [isVisible]);
+
+
 
 
   const checkFeedback = async () => {
