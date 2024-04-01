@@ -37,12 +37,9 @@ const CheckUser = ({ navigation }) => {
       );
       useEffect(() => {
         getRecords();
-<<<<<<< HEAD
+
     }, [isVisible]);
 
-=======
-    }, [navigation]);
->>>>>>> f352160b4bbc9ee9df10fc9a258f42f50df86e06
 
     
 
