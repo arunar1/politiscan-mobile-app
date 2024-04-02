@@ -37,7 +37,7 @@ const ProjectListScreen = ({ navigation,route }) => {
             projects.reverse();
           } else {
             Alert.alert('No Projects', 'No projects found for the specified constituency');
-            navigation.goBack();
+            // navigation.goBack();
           }
         } else {
           throw new Error('Failed to fetch projects');
