@@ -33,8 +33,8 @@ const ProjectListScreen = ({ navigation,route }) => {
         if (response.status === 200) {
           const { projects } = response.data;
           if (projects && projects.length > 0) {
-            setProjects(projects);
-            projects.reverse();
+            setProjects( projects.reverse());
+           
           } else {
             Alert.alert('No Projects', 'No projects found for the specified constituency');
             // navigation.goBack();
