@@ -15,6 +15,8 @@ const ProjectListScreen = ({ navigation,route }) => {
 
   const isVisible =useIsFocused()
 
+  const [load,setLoad]=useState(false)
+
 
   
 
@@ -38,6 +40,8 @@ const ProjectListScreen = ({ navigation,route }) => {
           } else {
             Alert.alert('No Projects', 'No projects found for the specified constituency');
             // navigation.goBack();
+            setLoad(true)
+
           }
         } else {
           throw new Error('Failed to fetch projects');
@@ -107,6 +111,7 @@ const ProjectListScreen = ({ navigation,route }) => {
                       data:{projectId:item}
                     })
                     setProjects(projects.filter(project => project.projectId !== item));
+                    setLoad(true)
 
                     
                   } catch (error) {
@@ -124,7 +129,7 @@ const ProjectListScreen = ({ navigation,route }) => {
 
  
 
-  return projects.length ? (
+  return projects.length || load ? (
     <View style={styles.container}>
       <Text style={styles.head}>Projects</Text>
      <FlatList
