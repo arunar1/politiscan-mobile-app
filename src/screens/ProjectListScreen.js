@@ -38,8 +38,8 @@ const ProjectListScreen = ({ navigation,route }) => {
             setProjects( projects.reverse());
            
           } else {
+
             Alert.alert('No Projects', 'No projects found for the specified constituency');
-            // navigation.goBack();
             setLoad(true)
 
           }
