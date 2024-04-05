@@ -93,10 +93,11 @@ const styles = StyleSheet.create({
         backgroundColor:'black',
         width:150,
         borderRadius:20,
+        marginTop:30
 
     },
     deleteContainer:{
-        marginTop:55,
+        marginTop:45,
         justifyContent:'center',
         alignItems:'center',
 

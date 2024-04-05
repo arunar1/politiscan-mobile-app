@@ -6,6 +6,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import {useRef } from 'react';
 import { useIsFocused } from '@react-navigation/native';
+import { setHeight, setWidth } from '../utils';
+import { width } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
+
+
 
 const ProjectListScreen = ({ navigation,route }) => {
   const animation = useRef(null);
@@ -148,12 +152,12 @@ const ProjectListScreen = ({ navigation,route }) => {
       >
         <View>
           <Text style={styles.projectTitle}>{item.projectId}  :  <Text style={[styles.projectName,{color:'red'}]}>{item.Date}</Text></Text>
-          <Text style={styles.projectName}>{item.projectName.trim()}</Text>
+          <Text style={[styles.projectName,data.userType==='admin'?{width:setWidth(75)}:'']}>{item.projectName.trim()}</Text>
           
 
         </View>
         {data.userType === 'admin' ? (
-          <MaterialCommunityIcons name="delete" size={40} color="black" onPress={()=>{deleteProject(item.projectId)}} />
+          <MaterialCommunityIcons   name="delete" size={40} color="black" onPress={()=>{deleteProject(item.projectId)}} />
         ) : null}
       </TouchableOpacity>
     );
@@ -188,7 +192,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
     flexDirection:'row',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    width:setWidth(90)
   },
   projectTitle: {
     fontSize: 18,
@@ -200,7 +205,10 @@ const styles = StyleSheet.create({
     fontSize:18,
     padding:5,
     fontWeight:'500',
-    fontFamily:'Regular'
+    fontFamily:'Regular',
+    // width:setWidth(75)
+
+   
 
   },
   head: {

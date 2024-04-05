@@ -21,7 +21,6 @@ const AddProjectScreen = ({ navigation, route }) => {
     };
 
     const handleAddProject = async() => {
-        // Here you can handle adding the project to your database or perform any other actions
         console.log('Project ID:', projectId);
         console.log('Project Name:', projectName);
         console.log('Project Type:', projectType);
