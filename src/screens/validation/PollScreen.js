@@ -4,8 +4,17 @@ import axios from 'axios';
 import { Api } from '../../constants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const PollScreen = ({navigation}) => {
+const PollScreen = ({navigation,route}) => {
     const [pollDescription, setPollDescription] = useState('');
+
+let constituency=''
+let userType=''
+    if (route && route.params) {
+       const{data}= route.params;
+       constituency=data.constituency
+       userType=data.userType;
+    } 
+
 
 
     const [deletedItem,setDeletedItem]=useState('')
@@ -19,11 +28,15 @@ const PollScreen = ({navigation}) => {
     const getPoll = async () => {
         try {
             const response = await axios.get(`${Api.API_BACKEND}/getpoll`, {});
-            setPoll(response.data.data);
+            console.log(response.data.data)
+            if(response.data){
+                setPoll(response.data.data.reverse());
+            }
         } catch (error) {
-            console.error('Error fetching poll:', error);
+            console.error('Error fetching poll:', error.message); 
         }
     };
+    
     console.log(poll)
 
     const handlePollPress =(pollItem)=>{
@@ -60,12 +73,33 @@ const PollScreen = ({navigation}) => {
     
 
     const renderPollItem = ({ item }) => (
-        <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
-            <Text>{item.description}</Text>
-            <MaterialCommunityIcons name="delete" size={24} color="black"  onPress={()=>deleteItem(item.description)}/>
+        userType=='admin' && item.constituency === constituency ? (
+            <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
+            
+            <View>
+               <Text style={{fontFamily:'Bold',marginBottom:10}}>{item.constituency.length!=0 ? <Text>Constituency : {item.constituency}</Text>:null}</Text>
+               <Text style={{fontFamily:'Regular',marginBottom:10}} >{item.date}</Text>
 
-        </TouchableOpacity>
+                <Text style={{fontFamily:'Regular'}} >{item.description}</Text>
+
+               </View>
+                
+                {/* <MaterialCommunityIcons name="delete" size={30} color="black" onPress={() => deleteItem(item.description)} /> */}
+            </TouchableOpacity>
+        ) : userType!='admin'?((
+            <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
+               <View>
+               <Text style={{fontFamily:'Bold',marginBottom:10}}>{item.constituency.length!=0 ? <Text>Constituency : {item.constituency}</Text>:null}</Text>
+               <Text style={{fontFamily:'Regular',marginBottom:10}} >{item.date}</Text>
+
+                <Text style={{fontFamily:'Regular'}} >{item.description}</Text>
+
+               </View>
+                <MaterialCommunityIcons name="delete" size={30} color="black" onPress={() => deleteItem(item.description)} />
+            </TouchableOpacity>
+        )):null
     );
+    
 
     const handleAddPoll = async () => {
         try {
@@ -96,13 +130,13 @@ const PollScreen = ({navigation}) => {
     
 
     const addPoll = async (description) => {
-        return await axios.post(`${Api.API_BACKEND}/addpoll`, { description });
+        return await axios.post(`${Api.API_BACKEND}/addpoll`, { description,constituency});
     };
 
 
     return (
         <View style={styles.container}>
-            
+            <Text style={{fontFamily:'Bold',marginBottom:10}}>Enter the Description</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Enter poll description"
@@ -137,6 +171,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
+        borderRadius:10
     },
     pollItem: {
     

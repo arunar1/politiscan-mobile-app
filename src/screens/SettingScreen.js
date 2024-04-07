@@ -67,8 +67,8 @@ const SettingScreen = ({navigation,route}) => {
             <TouchableOpacity style={styles.delete} onPress={deleteAccount}>
                 <Text style={styles.deleteText}>Delete Account</Text>
             </TouchableOpacity>
-            {data.userType=='admin'?(<TouchableOpacity style={styles.delete} >
-                <Text style={styles.deleteText}>Set Poll</Text>
+            {data.userType=='admin'?(<TouchableOpacity style={styles.delete} onPress={()=>{navigation.navigate('pollscreen',{data:data})}} >
+                <Text style={styles.deleteText}>Poll</Text>
             </TouchableOpacity>):null }
 
             </View>

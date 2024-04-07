@@ -23,7 +23,7 @@ const Notification = ({navigation,route}) => {
     const getPoll = async () => {
         try {
             const response = await axios.get(`${Api.API_BACKEND}/getpoll`, {});
-            setPoll(response.data.data);
+            setPoll(response.data.data.reverse());
             console.log(response.data.data.length)
             if(response.data.data.length==0){
                 Alert.alert("Alert","Notification Not Added")
@@ -37,7 +37,7 @@ const Notification = ({navigation,route}) => {
 
     const renderPollItem = ({ item }) => (
         <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
-            <Text style={{fontFamily:'Regular'}}>{item.description}</Text>
+            {data.constituency == item.constituency || item.constituency=='' ? <><Text style={{fontFamily:'Bold',marginBottom:10}}>{item.date}</Text><Text style={{fontFamily:'Regular'}}>{item.description}</Text></>:null}
         </TouchableOpacity>
     );
 
