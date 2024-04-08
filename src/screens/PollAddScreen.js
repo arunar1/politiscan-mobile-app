@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Button, Alert, TouchableOpacity } from 'react-n
 import axios from 'axios';
 import { Api } from '../constants';
 import { setWidth } from '../utils';
+import { useIsFocused } from '@react-navigation/native';
 
 
 const PollAddScreen = ({ navigation, route }) => {
@@ -13,9 +14,13 @@ const PollAddScreen = ({ navigation, route }) => {
     const [noClicked, setNoClicked] = useState(false);
     const [flag,setFlag]=useState(false)
 
+    const isVisible=useIsFocused();
+
+    const [load,setload]=useState(false)
+
     useEffect(()=>{
         getData()
-    },[])
+    },[isVisible,load])
 
     console.log(item)
 
@@ -31,6 +36,8 @@ const PollAddScreen = ({ navigation, route }) => {
     console.log(flag)
 
     const handleAddVote = async () => {
+        setload(true)
+
         try {
             if (!vote) {
                 throw new Error('Please select a vote option');
@@ -39,6 +46,7 @@ const PollAddScreen = ({ navigation, route }) => {
             const response = await addVote(pollItem.description,item.district,item.constituency,item.aadharNo,vote);
             if (response.status === 200) {
                 Alert.alert('Success', response.data.message);
+                setload(false)
             } else {
                 throw new Error('Failed to add vote');
             }
@@ -83,7 +91,12 @@ const PollAddScreen = ({ navigation, route }) => {
                         <Text>No</Text>
                     </TouchableOpacity>
                 </View>
-                <Button title="Add Vote" onPress={handleAddVote} disabled={!vote || flag } />
+                {/* <Button  title="Add Vote" onPress={handleAddVote} disabled={!vote || flag } /> */}
+               <View style={{justifyContent:'center',width:setWidth(100),alignItems:'center',marginTop:20}}>
+               <TouchableOpacity style={[styles.votebtn,vote&&{backgroundColor:'purple',color:'white'}]}  onPress={handleAddVote} disabled={!vote || flag } >
+                    {!load ? (<Text style={[vote&&{color:'white'}]}>ADD VOTE</Text>):(<Text style={[vote&&{color:'white'}]}>VOTING...</Text>)}
+                </TouchableOpacity>
+               </View>
             </View>
 
                 
@@ -120,9 +133,16 @@ const styles = StyleSheet.create({
     alreadyResponded:{
         width:setWidth(100),
         textAlign:'center',
-        color:'red',
         fontSize:20,
         fontFamily:'Regular'
+    },
+    votebtn:{
+        padding:10,
+        width:setWidth(40),
+        backgroundColor:'#ccc',
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:10
     }
 });
 
