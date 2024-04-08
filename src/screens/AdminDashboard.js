@@ -42,6 +42,7 @@ const AdminDashboard = ({ navigation, route }) => {
         </Text>
       </View>
 
+
       <View style={styles.userInfo}>
         <Text style={styles.label}>Role:</Text>
         <Text style={styles.info}>MLA</Text>

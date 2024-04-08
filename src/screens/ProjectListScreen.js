@@ -38,6 +38,7 @@ const ProjectListScreen = ({ navigation,route }) => {
         
         if (response.status === 200) {
           const { projects } = response.data;
+          // console.log(projects)
           if (projects && projects.length > 0) {
             setProjects( projects.reverse());
            
@@ -84,7 +85,7 @@ const ProjectListScreen = ({ navigation,route }) => {
 
  
 
-  console.log(details)
+  // console.log(details)
 
 
   

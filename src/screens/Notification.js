@@ -4,11 +4,13 @@ import { View, StyleSheet, Text, TouchableOpacity, FlatList, ScrollView,Alert } 
 import { Api } from '../constants';
 import { useRef } from 'react';
 import LottieView from 'lottie-react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 const Notification = ({navigation,route}) => {
 
     const animation = useRef(null);
 
+    const [details,setDetails]=useState([])
 
     const {data}=route.params
 
@@ -16,9 +18,21 @@ const Notification = ({navigation,route}) => {
 
     const [poll, setPoll] = useState([]);
 
+    const isVisible =useIsFocused()
+
+   
+
     useEffect(() => {
         getPoll();
-    }, []);
+        getAllpoll();
+    }, [isVisible]);
+
+    const getAllpoll= async()=>{
+        const response =await axios.get(`${Api.API_BACKEND}/getAllpollResult`);
+        // console.log(response.data)
+        setDetails(response.data.data)
+
+    }
 
     const getPoll = async () => {
         try {
@@ -35,15 +49,32 @@ const Notification = ({navigation,route}) => {
         }
     };
 
-    const renderPollItem = ({ item }) => (
-        <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
-            {data.constituency == item.constituency || item.constituency=='' ? <><Text style={{fontFamily:'Bold',marginBottom:10}}>{item.date}</Text><Text style={{fontFamily:'Regular'}}>{item.description}</Text></>:null}
-        </TouchableOpacity>
-    );
-
-    const handlePollPress = (pollItem) => {
-        navigation.navigate('polladdscreen',{item:data , pollItem:pollItem})
+    const renderPollItem = ({ item }) => {
+        const hasPollData = details.some(detail => {
+            // {console.log(detail)}
+            // {console.log(item.description)}
+            return detail.description === item.description && detail.aadhar === data.aadharNo;
+        });
+    
+        return (
+            <TouchableOpacity
+                style={[styles.pollItem, { backgroundColor: hasPollData ? '#d0eeec' : '#fff' }]}
+                onPress={() => handlePollPress(item)}
+            >
+                {data.constituency === item.constituency || item.constituency === '' ? (
+                    <View>
+                        <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>{item.date} {item.constituency === '' ? '   🌟' : ''}</Text>
+                        <Text style={{ fontFamily: 'Regular' }}>{item.description}</Text>
+                    </View>
+                ) : null}
+            </TouchableOpacity>
+        );
     };
+    
+    const handlePollPress = (pollItem) => {
+        navigation.navigate('polladdscreen', { item: data, pollItem: pollItem });
+    };
+    
 
     console.log(poll)
 

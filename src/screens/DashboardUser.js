@@ -45,6 +45,7 @@ const DashboardUser = ({ navigation, route }) => {
 </Text>
       </View>
 
+
       <View style={styles.userInfo}>
         <Text style={styles.label}>Constituency:</Text>
         <Text style={styles.info}>{data.constituency}</Text>
