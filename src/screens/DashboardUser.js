@@ -30,10 +30,10 @@ const DashboardUser = ({ navigation, route }) => {
       <View style={styles.btnStyle}>
               
               <TouchableOpacity style={styles.settingButton} >
-              <MaterialCommunityIcons  name="cog" size={40} color="black"  onPress={showSetting}/>
+              <MaterialCommunityIcons  name="cog" size={40} color="white"  onPress={showSetting}/>
               </TouchableOpacity>
               <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-              <MaterialCommunityIcons  name="logout" size={40} color="black" />
+              <MaterialCommunityIcons  name="logout" size={40} color="white" />
               </TouchableOpacity>
               </View>
         <Image
@@ -44,6 +44,8 @@ const DashboardUser = ({ navigation, route }) => {
   {data.name.toUpperCase()}
 </Text>
       </View>
+      <Seperator height={setHeight(3)} />
+
 
 
       <View style={styles.userInfo}>
@@ -62,7 +64,7 @@ const DashboardUser = ({ navigation, route }) => {
         <Text style={styles.label}>Email ID:</Text>
         <Text style={styles.info}>{data.email}</Text>
       </View>
-      <Seperator height={setHeight(5)} />
+      <Seperator height={setHeight(3)} />
 
 
       <View style={styles.buttonsContainer}>
@@ -94,26 +96,27 @@ const styles = StyleSheet.create({
     width:setWidth(90),
     justifyContent:'space-evenly',
     height: setWidth(65),
-    backgroundColor:'#82d5e3',
+    backgroundColor:'#5a1f85',
     borderRadius:setWidth(5),
     alignItems:'center'
   },
   profilePic: {
     width: 130,
     height: 130,
-    borderRadius: 75,
+    borderRadius: 55,
     marginRight: 15,
   },
   name: {
     fontSize: 26,
-    fontFamily:'Bold'
+    fontFamily:'Bold',
+    color:'white'
     // width:setWidth(40)
 
   },
   userInfo: {
     marginBottom: 2,
     borderRadius:setWidth(5),
-    backgroundColor:'#cbedeb',
+    backgroundColor:'#C4E4E2',
     padding:30,
     
   },
@@ -142,7 +145,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: setWidth(40),
-    backgroundColor: '#3498db',
+    backgroundColor:'#5a1f85',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
