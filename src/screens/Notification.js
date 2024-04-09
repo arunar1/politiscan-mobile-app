@@ -28,7 +28,7 @@ const Notification = ({navigation,route}) => {
     }, [isVisible]);
 
     const getAllpoll= async()=>{
-        const response =await axios.get(`${Api.API_BACKEND}/getAllpollResult`);
+        const response =await axios.get(`${Api.API_BACKEND}/getPollResult`);
         // console.log(response.data)
         setDetails(response.data.data)
 
@@ -38,7 +38,7 @@ const Notification = ({navigation,route}) => {
         try {
             const response = await axios.get(`${Api.API_BACKEND}/getpoll`, {});
             setPoll(response.data.data.reverse());
-            console.log(response.data.data.length)
+            // console.log(response.data.data.length)
             if(response.data.data.length==0){
                 Alert.alert("Alert","Notification Not Added")
                 setLoad(true)
@@ -51,7 +51,7 @@ const Notification = ({navigation,route}) => {
 
     const renderPollItem = ({ item }) => {
         const hasPollData = details.some(detail => {
-            // {console.log(detail)}
+            // {console.log(detail.description)}
             // {console.log(item.description)}
             return detail.description === item.description && detail.aadhar === data.aadharNo;
         });
@@ -63,7 +63,7 @@ const Notification = ({navigation,route}) => {
             >
                 {data.constituency === item.constituency || item.constituency === '' ? (
                     <View>
-                        <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>{item.date} {item.constituency === '' ? '   🌟' : ''}</Text>
+                        <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>{item.date} {item.constituency === '' ? '  ★' : ''}</Text>
                         <Text style={{ fontFamily: 'Regular' }}>{item.description}</Text>
                     </View>
                 ) : null}
@@ -76,7 +76,7 @@ const Notification = ({navigation,route}) => {
     };
     
 
-    console.log(poll)
+    // console.log(details)
 
 
 
