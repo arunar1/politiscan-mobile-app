@@ -78,8 +78,8 @@ const PollResultScreen = ({ navigation, route }) => {
         return (
             <View >
             <View style={styles.result}>
-                <Text style={styles.retext}>Positive : {votes.yes}</Text>
-                <Text style={styles.retext}  >Negative : {votes.no}</Text>
+                <Text style={styles.retext}>YES : {votes.yes}</Text>
+                <Text style={styles.retext}  >NO : {votes.no}</Text>
             </View>
         <View style={{justifyContent:'center',width:setWidth(90),alignItems:'center',}}>
         <View style={styles.chart}>

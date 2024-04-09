@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Button, Alert, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
-import { setWidth } from '../utils';
+import { setHeight, setWidth } from '../utils';
 import { useIsFocused } from '@react-navigation/native';
 
 
@@ -92,7 +92,7 @@ const PollAddScreen = ({ navigation, route }) => {
                     </TouchableOpacity>
                 </View>
                 {/* <Button  title="Add Vote" onPress={handleAddVote} disabled={!vote || flag } /> */}
-               <View style={{justifyContent:'center',width:setWidth(100),alignItems:'center',marginTop:20}}>
+               <View style={{justifyContent:'center',width:setWidth(90),alignItems:'center',marginTop:20}}>
                <TouchableOpacity style={[styles.votebtn,vote&&{backgroundColor:'purple',color:'white'}]}  onPress={handleAddVote} disabled={!vote || flag } >
                     {!load ? (<Text style={[vote&&{color:'white'}]}>ADD VOTE</Text>):(<Text style={[vote&&{color:'white'}]}>VOTING...</Text>)}
                 </TouchableOpacity>
@@ -138,11 +138,12 @@ const styles = StyleSheet.create({
     },
     votebtn:{
         padding:10,
-        width:setWidth(40),
+        width:setWidth(70),
         backgroundColor:'#ccc',
         justifyContent:'center',
         alignItems:'center',
-        borderRadius:10
+        borderRadius:10,
+        marginTop:setHeight(5)
     }
 });
 
