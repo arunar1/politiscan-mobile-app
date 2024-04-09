@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Api } from '../constants';
 import LottieView from 'lottie-react-native'; // Import LottieView
 import { useFocusEffect } from '@react-navigation/native';
+import { height } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
+import { setWidth } from '../utils';
 
 
 
@@ -170,7 +172,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailLabel}>Type of Project </Text>
-            <Text style={styles.detailValue}>{details.projectType}</Text>
+            <Text style={[styles.detailValue,{width:setWidth(50)}]} multiline numberOfLines={2}>{details.projectType}</Text>
           </View>
           <View style={styles.detailItempro}>
             <Text style={styles.detailLabel}>Project Details</Text>
