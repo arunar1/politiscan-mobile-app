@@ -72,7 +72,7 @@ const AdminResult = ({ navigation, route }) => {
                     >
                         {console.log(item)}
                         <Text style={[styles.projectTitle,{backgroundColor:'#d0eeec'}]}>Project ID: {item.projectId}</Text>
-                        <Text style={[styles.projectTitle]} numberOfLines={2} multiline>Project Name: {item.projectName}</Text>
+                        <Text style={[styles.projectTitle]} numberOfLines={2} multiline> {item.projectName}</Text>
 
                         <Text style={styles.text}>Total Positive   Sentiments: {getPositiveSentiments(item)}</Text>
                         <Text  style={styles.text}>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     },
     projectTitle: {
         fontSize: 18,
-        fontFamily:'Bold',
+        fontFamily:'Italic',
         marginBottom: 8,
         // backgroundColor:'#d0eeec',
         paddingHorizontal:20,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     },
     text:{
         // backgroundColor:'#d0eeec',
-        width:setWidth(60),
+        width:setWidth(90),
         borderRadius:10,
         padding:5,
         margin:10,
