@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
     },
     alreadyResponded:{
-        width:setWidth(100),
+        width:setWidth(90),
         textAlign:'center',
         fontSize:20,
         fontFamily:'Regular'

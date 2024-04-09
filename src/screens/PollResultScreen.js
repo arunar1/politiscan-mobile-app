@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-picker/picker';
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text,ScrollView } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
 import { setHeight, setWidth } from '../utils';
@@ -76,15 +76,23 @@ const PollResultScreen = ({ navigation, route }) => {
         const votes = constituencyVotes[selectedConstituency] || { yes: 0, no: 0 };
 
         return (
+            <View >
             <View style={styles.result}>
-                <Text style={styles.retext}>Yes : {votes.yes}</Text>
-                <Text style={styles.retext}  >No : {votes.no}</Text>
+                <Text style={styles.retext}>Positive : {votes.yes}</Text>
+                <Text style={styles.retext}  >Negative : {votes.no}</Text>
+            </View>
+        <View style={{justifyContent:'center',width:setWidth(90),alignItems:'center',}}>
+        <View style={styles.chart}>
+            <View style={[styles.bar, { height: setHeight(votes.yes*25/(votes.yes+votes.no+1)) }]} ><Text style={styles.text} >Yes</Text></View>
+            <View style={[styles.bar, { height: setHeight(votes.no*25/(votes.yes+votes.no+1)),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
+          </View>
+        </View>
             </View>
         );
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text>Select District:</Text>
             <Picker
                 selectedValue={selectedDistrict}
@@ -108,7 +116,7 @@ const PollResultScreen = ({ navigation, route }) => {
             </Picker>
 
             {renderConstituencyVotes()}
-        </View>
+        </ScrollView>
     );
 };
 
@@ -117,10 +125,11 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 55,
         padding: 16,
+        
     },
     result:{
-        width:setWidth(100),
-        height:setHeight(50),
+        width:setWidth(90),
+        height:setHeight(30),
         justifyContent:'center',
         textAlign:'center',
         alignItems:'center',
@@ -129,8 +138,42 @@ const styles = StyleSheet.create({
         padding:10,
         fontSize:20,
         backgroundColor:'#ccc',
-        margin:20
-    }
+        margin:20,
+        fontFamily:'Regular',
+        borderRadius:10
+    },
+    chart: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        width: '50%',
+        maxHeight:400, 
+        paddingHorizontal: 10,
+        marginBottom:20,
+    
+      },
+      bar: {
+        flex: 1,
+        backgroundColor: '#3498db', 
+        margin:20,
+        alignItems:'center',
+        justifyContent:'flex-end',
+        maxHeight:300,
+        position:'relative',
+        
+
+       
+      },
+      text:{
+        top:50,
+        width:60,
+        textAlign:'center',
+        height:40,
+        fontFamily:'Regular'
+        
+       
+      },
+     
 });
 
 export default PollResultScreen;
