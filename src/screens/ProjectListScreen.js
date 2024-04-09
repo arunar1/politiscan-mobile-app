@@ -7,7 +7,6 @@ import LottieView from 'lottie-react-native';
 import {useRef } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import { setHeight, setWidth } from '../utils';
-import { width } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 
 
 
@@ -38,15 +37,18 @@ const ProjectListScreen = ({ navigation,route }) => {
         
         if (response.status === 200) {
           const { projects } = response.data;
-          // console.log(projects)
+          console.log(response.data.message)
           if (projects && projects.length > 0) {
             setProjects( projects.reverse());
            
-          } else {
-
-            Alert.alert('No Projects', 'No projects found for the specified constituency');
+          } else if(response.data.message=="No projects found for the specified constituency.") {
             setLoad(true)
 
+            Alert.alert('No Projects', 'No projects found');
+
+          }
+          else{
+            Alert.alert('Error','Error in fetching project')
           }
         } else {
           throw new Error('Failed to fetch projects');
@@ -58,12 +60,12 @@ const ProjectListScreen = ({ navigation,route }) => {
     };
 
     fetchProjects();
-    checkFeedback();
+  }, []);
 
-    
-  }, [isVisible]);
+useEffect(()=>{
+  checkFeedback();
 
-
+},[isVisible])
 
 
   const checkFeedback = async () => {
