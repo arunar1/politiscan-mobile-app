@@ -9,12 +9,16 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Api } from '../constants';
 import { setWidth } from '../utils';
 import LottieView from 'lottie-react-native';
+import * as FileSystem from 'expo-file-system';
+
 
 import { constituencies,districtList } from '../constants/constituency';
 
 const SignupScreen = ({navigation}) => {
   const animation = useRef(null);
   const [signClick,setSignClick] = useState(false)
+  const [profileSize,setProfileSize]=useState(0)
+  const [aadharSize,setAadharSize]=useState(0)
   
 
   useFocusEffect(
@@ -169,12 +173,25 @@ const SignupScreen = ({navigation}) => {
       return true
     }
   }
+
+  const validateImageSize = () => {
+    if (profileSize > 200) {
+      Alert.alert('Info', `The required profile image size should be below 200kb. Current selected filesize ${profileSize}kb`);
+      return false;
+    } else if (aadharSize > 200) {
+      Alert.alert('Info', `The required aadhar image size should be below 200kb. Current selected filesize ${aadharSize}kb`);
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
         
 
      
   const handleSignup = async () => {
     
-    if(validPhonenumber() && validAadhar() && passwordCheck() && emailvalidate()&&ageCheck()){
+    if(validPhonenumber() && validAadhar() && passwordCheck() && emailvalidate()&&ageCheck() && validateImageSize()){
     if (validateFields()) {
       setSignClick(true)
       
@@ -261,11 +278,24 @@ const SignupScreen = ({navigation}) => {
 
     console.log(result.assets[0].uri);
 
+    
+
     if (!result.cancelled) {
       setFormData(prevState => ({
         ...prevState,
         [type === 'profile' ? 'profileImage' : 'aadharImage']: result.assets[0].uri
       }));
+
+      const fileInfo = await FileSystem.getInfoAsync(result.assets[0].uri);
+      console.log('Image size:', Number(fileInfo.size)/1024);
+
+
+      if(type==='profile' ){
+        setProfileSize(Math.round(Number(fileInfo.size)/1024))
+      }
+      else{
+        setAadharSize(Math.round(Number(fileInfo.size)/1024))
+      }
 
       setErrors(prevErrors => ({ ...prevErrors, [type === 'profile' ? 'profileImage' : 'aadharImage']: false }));
     }
@@ -380,7 +410,7 @@ const SignupScreen = ({navigation}) => {
 
       >
         <Picker.Item label="Select District" value="" />
-        {districtList.map((district, index) => ( // Use districtList here
+        {districtList.map((district, index) => ( 
           <Picker.Item key={index} label={district} value={district} />
         ))}
       </Picker>
@@ -438,12 +468,12 @@ const SignupScreen = ({navigation}) => {
       />
 
       <TouchableOpacity style={[styles.uploadButton,formData.profileImage  && {backgroundColor:"red"}]} onPress={() => pickImage('profile')}>
-        <Text style={styles.uploadButtonText}>Upload Profile Image</Text>
+        <Text style={styles.uploadButtonText}>Upload Profile Image (200Kb↓)</Text>
       </TouchableOpacity>
       {errors.profileImage && <Text style={styles.errorText}>Profile image is required</Text>}
 
       <TouchableOpacity style={[styles.uploadButton,formData.aadharImage && {backgroundColor:"red"}]} onPress={() => pickImage('aadhar')}>
-        <Text style={styles.uploadButtonText}>Upload Aadhar Image</Text>
+        <Text style={styles.uploadButtonText}>Upload Aadhar Image (200Kb↓)</Text>
       </TouchableOpacity>
       {errors.aadharImage && <Text style={styles.errorText}>Aadhar image is required</Text>}
 
