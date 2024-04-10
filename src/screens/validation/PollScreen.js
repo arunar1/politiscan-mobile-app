@@ -89,7 +89,7 @@ let userType=''
         ) : userType!='admin'?((
             <TouchableOpacity style={styles.pollItem} onPress={() => handlePollPress(item)}>
                <View>
-               <Text style={{fontFamily:'Bold',marginBottom:10}}>{item.constituency.length!=0 ? <Text>Constituency : {item.constituency}</Text>:null}</Text>
+               <Text style={{fontFamily:'Bold',marginBottom:10}}>{item.constituency!="nodata" ? <Text>Constituency : {item.constituency}</Text>:null}</Text>
                <Text style={{fontFamily:'Regular',marginBottom:10}} >{item.date}</Text>
 
                 <Text style={{fontFamily:'Regular'}} >{item.description}</Text>
