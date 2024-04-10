@@ -172,7 +172,7 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailLabel}>Type of Project </Text>
-            <Text style={[styles.detailValue,{width:setWidth(50)}]} multiline numberOfLines={2}>{details.projectType}</Text>
+            <Text style={[styles.detailValue,{width:setWidth(50),textAlign:'center'}]} multiline numberOfLines={2}>{details.projectType}</Text>
           </View>
           <View style={styles.detailItempro}>
             <Text style={styles.detailLabel}>Project Details</Text>

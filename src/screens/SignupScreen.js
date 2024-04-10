@@ -354,7 +354,7 @@ const SignupScreen = ({navigation}) => {
   value={formData.aadharNo}
   onChangeText={(text) => setFormData(prevState => ({ ...prevState, aadharNo: text }))}
   placeholderTextColor="black"
-  autoCompleteType="off"
+  autoComplete="off"
 />
 
      
@@ -411,7 +411,7 @@ const SignupScreen = ({navigation}) => {
         value={formData.mobileNumber}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, mobileNumber: text }))}
         placeholderTextColor="black"
-        autoComplete='off'
+       
         
       />
 
@@ -425,6 +425,7 @@ const SignupScreen = ({navigation}) => {
         value={formData.email}
         onChangeText={(text) => setFormData(prevState => ({ ...prevState, email: text }))}
         placeholderTextColor="black"
+
       />
 
       <TextInput

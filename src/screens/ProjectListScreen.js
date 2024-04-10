@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react
 import axios from 'axios';
 import { Api } from '../constants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import {useRef } from 'react';
 import { useIsFocused } from '@react-navigation/native';
@@ -60,7 +61,7 @@ const ProjectListScreen = ({ navigation,route }) => {
     };
 
     fetchProjects();
-  }, []);
+  }, [isVisible]);
 
 useEffect(()=>{
   checkFeedback();
@@ -134,6 +135,12 @@ useEffect(()=>{
     
   }
 
+
+  const updateHandle=(item)=>{
+    navigation.navigate('projectediting',{data:item})
+    console.log(item)
+  }
+
  
 
   return projects.length || load ? (
@@ -143,7 +150,15 @@ useEffect(()=>{
   data={projects}
   keyExtractor={(item) => item.projectId.toString()} 
   renderItem={({ item }) => {
+    const SentimentData = details.some(detail => {
+      // {console.log(detail.sentimentData.length)}
+      return detail.projectId === item.projectId && detail.sentimentData.length!=0;
+
+    });
+    // console.log(SentimentData)
     const hasSentimentData = details.some(detail => {
+      // {console.log(details.sentimentData)}
+
       return detail.projectId === item.projectId && detail.sentimentData.some(data1 => data1.aadharNo === data.aadharNo);
 
     });
@@ -160,7 +175,11 @@ useEffect(()=>{
 
         </View>
         {data.userType === 'admin' ? (
-          <MaterialCommunityIcons   name="delete" size={40} color="black" onPress={()=>{deleteProject(item.projectId)}} />
+          <View style={{justifyContent:'center',alignItems:'center'}}>
+                      <MaterialCommunityIcons   name="delete" size={40} color="black" onPress={()=>{deleteProject(item.projectId)}} />
+                      {!SentimentData?(<View style={{marginTop:20}}><FontAwesome name='edit' size={30} color="black" onPress={()=>{updateHandle(item)}} ></FontAwesome></View>
+):null}
+          </View>
         ) : null}
       </TouchableOpacity>
     );
