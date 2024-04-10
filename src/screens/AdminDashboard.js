@@ -21,7 +21,7 @@ const AdminDashboard = ({ navigation, route }) => {
 
   console.log(data)
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} selectable={true}>
      <Seperator height={setHeight(5)} />
 
       <View style={styles.header}>
@@ -37,7 +37,7 @@ const AdminDashboard = ({ navigation, route }) => {
           source={{uri: data.profileImage }}
           style={styles.profilePic}
         />
-        <Text style={styles.name} numberOfLines={2} ellipsizeMode="tail" multiline={true}>
+        <Text selectable={true} style={styles.name} numberOfLines={2} ellipsizeMode="tail" multiline={true}>
             {data.name.toUpperCase()}
         </Text>
       </View>
@@ -47,22 +47,22 @@ const AdminDashboard = ({ navigation, route }) => {
 
       <View style={styles.userInfo}>
         <Text style={styles.label}>Role:</Text>
-        <Text style={styles.info}>MLA</Text>
+        <Text selectable={true} style={styles.info}>MLA</Text>
 
         <Text style={styles.label}>Constituency:</Text>
-        <Text style={styles.info}>{data.constituency}</Text>
+        <Text selectable={true} style={styles.info}>{data.constituency}</Text>
 
         <Text style={styles.label}>District:</Text>
-        <Text style={styles.info}>{data.district}</Text>
+        <Text selectable={true} style={styles.info}>{data.district}</Text>
 
         <Text style={styles.label}>Phone Number:</Text>
-        <Text style={styles.info}>{data.mobileNumber}</Text>
+        <Text  selectable={true} style={styles.info}>{data.mobileNumber}</Text>
 
         <Text style={styles.label}>Aadhar No:</Text>
-        <Text style={styles.info}>{data.aadharNo}</Text>
+        <Text selectable={true} style={styles.info}>{data.aadharNo}</Text>
 
         <Text style={styles.label}>Email ID:</Text>
-        <Text style={styles.info}>{data.email}</Text>
+        <Text  selectable={true} style={styles.info}>{data.email}</Text>
       </View>
       <Seperator height={setHeight(2)} />
 
