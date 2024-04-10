@@ -50,7 +50,7 @@ const ProjectEditing = ({ navigation, route }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.label}>Project ID</Text>
+            <Text selectable={true} style={styles.label}>Project ID</Text>
             <TextInput
                 style={[styles.input,{color:'red',fontFamily:'Bold'}]}
                 value={projectId}

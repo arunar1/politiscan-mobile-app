@@ -159,26 +159,26 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.projectId}>Project ID: {details.projectId}</Text>
-          <Text style={styles.projectName}>{item.projectName}</Text>
+          <Text selectable={true} style={styles.projectId}>Project ID: {details.projectId}</Text>
+          <Text selectable={true} style={styles.projectName}>{item.projectName}</Text>
         </View>
 
   
 
         <View style={styles.detailsContainer}>
           <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Total Budget </Text>
-            <Text style={styles.detailValue}>₹ {details.totalBudget}</Text>
+            <Text  style={styles.detailLabel}>Total Budget </Text>
+            <Text selectable={true} style={styles.detailValue}>₹ {details.totalBudget}</Text>
           </View>
           <View style={styles.detailItem}>
             <Text style={styles.detailLabel}>Type of Project </Text>
-            <Text style={[styles.detailValue,{width:setWidth(50),textAlign:'center'}]} multiline numberOfLines={2}>{details.projectType}</Text>
+            <Text selectable={true} style={[styles.detailValue,{width:setWidth(50),textAlign:'center'}]} multiline numberOfLines={2}>{details.projectType}</Text>
           </View>
           <View style={styles.detailItempro}>
             <Text style={styles.detailLabel}>Project Details</Text>
           </View>
           <View>
-            <Text style={styles.discription}>{details.projectDetails}</Text>
+            <Text selectable={true} style={styles.discription}>{details.projectDetails}</Text>
           </View>
         </View>
 

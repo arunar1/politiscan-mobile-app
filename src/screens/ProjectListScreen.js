@@ -169,8 +169,8 @@ useEffect(()=>{
         onPress={() => navigation.navigate('projectdetails', { item: item, data: data })}
       >
         <View>
-          <Text style={styles.projectTitle}>{item.projectId}  :  <Text style={[styles.projectName,{color:'red'}]}>{item.Date}</Text></Text>
-          <Text style={[styles.projectName,data.userType==='admin'?{width:setWidth(75)}:'']}>{item.projectName.trim()}</Text>
+          <Text selectable={true} style={styles.projectTitle}>{item.projectId}  :  <Text style={[styles.projectName,{color:'red'}]}>{item.Date}</Text></Text>
+          <Text selectable={true} style={[styles.projectName,data.userType==='admin'?{width:setWidth(75)}:'']}>{item.projectName.trim()}</Text>
           
 
         </View>

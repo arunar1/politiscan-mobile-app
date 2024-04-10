@@ -12,6 +12,15 @@ const AdminResult = ({ navigation, route }) => {
     const animation = useRef(null);
 
     const [load,setLoad]=useState(false)
+    let x =0
+    let y =0
+
+    const [pos,setPos]=useState(0)
+    const [neg,setNeg]=useState(0)
+
+    const [isOk,SetIsOk]=useState(false)
+
+  
 
 
 
@@ -56,28 +65,53 @@ const AdminResult = ({ navigation, route }) => {
         return negative;
     };
 
-    console.log(dataSet)
+    // console.log(dataSet)
 
-    return dataSet.length || load ? (
+    console.log(pos,neg)
+
+    let total=pos+neg
+    
+
+
+
+    return dataSet.length  || load ? (
         <View style={styles.container}>
-            <Text style={styles.head}>Rating</Text>
+            <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+                <Text style={styles.head}>Rating</Text>
+                <TouchableOpacity style={{backgroundColor:'#ccc',justifyContent:'center',alignContent:'center',marginBottom:20,padding:10,borderRadius:20}} onPress={()=>{navigation.navigate('prediction',{pos:pos,neg:neg})}}>
+                    <Text style={{fontFamily:'Regular',fontSize:15,color:'red'}}>Predict</Text>
+                    </TouchableOpacity>
+                    </View>
+            
             <FlatList
                 data={dataSet}
                 keyExtractor={(item) => item._id}
-                renderItem={({ item }) => (
-                    <TouchableOpacity
-                        style={styles.projectItem}
-                        onPress={() => navigation.navigate('projectdetails', {item:item, data:data})}
+                renderItem={({ item }) => {
+                    x= x + getPositiveSentiments(item);
+                    y=y + getNegativeSentiments(item);
+                    setPos(x)
+                    setNeg(y)
                     
-                    >
-                        {console.log(item)}
-                        <Text style={[styles.projectTitle,{backgroundColor:'#d0eeec'}]}>Project ID: {item.projectId}</Text>
-                        <Text style={[styles.projectTitle]} numberOfLines={2} multiline> {item.projectName}</Text>
+                    return(
+                        (
+                            <TouchableOpacity
+                                style={styles.projectItem}
+                                onPress={() => navigation.navigate('projectdetails', {item:item, data:data})}
+                            
+                            >
+                                
+                                {console.log(item)}
+                                <Text style={[styles.projectTitle,{backgroundColor:'#d0eeec'}]}>Project ID: {item.projectId}</Text>
+                                <Text selectable={true} style={[styles.projectTitle]} numberOfLines={2} multiline> {item.projectName}</Text>
+        
+                                <Text selectable={true} style={styles.text}>Total Positive   Sentiments: {getPositiveSentiments(item)}</Text>
+                                <Text  selectable={true} style={styles.text}>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
+                            </TouchableOpacity>
+                        )
+                    )
+                }
 
-                        <Text style={styles.text}>Total Positive   Sentiments: {getPositiveSentiments(item)}</Text>
-                        <Text  style={styles.text}>Total Negative Sentiments: {getNegativeSentiments(item)}</Text>
-                    </TouchableOpacity>
-                )}
+            }
             />
         </View>
     ):(
@@ -131,7 +165,7 @@ const styles = StyleSheet.create({
     },
     head: {
         fontSize: 22,
-        marginBottom: 10,
+        marginBottom: 20,
         fontFamily:'Regular'
     },
     containerload:{

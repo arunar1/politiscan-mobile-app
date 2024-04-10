@@ -7,6 +7,7 @@ const AddProjectScreen = ({ navigation, route }) => {
     const { constituency } = route.params;
     console.log(constituency);
 
+    
     const [projectId, setProjectId] = useState('');
     const [projectName, setProjectName] = useState('');
     const [projectType, setProjectType] = useState('');
@@ -60,7 +61,7 @@ const AddProjectScreen = ({ navigation, route }) => {
                 style={[styles.input,{color:'red'}]}
                 value={projectId}
                 onChangeText={setProjectId}
-                placeholder="Auto-generated or enter manually"
+                placeholder="Random-generated"
                 editable={false}
             />
             <TouchableOpacity style={styles.generateButton} onPress={generateRandomId}>

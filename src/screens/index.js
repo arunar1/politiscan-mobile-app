@@ -21,6 +21,7 @@ import Forgotpass from "./Forgotpass";
 import ForgotPassVerify from "./validation/ForgotPass";
 import SettingScreen from "./SettingScreen";
 import ProjectEditing from "./ProjectEditing";
+import Predction from "./Predction";
 
  export {SplashScreen,WelcomeScreen,LoginScreen,SignupScreen,DemoScreen,DashboardUser,ProjectListScreen,ProjectDetailsScreen,AdminDashboard,
-ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen,PollResultScreen,Forgotpass,ForgotPassVerify,SettingScreen,ProjectEditing};
+ViewResultScreen,AddProjectScreen,Emailvalidation,AdminResult,Notification,CheckUser,VerifyAdmin,PollScreen,PollAddScreen,PollResultScreen,Forgotpass,ForgotPassVerify,SettingScreen,ProjectEditing,Predction};
