@@ -61,9 +61,9 @@ const Notification = ({navigation,route}) => {
                 style={[styles.pollItem, { backgroundColor: hasPollData ? '#d0eeec' : '#fff' }]}
                 onPress={() => handlePollPress(item)}
             >
-                {data.constituency === item.constituency || item.constituency === 'nodata' ? (
+                {data.constituency === item.constituency || item.constituency === 'Admin' ? (
                     <View>
-                        <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>{item.date} {item.constituency === '' ? '  ★' : ''}</Text>
+                        <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>{item.date} {item.constituency === 'Admin' ? '  ★' : ''}</Text>
                         <Text style={{ fontFamily: 'Regular' }}>{item.description}</Text>
                     </View>
                 ) : null}
