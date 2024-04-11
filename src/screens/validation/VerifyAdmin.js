@@ -57,8 +57,8 @@ const VerifyAdmin = ({ navigation,route }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Email : {item.email}</Text>
-            <Text style={styles.text}>Constituency : {item.constituency}</Text>
+            <Text numberOfLines={2}  selectable={true} style={[styles.text,{marginBottom:40,fontFamily:'Bold',he:30}]}>Email : {item.email}</Text>
+            <Text selectable={true} style={styles.text}>Constituency : {item.constituency}</Text>
 
             {item.aadharImage ? (
                 <Image
@@ -70,7 +70,7 @@ const VerifyAdmin = ({ navigation,route }) => {
             ) : (
                 <ActivityIndicator size="large" color="#0000ff" />
             )}
-                        <Text style={styles.text}>Name : {item.name}</Text>
+                        <Text selectable={true} style={styles.text}>Name : {item.name}</Text>
 
             {item.profileImage ? (
                 <Image
@@ -83,7 +83,7 @@ const VerifyAdmin = ({ navigation,route }) => {
                 <ActivityIndicator size="large" color="#0000ff" />
             )}
 
-                        <Text style={styles.text}>Aadhar Number : {item.aadharNo}</Text>
+                        <Text selectable={true} style={styles.text}>Aadhar Number : {item.aadharNo}</Text>
 
             
                 <View style={styles.buttonContainer}>
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     },
     text:
     {
-        fontFamily:'Regular'
+        fontFamily:'Bold'
     },
     buttonContainer:{
         flexDirection:'row'
