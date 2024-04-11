@@ -548,7 +548,7 @@ const styles = StyleSheet.create({
     paddingLeft: 18,
     fontSize: 15,
     color:'black',
-    borderRadius:10,
+    borderRadius:5,
     // fontFamily:'Bold'
   },
   errorInput: {
@@ -564,7 +564,7 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     fontSize: 15,
     fontFamily:'Bold',
-    borderRadius:10,
+    borderRadius:5,
 
   },
   uploadButton: {
