@@ -26,7 +26,7 @@ const PollAddScreen = ({ navigation, route }) => {
 
     const getData = async()=>{
         try {
-            const response = await axios.post(`${Api.API_BACKEND}/addingPollCheck`,{aadhar:item.aadharNo,description:pollItem.description})
+            const response = await axios.post(`${Api.API_BACKEND}/addingPollCheck`,{aadhar:item.aadharNo,description:pollItem.description,})
             setFlag(response.data.flag)
         } catch (error) {
             
@@ -101,7 +101,7 @@ const PollAddScreen = ({ navigation, route }) => {
 
                 
             ) : (
-                <Text style={styles.alreadyResponded}>Already responded</Text>
+                <Text style={styles.alreadyResponded}>Already Responded</Text>
             )}
         </View>
     );
