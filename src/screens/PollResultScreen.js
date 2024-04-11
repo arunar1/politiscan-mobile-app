@@ -6,13 +6,15 @@ import { Api } from '../constants';
 import { setHeight, setWidth } from '../utils';
 
 const PollResultScreen = ({ navigation, route }) => {
-    const { item } = route.params;
+    const { item ,userType} = route.params;
     const [data, setData] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [constituencies, setConstituencies] = useState([]);
-    const [selectedDistrict, setSelectedDistrict] = useState('');
-    const [selectedConstituency, setSelectedConstituency] = useState('');
+    const [selectedDistrict, setSelectedDistrict] = useState(''||item.district);
+    const [selectedConstituency, setSelectedConstituency] = useState(''||item.constituency);
     const [constituencyVotes, setConstituencyVotes] = useState({});
+
+    console.log(item)
 
     useEffect(() => {
         getData();
@@ -93,7 +95,8 @@ const PollResultScreen = ({ navigation, route }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text>Select District:</Text>
+            <View>
+            <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>Select District</Text>
             <Picker
                 selectedValue={selectedDistrict}
                 onValueChange={(itemValue) => setSelectedDistrict(itemValue)}
@@ -104,7 +107,7 @@ const PollResultScreen = ({ navigation, route }) => {
                 ))}
             </Picker>
 
-            <Text>Select Constituency:</Text>
+            <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>Select Constituency</Text>
             <Picker
                 selectedValue={selectedConstituency}
                 onValueChange={(itemValue) => setSelectedConstituency(itemValue)}
@@ -114,6 +117,7 @@ const PollResultScreen = ({ navigation, route }) => {
                     <Picker.Item key={index} label={constituency} value={constituency} />
                 ))}
             </Picker>
+            </View>
 
             {renderConstituencyVotes()}
         </ScrollView>
