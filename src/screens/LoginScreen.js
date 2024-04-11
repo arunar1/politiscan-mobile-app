@@ -158,6 +158,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 16,
     paddingLeft: 8,
+    borderRadius: 5,
+
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -167,6 +169,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
+    height: 40,
   },
   passwordInput: {
     flex: 1,
