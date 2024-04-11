@@ -83,8 +83,8 @@ const ViewResultScreen = ({navigation,route}) => {
   return  data1.length  || load ?(
     <View style={styles.container}>
     <View style={styles.chart}>
-      <View style={[styles.bar, { height: setHeight(data[0].value*5/(x)) }]} ><Text style={styles.text} >Yes</Text></View>
-      <View style={[styles.bar, { height: setHeight(data[1].value*5/(x)),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
+      <View style={[styles.bar, { height: setHeight(data[0].value*25/(x)) }]} ><Text style={styles.text} >Yes</Text></View>
+      <View style={[styles.bar, { height: setHeight(data[1].value*25/(x)),backgroundColor:'red' }]} ><Text style={styles.text}>No</Text></View>
     </View>
 
       <Text style={{paddingTop:20,fontFamily:'Bold',borderTopWidth: 1, borderTopColor: 'lightgray',}}>View Result Screen</Text>
