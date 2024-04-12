@@ -1,50 +1,61 @@
 export const constituencies = {
-    "Thiruvananthapuram": [
-      "Nemom",
-      "Aruvikara",
-      "Attingal",
-      "Chirayinkeezhu",
-      "Varkala",
-      "Kazhakkoottam",
-      "Vattiyoorkavu",
-      "Thiruvananthapuram",
-      "Neyyattinkara"
-    ],
-    "Kollam": [
-      "Paravur",
-      "Varkala",
-      "Chathannoor",
-      "Kollam",
-      "Eravipuram",
-      "Chavara",
-      "Kunnathur",
-      "Kottarakkara",
-      "Pathanapuram",
-      "Punalur"
+  "Thiruvananthapuram": [
+   "Varkala",	
+   "Attingal",	
+   "Chirayinkeezhu",
+   "Nedumangad",
+   "Vamanapuram",
+   "Kazhakootam",	
+   "Vattiyoorkavu",	
+   "Thiruvananthapuram",
+   "Nemom",
+   "Aruvikkara",
+   "Parassala",
+   "Kattakkada",	
+   "Kovalam",
+   "Neyyattinkara"
+  ],
+  "Kollam": [
+    "Karunagapally",
+    "Chavara",
+    "Kunnathur",
+    "Kottarakkara",
+    "Pathanapuram",
+    "Punalur",
+    "Chadayamangalam",
+    "Kundara",
+    "Kollam",
+    "Eravipuram",
+    "Chathannoor"
     ],
     "Pathanamthitta": [
-      "Konni",
       "Adoor",
       "Ranni",
       "Aranmula",
       "Konni",
       "Thiruvalla",
-      "Mavelikkara"
     ],
     "Alappuzha": [
-      "Cherthala",
-      "Alappuzha",
-      "Aroor",
-      "Haripad",
-      "Kayamkulam"
+    "Aroor",
+	"Cherthala",
+	"Alappuzha",
+	"Ambalappuzha",
+	"Kuttanad	",
+	"Haripad",
+	"Kayamkulam",
+	"Mavelikara",
+	"Chengannur"
     ],
     "Kottayam": [
       "Puthuppally",
       "Changanassery",
       "Kanjirappally",
       "Poonjar",
-      "Palai",
-      "Kottayam"
+      "Pala",
+      "Kottayam",
+      "Kadathuruthy",
+      "Vaikom",
+      "Ettumanoor"
     ],
     "Idukki": [
       "Udumbanchola",
@@ -52,9 +63,13 @@ export const constituencies = {
       "Devikulam",
       "Idukki",
       "Peerumade",
-      "Muvattupuzha"
     ],
     "Ernakulam": [
+      "Perumbavoor",
+      "Angamaly",
+      "Aluva",
+      "Muvattupuzha",
+      "Kothamangalam",
       "Kalamassery",
       "Paravur",
       "Vypin",
@@ -66,49 +81,66 @@ export const constituencies = {
       "Piravom"
     ],
     "Thrissur": [
+      "Chelakkara",
+      "Kunnamkulam",
       "Guruvayoor",
       "Manalur",
       "Wadakkanchery",
       "Ollur",
       "Thrissur",
       "Nattika",
-      "Irripally",
+      "Kaipamangalam",
+      "Irinjalakuda",
+      "Puthukkad",
       "Chalakudy",
       "Kodungallur"
     ],
     "Palakkad": [
-      "Tarur",
-      "Chittur",
-      "Nemmara",
-      "Alathur",
-      "Chelakkara",
-      "Kunnamkulam",
-      "Guruvayoor",
-      "Manalur",
-      "Wadakkanchery",
-      "Ollur"
+    "Thrithala",	
+    "Pattambi",
+    "Shornur",
+    "Ottapalam",
+    "Kongad (SC)",	
+    "Mannarkkad",		
+    "Malampuzha",	
+    "Palakkad",		
+    "Tarur",
+    "Chittur",	
+    "Nenmara",		
+    "Alathur"
     ],
     "Malappuram": [
       "Kondotty",
       "Eranad",
       "Nilambur",
       "Wandoor",
+      "Manjeri",
       "Perinthalmanna",
       "Mankada",
       "Malappuram",
       "Vengara",
       "Vallikunnu",
-      "Tirurangadi"
+      "Tirurangadi",
+      "Tanur",
+      "Tirur",
+      "Kottakkal",
+      "Thavanur",
+      "Ponani"
     ],
     "Kozhikode": [
       "Kuttiadi",
-      "Vatakara",
+      "Vadakara",
       "Koyilandy",
       "Beypore",
       "Kozhikode North",
       "Kozhikode South",
       "Balussery",
-      "Elathur"
+      "Elathur",
+      "Nadapuram",
+      "Perambra",
+      "Kunnamangalam",
+      "Koduvally",
+      "Thiruvambady"
     ],
     "Wayanad": [
       "Mananthavady",
@@ -118,13 +150,15 @@ export const constituencies = {
     "Kannur": [
       "Taliparamba",
       "Irikkur",
-      "Azhiyoor",
+      "Azhikode",
       "Kannur",
       "Dharmadam",
       "Thalassery",
       "Kuthuparamba",
       "Mattannur",
-      "Peravoor"
+      "Peravoor",
+      "Payyannur",
+      "Kalliasseri"
     ],
     "Kasaragod": [
       "Kasaragod",
@@ -132,8 +166,6 @@ export const constituencies = {
       "Udma",
       "Kanhangad",
       "Thrikaripur",
-      "Payyannur",
-      "Kalliasseri"
     ]
   };
 
@@ -152,6 +184,4 @@ export const constituencies = {
     "Wayanad",
     "Kannur",
     "Kasaragod"
-  ];
-  
-  
+  ]
