@@ -8,6 +8,7 @@ import LottieView from 'lottie-react-native';
 import {useRef } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import { setHeight, setWidth } from '../utils';
+import { style } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes';
 
 
 
@@ -20,6 +21,8 @@ const ProjectListScreen = ({ navigation,route }) => {
   const isVisible =useIsFocused()
 
   const [load,setLoad]=useState(false)
+  const [dload,setdLoad]=useState(false)
+
 
 
   
@@ -45,7 +48,7 @@ const ProjectListScreen = ({ navigation,route }) => {
           } else if(response.data.message=="No projects found for the specified constituency.") {
             setLoad(true)
 
-            Alert.alert('No Projects', 'No projects found');
+            // Alert.alert('No Projects', 'No projects found');
 
           }
           else{
@@ -78,6 +81,9 @@ useEffect(()=>{
         constituency:data.constituency
       });
 
+      if(response.data.message){
+        setdLoad(true)
+      }
 
       setDetails(response.data.projectDetails)
       
@@ -143,9 +149,12 @@ useEffect(()=>{
 
  
 
-  return projects.length || load ? (
+  return projects.length && details.length || load && dload ? (
     <View style={styles.container}>
-      <Text style={styles.head}>Projects</Text>
+      <Text style={styles.head}>Projects [{projects.length}]</Text>
+      {projects.length == 0 ? (<View  style={[styles.containerload,{alignItems:'center'}]}>
+        <Text style={{fontFamily:'Italic',fontSize:22}}>Project are not added</Text>
+      </View>):null}
      <FlatList
   data={projects}
   keyExtractor={(item) => item.projectId.toString()} 

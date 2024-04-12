@@ -11,6 +11,8 @@ const AdminResult = ({ navigation, route }) => {
 
     const animation = useRef(null);
 
+    const [buttonVisible,setButtonVisible]=useState(true)
+
     const [load,setLoad]=useState(false)
     let x =0
     let y =0
@@ -32,7 +34,8 @@ const AdminResult = ({ navigation, route }) => {
             });
             setDataSet(response.data);
            if(response.data.length==0){
-            Alert.alert("Alert","No Project Rated")
+            // Alert.alert("Alert","Project are not rated......")
+                setButtonVisible(false)
                 setLoad(true)
             // navigation.goBack()
            }
@@ -77,11 +80,16 @@ const AdminResult = ({ navigation, route }) => {
     return dataSet.length  || load ? (
         <View style={styles.container}>
             <View style={{justifyContent:'space-between',flexDirection:'row'}}>
-                <Text style={styles.head}>Rating</Text>
-                <TouchableOpacity style={{backgroundColor:'#ccc',justifyContent:'center',alignContent:'center',marginBottom:20,padding:10,borderRadius:20}} onPress={()=>{navigation.navigate('prediction',{pos:pos,neg:neg})}}>
+                <Text style={styles.head}>Rating [{dataSet.length}]</Text>
+                
+                {buttonVisible ? (<TouchableOpacity style={{backgroundColor:'#ccc',justifyContent:'center',alignContent:'center',marginBottom:20,padding:10,borderRadius:20}} onPress={()=>{navigation.navigate('prediction',{pos:pos,neg:neg})}}>
                     <Text style={{fontFamily:'Regular',fontSize:15,color:'red'}}>Predict</Text>
-                    </TouchableOpacity>
+                </TouchableOpacity>):null}
                     </View>
+
+                    {dataSet.length == 0 ? (<View  style={[styles.containerload,{alignItems:'center'}]}>
+        <Text style={{fontFamily:'Italic',fontSize:22}}>projects are not rated</Text>
+      </View>):null}
             
             <FlatList
                 data={dataSet}

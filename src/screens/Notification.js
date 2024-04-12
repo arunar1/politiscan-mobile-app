@@ -57,17 +57,20 @@ const Notification = ({navigation,route}) => {
         });
     
         return (
+            data.constituency === item.constituency || item.constituency === 'Admin' ? (
             <TouchableOpacity
                 style={[styles.pollItem, { backgroundColor: hasPollData ? '#d0eeec' : '#fff' }]}
                 onPress={() => handlePollPress(item)}
             >
-                {data.constituency === item.constituency || item.constituency === 'Admin' ? (
+    
                     <View>
                         <Text style={{ fontFamily: 'Bold', marginBottom: 10 }}>{item.date} {item.constituency === 'Admin' ? '  ★' : ''}</Text>
                         <Text style={{ fontFamily: 'Regular' }}>{item.description}</Text>
                     </View>
-                ) : null}
             </TouchableOpacity>
+            ):null
+  
+            
         );
     };
     
@@ -83,6 +86,9 @@ const Notification = ({navigation,route}) => {
     return poll.length || load ? (
         <View style={styles.container}>
             <Text style={styles.head}>Notification</Text>
+            {poll.length == 0 ? (<View  style={[styles.containerload,{alignItems:'center'}]}>
+        <Text style={{fontFamily:'Italic',fontSize:22}}>Notification are not added</Text>
+      </View>):null}
             <FlatList
                 data={poll}
                 renderItem={renderPollItem}
