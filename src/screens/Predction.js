@@ -6,7 +6,7 @@ const Predction = ({navigation,route}) => {
     console.log(pos,neg)
     return (
         <View style={styles.container}>
-            {pos>=neg ?(<View style={{justifyContent:'center',alignItems:'center'}}>
+            {pos !=0 ?(<View style={{justifyContent:'center',alignItems:'center'}}>
                 <View style={{backgroundColor:'#ccc',width:setWidth(80),height:10,borderRadius:10,marginBottom:10}}>
                     <View style={{backgroundColor:'red',width:setWidth(80*pos/(pos+neg)),height:10,borderRadius:10}}></View>
                 </View>
