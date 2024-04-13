@@ -79,18 +79,23 @@ const AdminResult = ({ navigation, route }) => {
 
     return dataSet.length  || load ? (
         <View style={styles.container}>
-            <View style={{justifyContent:'space-between',flexDirection:'row'}}>
-                <Text style={styles.head}>Rating [{dataSet.length}]</Text>
+            <Text style={styles.head}>Rating</Text>
+           <View style={{padding:16}}>
+           <View >
                 
-                {buttonVisible ? (<TouchableOpacity style={{backgroundColor:'#ccc',justifyContent:'center',alignContent:'center',marginBottom:20,padding:10,borderRadius:20}} onPress={()=>{navigation.navigate('prediction',{pos:pos,neg:neg})}}>
-                    <Text style={{fontFamily:'Regular',fontSize:15,color:'red'}}>Predict</Text>
-                </TouchableOpacity>):null}
+                {buttonVisible ? (<View style={{justifyContent:'center',width:setWidth(90),alignItems:'center'}}>
+                    <TouchableOpacity style={{backgroundColor:'#ccc',justifyContent:'center',alignContent:'center',marginBottom:20,padding:10,borderRadius:10,width:setWidth(90)}} onPress={()=>{navigation.navigate('prediction',{pos:pos,neg:neg})}}>
+                    <Text style={{fontFamily:'Regular',fontSize:15,color:'red',textAlign:'center',alignItems:'centerr'}}>Predict</Text>
+                </TouchableOpacity>
+                    </View>):null}
                     </View>
 
                     {dataSet.length == 0 ? (<View  style={[styles.containerload,{alignItems:'center'}]}>
-        <Text style={{fontFamily:'Italic',fontSize:22}}>projects are not rated</Text>
+        <Text style={{fontFamily:'Italic',fontSize:22}}>Projects are not rated</Text>
       </View>):null}
-            
+      
+      <Text style={{fontFamily:'Italic',fontSize:15,marginBottom:20}}>Rated Projects : {dataSet.length}</Text>
+
             <FlatList
                 data={dataSet}
                 keyExtractor={(item) => item._id}
@@ -121,6 +126,7 @@ const AdminResult = ({ navigation, route }) => {
 
             }
             />
+           </View>
         </View>
     ):(
         <LottieView 
@@ -137,8 +143,8 @@ const AdminResult = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 55,
-        padding: 16,
+        marginTop: 30,
+        // padding: 16,
        
     },
     projectItem: {
@@ -172,9 +178,14 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     head: {
-        fontSize: 22,
-        marginBottom: 20,
-        fontFamily:'Regular'
+    fontSize: 22,
+    marginBottom: 20,
+    fontFamily:'Bold',
+    justifyContent:'center',
+    textAlign:'center',
+    backgroundColor:'#5a1f85',
+    paddingVertical:20,
+    color:'white'
     },
     containerload:{
         flex:1,
