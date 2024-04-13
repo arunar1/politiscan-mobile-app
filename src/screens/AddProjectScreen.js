@@ -58,7 +58,7 @@ const AddProjectScreen = ({ navigation, route }) => {
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.label}>Project ID</Text>
             <TextInput
-                style={[styles.input,{color:'red'}]}
+                style={[styles.input,{color:'red',fontFamily:'Bold'}]}
                 value={projectId}
                 onChangeText={setProjectId}
                 placeholder="Random-generated"
@@ -70,7 +70,7 @@ const AddProjectScreen = ({ navigation, route }) => {
 
             <Text style={styles.label}>Project Name</Text>
             <TextInput
-                style={styles.input}
+                style={[styles.input]}
                 value={projectName}
                 onChangeText={setProjectName}
                 placeholder="Enter project name"
@@ -135,13 +135,13 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     generateButton: {
-        backgroundColor: '#3498db',
+        backgroundColor: '#5a1f85',
         padding: 10,
         borderRadius: 5,
         marginBottom: 20,
     },
     addButton: {
-        backgroundColor: '#27ae60',
+        backgroundColor: '#5a1f85',
         padding: 15,
         borderRadius: 5,
     },
