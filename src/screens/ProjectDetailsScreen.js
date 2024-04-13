@@ -4,8 +4,8 @@ import axios from 'axios';
 import { Api } from '../constants';
 import LottieView from 'lottie-react-native'; // Import LottieView
 import { useFocusEffect } from '@react-navigation/native';
-import { height } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
-import { setWidth } from '../utils';
+import { height, width } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
+import { setHeight, setWidth } from '../utils';
 
 
 
@@ -170,9 +170,9 @@ const ProjectDetailsScreen = ({ route, navigation }) => {
             <Text  style={styles.detailLabel}>Total Budget </Text>
             <Text selectable={true} style={styles.detailValue}>₹ {details.totalBudget}</Text>
           </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Type of Project </Text>
-            <Text selectable={true} style={[styles.detailValue,{width:setWidth(50),textAlign:'center'}]} multiline numberOfLines={2}>{details.projectType}</Text>
+          <View style={[styles.detailItem]}>
+            <Text style={[styles.detailLabel]}>Type of Project </Text>
+            <Text selectable={true} style={[styles.detailValue,{width:setWidth(40)}]} multiline={true} numberOfLines={3}>{details.projectType}</Text>
           </View>
           <View style={styles.detailItempro}>
             <Text style={styles.detailLabel}>Project Details</Text>
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
     minHeight: 100,
   },
   submitButton: {
-    backgroundColor: '#3498db',
+    backgroundColor: '#5a1f85',
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',

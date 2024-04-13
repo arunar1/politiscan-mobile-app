@@ -127,13 +127,13 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     generateButton: {
-        backgroundColor: '#3498db',
+        backgroundColor: '#5a1f85',
         padding: 10,
         borderRadius: 5,
         marginBottom: 20,
     },
     addButton: {
-        backgroundColor: '#27ae60',
+        backgroundColor: '#5a1f85',
         padding: 15,
         borderRadius: 5,
     },

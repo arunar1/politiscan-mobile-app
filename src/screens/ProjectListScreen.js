@@ -151,10 +151,13 @@ useEffect(()=>{
 
   return projects.length && details.length || load && dload ? (
     <View style={styles.container}>
-      <Text style={styles.head}>Projects [{projects.length}]</Text>
+      <Text style={styles.head}>Projects</Text>
+      <View style={{padding:16}}>
       {projects.length == 0 ? (<View  style={[styles.containerload,{alignItems:'center'}]}>
         <Text style={{fontFamily:'Italic',fontSize:22}}>Project are not added</Text>
       </View>):null}
+      <Text style={{fontFamily:'Regular',fontSize:15,marginBottom:20}}>Number of Projects : {projects.length}</Text>
+
      <FlatList
   data={projects}
   keyExtractor={(item) => item.projectId.toString()} 
@@ -194,6 +197,7 @@ useEffect(()=>{
     );
   }}
 />
+      </View>
 
     </View>
   ):(
@@ -211,8 +215,8 @@ useEffect(()=>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 55,
-    padding: 16,
+    marginTop: 30,
+    // padding: 16,
     
   },
   projectItem: {
@@ -244,8 +248,14 @@ const styles = StyleSheet.create({
   },
   head: {
     fontSize: 22,
-    marginBottom: 10,
-    fontFamily:'Regular'
+    marginBottom: 30,
+    fontFamily:'Bold',
+    justifyContent:'center',
+    textAlign:'center',
+    backgroundColor:'#5a1f85',
+    paddingVertical:20,
+    color:'white',
+    
 },
 containerload:{
   flex:1,

@@ -24,9 +24,9 @@ const Predction = ({navigation,route}) => {
                 </View>
                 <View style={{flexDirection:'row',justifyContent:'space-between',width:setWidth(80),marginBottom:20}}>
                     <Text>0%</Text>
-                    <Text>-25%</Text>
+                    {/* <Text>-25%</Text> */}
                     <Text>-50%</Text>
-                    <Text>-75%</Text>
+                    {/* <Text>-75%</Text> */}
                     <Text>-100%</Text>
                 </View>
             </View>)}   
