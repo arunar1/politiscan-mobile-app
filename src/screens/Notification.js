@@ -86,6 +86,7 @@ const Notification = ({navigation,route}) => {
     return poll.length || load ? (
         <View style={styles.container}>
             <Text style={styles.head}>Notification</Text>
+            <View style={{padding:16}}>
             {poll.length == 0 ? (<View  style={[styles.containerload,{alignItems:'center'}]}>
         <Text style={{fontFamily:'Italic',fontSize:22}}>Notification are not added</Text>
       </View>):null}
@@ -94,6 +95,7 @@ const Notification = ({navigation,route}) => {
                 renderItem={renderPollItem}
                 keyExtractor={(item) => item._id}
             />
+            </View>
         </View>
     ):(
        <LottieView 
@@ -110,13 +112,20 @@ const Notification = ({navigation,route}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 55,
-        padding: 16,
+        marginTop: 30,
+        // padding: 16,
     },
     head: {
-        fontSize: 22,
-        marginBottom: 10,
-        fontFamily:'Regular'
+    fontSize: 22,
+    marginBottom: 20,
+    fontFamily:'Bold',
+    justifyContent:'center',
+    textAlign:'center',
+    backgroundColor:'#5a1f85',
+    paddingVertical:20,
+    borderRadius:5,
+    color:'white',
+    
     },
     pollItem: {
         padding: 20,
