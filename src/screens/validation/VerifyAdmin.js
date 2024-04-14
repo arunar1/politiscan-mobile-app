@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Api } from '../../constants';
 
 const VerifyAdmin = ({ navigation,route }) => {
-    const { item } = route.params;
+    const { item,user } = route.params;
     const [verifying, setVerifying] = useState(false);
     const [rejecting, setRejectinging] = useState(false);
 
@@ -57,14 +57,14 @@ const VerifyAdmin = ({ navigation,route }) => {
 
     return (
         <View style={styles.container}>
-            <Text numberOfLines={2}  selectable={true} style={[styles.text,{marginBottom:40,fontFamily:'Bold',he:30}]}>Email : {item.email}</Text>
+            <Text numberOfLines={2}  selectable={true} style={[styles.text,{marginBottom:40,fontFamily:'Bold',height:30}]}>Email : {item.email}</Text>
             <Text selectable={true} style={styles.text}>Constituency : {item.constituency}</Text>
 
-            {item.aadharImage ? (
+            {item.profileImage ? (
                 <Image
                     source={{ uri: item.profileImage }}
                     style={styles.image}
-                    resizeMode="cover"
+                    resizeMode="contain"
                     onError={(error) => console.error('Image loading error:', error)}
                 />
             ) : (
@@ -72,11 +72,12 @@ const VerifyAdmin = ({ navigation,route }) => {
             )}
                         <Text selectable={true} style={styles.text}>Name : {item.name}</Text>
 
-            {item.profileImage ? (
+            {item.aadharImage ? (
                 <Image
                     source={{ uri: item.aadharImage }}
                     style={styles.image}
-                    resizeMode="cover"
+                    resizeMode='contain'
+
                     onError={(error) => console.error('Image loading error:', error)}
                 />
             ) : (
@@ -86,7 +87,8 @@ const VerifyAdmin = ({ navigation,route }) => {
                         <Text selectable={true} style={styles.text}>Aadhar Number : {item.aadharNo}</Text>
 
             
-                <View style={styles.buttonContainer}>
+                {user=='admin' ?(
+                    <View style={styles.buttonContainer}>
                     <TouchableOpacity
                     style={styles.verifyButton}
                     onPress={handleVerify}
@@ -107,6 +109,8 @@ const VerifyAdmin = ({ navigation,route }) => {
                     </TouchableOpacity>
                 ):null}
                 </View>
+                ):(<Text selectable={true} style={[styles.text,{marginTop:20}]}>Phone Number : {item.mobileNumber}</Text>
+                )}
             
         </View>
     );
