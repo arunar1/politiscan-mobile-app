@@ -2,7 +2,7 @@
   "expo": {
     "name": "PolitiScan",
     "slug": "politiscan",
-    "version": "2.2.0",
+    "version": "2.5.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
