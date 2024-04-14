@@ -73,8 +73,12 @@ const PollAddScreen = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
+            
            {!flag ? (
             <View>
+                <View>
+                        <Text style={{ fontFamily: 'Regular',padding:20,textAlign:'center',marginBottom:60 }}>{pollItem.description}</Text>
+                    </View>
                 <View style={styles.voteButtons}>
                     <TouchableOpacity
                         style={[styles.button, yesClicked ? styles.clicked : null]}
