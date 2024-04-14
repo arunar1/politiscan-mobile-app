@@ -118,6 +118,9 @@ const PollResultScreen = ({ navigation, route }) => {
                 ))}
             </Picker>
             </View>
+            <View>
+                        <Text style={{ fontFamily: 'Regular',padding:20,textAlign:'center',marginTop:20 }}>{item.description}</Text>
+                    </View>
 
             {renderConstituencyVotes()}
         </ScrollView>

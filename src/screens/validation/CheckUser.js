@@ -76,7 +76,7 @@ const CheckUser = ({ navigation }) => {
     };
     
     const handleItemPress = (item) => {
-        navigation.navigate('verifyadmin', { item: item });
+        navigation.navigate('verifyadmin', { item: item , user:'admin'});
     };
 
     const renderUserItem = ({ item }) => (
