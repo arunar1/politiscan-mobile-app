@@ -49,19 +49,19 @@ const DashboardUser = ({ navigation, route }) => {
 
 
       <View style={styles.userInfo}>
-        <Text style={styles.label}>Constituency:</Text>
+        <Text style={styles.label}>Constituency</Text>
         <Text selectable={true} style={styles.info}>{data.constituency}</Text>
 
-        <Text style={styles.label}>District:</Text>
+        <Text style={styles.label}>District</Text>
         <Text selectable={true} style={styles.info}>{data.district}</Text>
 
-        <Text style={styles.label}>Phone Number:</Text>
+        <Text style={styles.label}>Phone Number</Text>
         <Text selectable={true} style={styles.info}>{data.mobileNumber}</Text>
 
-        <Text style={styles.label}>Aadhar No:</Text>
+        <Text style={styles.label}>Aadhar No</Text>
         <Text selectable={true} style={styles.info}>{data.aadharNo}</Text>
 
-        <Text style={styles.label}>Email ID:</Text>
+        <Text style={styles.label}>Email ID</Text>
         <Text selectable={true} style={styles.info}>{data.email}</Text>
       </View>
       <Seperator height={setHeight(3)} />
