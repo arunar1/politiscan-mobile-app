@@ -58,7 +58,7 @@ const AdminDashboard = ({ navigation, route }) => {
         <Text style={styles.label}>Phone Number</Text>
         <Text  selectable={true} style={styles.info}>{data.mobileNumber}</Text>
 
-        <Text style={styles.label}>Aadhar No</Text>
+        <Text style={styles.label}>Aadhaar No</Text>
         <Text selectable={true} style={styles.info}>{data.aadharNo}</Text>
 
         <Text style={styles.label}>Email ID</Text>
