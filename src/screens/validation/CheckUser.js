@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, FlatList, TouchableOpacity ,Image} from 'react-native';
 import axios from 'axios';
 import { Api } from '../../constants';
 import { Picker } from '@react-native-picker/picker';
@@ -80,21 +80,52 @@ const CheckUser = ({ navigation }) => {
     };
 
     const renderUserItem = ({ item }) => (
-        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#d0eeec'}:'white']} onPress={() => handleItemPress(item)}>
-            <Text style={styles.email}>{item.email}</Text>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.name}>{item.constituency}</Text>
-        </TouchableOpacity>
+        item.verified ? (
+            <TouchableOpacity style={[styles.itemContainer, { backgroundColor: '#d0eeec' }]}  onPress={() => handleItemPress(item)}>
+                <Image source={{ uri: item.profileImage }} style={styles.profileImage} />
+                <View style={styles.detailsContainer}>
+                    <Text style={styles.name}>Name : {item.name}</Text>
+                    <Text style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
+                    <Text style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={[styles.detail, { color: 'red' }]}>Verified</Text>
+                </View>
+            </TouchableOpacity>
+        ) : (
+            <TouchableOpacity style={[styles.itemContainer, { backgroundColor: '#ccc' }]}  onPress={() => handleItemPress(item)}>
+                <Image source={{ uri: item.profileImage }} style={styles.profileImage} />
+                <View style={styles.detailsContainer}>
+                    <Text selectable={true} style={styles.name}>Name : {item.name}</Text>
+                    <Text selectable={true} style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
+                    <Text  selectable={true}style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={[styles.detail, { color: 'red' }]}>Not Verified</Text>
+                </View>
+            </TouchableOpacity>
+        )
     );
 
     const renderAdminItem = ({ item }) => (
         
-        <TouchableOpacity style={[styles.itemContainer,item.verified?{backgroundColor:'#d0eeec'}:'white']} onPress={() => handleItemPress(item)}>
-            <Text style={styles.email}>{item.email}</Text>
-            {console.log(item.verified)}
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.name}>{item.constituency}</Text>
-        </TouchableOpacity>
+        item.verified ? (
+            <TouchableOpacity style={[styles.itemContainer, { backgroundColor: '#d0eeec' }]}  onPress={() => handleItemPress(item)}>
+                <Image source={{ uri: item.profileImage }} style={styles.profileImage} />
+                <View style={styles.detailsContainer}>
+                    <Text style={styles.name}>Name : {item.name}</Text>
+                    <Text style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
+                    <Text style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={[styles.detail, { color: 'red' }]}>Verified</Text>
+                </View>
+            </TouchableOpacity>
+        ) : (
+            <TouchableOpacity style={[styles.itemContainer, { backgroundColor: '#ccc' }]}  onPress={() => handleItemPress(item)}>
+                <Image source={{ uri: item.profileImage }} style={styles.profileImage} />
+                <View style={styles.detailsContainer}>
+                    <Text selectable={true} style={styles.name}>Name : {item.name}</Text>
+                    <Text selectable={true} style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
+                    <Text  selectable={true}style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={[styles.detail, { color: 'red' }]}>Not Verified</Text>
+                </View>
+            </TouchableOpacity>
+        )
     );
 
     const toggleDisplay = () => {
@@ -182,14 +213,35 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     itemContainer: {
-        backgroundColor: '#fff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: '#ddd',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        padding: 10,
+        borderRadius: 10,
+        
     },
+    profileImage: {
+        width: 70,
+        height: 100,
+        borderRadius: 25,
+        marginRight: 10,
+    },
+    detailsContainer: {
+        flex: 1,
+    },
+    name: {
+        fontSize: 20,
+        marginBottom: 5,
+        fontFamily: 'Italic',
+    },
+    detail: {
+        fontSize: 12,
+        marginBottom: 3,
+        fontFamily: 'Italic',
+    },
+   
     textHead:{
         marginBottom: 10,
         color:"red",
@@ -203,11 +255,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily:'Bold'
     },
-    name:{
-        fontSize: 13,
-        fontFamily:'Regular'
-    }
-    ,
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
