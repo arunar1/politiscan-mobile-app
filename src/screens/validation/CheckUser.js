@@ -87,6 +87,7 @@ const CheckUser = ({ navigation }) => {
                     <Text style={styles.name}>Name : {item.name}</Text>
                     <Text style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
                     <Text style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={styles.detail}>Constituency : {item.constituency}</Text>
                     <Text style={[styles.detail, { color: 'red' }]}>Verified</Text>
                 </View>
             </TouchableOpacity>
@@ -97,6 +98,7 @@ const CheckUser = ({ navigation }) => {
                     <Text selectable={true} style={styles.name}>Name : {item.name}</Text>
                     <Text selectable={true} style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
                     <Text  selectable={true}style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={styles.detail}>Constituency : {item.constituency}</Text>
                     <Text style={[styles.detail, { color: 'red' }]}>Not Verified</Text>
                 </View>
             </TouchableOpacity>
@@ -112,6 +114,7 @@ const CheckUser = ({ navigation }) => {
                     <Text style={styles.name}>Name : {item.name}</Text>
                     <Text style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
                     <Text style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={styles.detail}>Constituency : {item.constituency}</Text>
                     <Text style={[styles.detail, { color: 'red' }]}>Verified</Text>
                 </View>
             </TouchableOpacity>
@@ -122,6 +125,7 @@ const CheckUser = ({ navigation }) => {
                     <Text selectable={true} style={styles.name}>Name : {item.name}</Text>
                     <Text selectable={true} style={styles.detail}>Adhar Number : {item.aadharNo}</Text>
                     <Text  selectable={true}style={styles.detail}>Email : {item.email}</Text>
+                    <Text style={styles.detail}>Constituency : {item.constituency}</Text>
                     <Text style={[styles.detail, { color: 'red' }]}>Not Verified</Text>
                 </View>
             </TouchableOpacity>
