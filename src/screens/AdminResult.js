@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
 import axios from 'axios';
 import { Api } from '../constants';
 import { setWidth } from '../utils';
@@ -78,7 +78,7 @@ const AdminResult = ({ navigation, route }) => {
 
 
     return dataSet.length  || load ? (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.head}>Rating</Text>
            <View style={{padding:16}}>
            <View >
@@ -127,7 +127,7 @@ const AdminResult = ({ navigation, route }) => {
             }
             />
            </View>
-        </View>
+        </ScrollView>
     ):(
         <LottieView 
         
