@@ -84,7 +84,7 @@ const Notification = ({navigation,route}) => {
 
 
     return poll.length || load ? (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.head}>Notification</Text>
             <View style={{padding:16}}>
             {poll.length == 0 ? (<View  style={[styles.containerload,{alignItems:'center'}]}>
@@ -96,7 +96,7 @@ const Notification = ({navigation,route}) => {
                 keyExtractor={(item) => item._id}
             />
             </View>
-        </View>
+        </ScrollView>
     ):(
        <LottieView 
 
